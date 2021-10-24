@@ -1,0 +1,95 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="card">
+
+                <div class="card-header card-header-rose card-header-text">
+                    <div class="card-text">
+
+                        <h4 class="card-title">Product</h4>
+                    </div>
+                </div>
+
+
+                <div class="card-body">
+
+                    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" #resetProductForm="ngForm" novalidate>
+
+                        <div class="controlers-wrapper">
+                            <!-- Name -->
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Product name" formControlName="name">
+                                <mat-error *ngIf="handleError('name', 'required')">
+                                    You must provide a<strong>product name</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+
+                            <!-- Codigo -->
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Codigo" formControlName="code">
+                                <mat-error *ngIf="handleError('code', 'required')">
+                                    You must provide a<strong>product code</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <!-- Codigo Auxiliar -->
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Codigo Auxiliar" formControlName="auxCode">
+                            </mat-form-field>
+
+                            <!-- Price -->
+                            <mat-form-field class="example-full-width">
+                                <input type="number" matInput placeholder="Product price" formControlName="price">
+                                <mat-error *ngIf="handleError('price', 'required')">
+                                    You must provide a<strong>product price</strong>
+                                </mat-error>
+                                <mat-error *ngIf="handleError('price', 'min')">
+                                    Minimum required number is {{minPrice}}.
+                                </mat-error>
+                            </mat-form-field>
+
+
+                            <!-- haveTaxes -->
+
+                            <!--mat-slide-toggle formControlName="haveTaxes">Have Taxes</mat-slide-toggle-->
+
+                            <!-- Type -->
+                            <mat-form-field class="example-full-width">
+                                <mat-select placeholder="Tipo de producto" formControlName="type">
+                                    <mat-option *ngFor="let t of productTypes" [value]="t.code">
+                                        {{t.value}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+
+                            <!-- Description -->
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Product description" formControlName="description">
+                                <mat-error *ngIf="handleError('description', 'required')">
+                                    You must provide a<strong>product description</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+
+                        </div>
+
+
+
+                        <div class="full-wrapper button-wrapper">
+                            <div class="button-wrapper">
+                                <button mat-flat-button color="warn">Save</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

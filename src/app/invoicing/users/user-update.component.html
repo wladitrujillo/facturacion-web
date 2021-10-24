@@ -1,0 +1,84 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="card">
+
+                <div class="card-header card-header-rose card-header-text">
+                    <div class="card-text">
+
+                        <h4 class="card-title">User</h4>
+                    </div>
+                </div>
+
+
+                <div class="card-body">
+
+                    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" #resetUserForm="ngForm" novalidate>
+
+                        <div class="controlers-wrapper">
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Rol</mat-label>
+                                <mat-select formControlName="role">
+                                  <mat-option *ngFor="let r of roles" [value]="r._id" >
+                                   {{r.name}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                         
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="First Name" formControlName="firstName">
+                                <mat-error *ngIf="handleError('firstName', 'required')">
+                                    You must provide a<strong> First Name</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+                            
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Last Name" formControlName="lastName">
+                                <mat-error *ngIf="handleError('lastName', 'required')">
+                                    You must provide a<strong> Last Name</strong>
+                                </mat-error>
+                            </mat-form-field>
+ 
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Email" formControlName="email">
+                                <mat-error *ngIf="handleError('email', 'required')">
+                                    You must provide a<strong> Email</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Phone" formControlName="phone">
+                                <mat-error *ngIf="handleError('phone', 'required')">
+                                    You must provide a<strong> Phone</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Address" formControlName="address">
+                                <mat-error *ngIf="handleError('address', 'required')">
+                                    You must provide a<strong> Address</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+                        </div>
+
+
+
+                        <div class="full-wrapper button-wrapper">
+                            <div class="button-wrapper">
+                                <button mat-flat-button color="warn">Save</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

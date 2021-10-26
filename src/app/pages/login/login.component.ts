@@ -46,8 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         this.loginForm = this.formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
-            password: [''],
-            enterprise: [undefined]
+            password: ['', [Validators.required]]
         });
     }
     sidebarToggle() {
@@ -81,41 +80,18 @@ export class LoginComponent implements OnInit, OnDestroy {
             return;
         }
 
-        if (this.step === 1) {
-            this.login();
-        } else {
-            this.authenticate();
-        }
+
+        this.login();
 
 
     }
 
     login() {
 
-        this.loading = true;
-        this.authenticationService.login(this.fval.email.value)
-            .subscribe(
-                enterprises => {
-                    this.loading = false;
-                    this.enterpriseList = enterprises;
-                    this.loginForm.patchValue({ enterprise: this.enterpriseList[0] });
-                    this.loginForm.controls.password.setValidators([Validators.required, Validators.minLength(5)]);
-                    this.step = 2;
-                },
-                error => {
-                    //this.toastr.error(error.error.message, 'Error');
-                    this.loading = false;
-                    this.alertService.error(error);
-                });
-
-    }
-
-    authenticate() {
-
         this.submitted = true;
 
         this.loading = true;
-        this.authenticationService.authenticate(this.fval.email.value, this.fval.password.value, this.fval.enterprise.value._id)
+        this.authenticationService.login(this.fval.email.value, this.fval.password.value)
             .subscribe(
                 data => {
                     this.loading = false;

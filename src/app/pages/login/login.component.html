@@ -8,9 +8,8 @@
           <form class="form" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
             <div class="card card-login card-hidden">
               <div class="card-header card-header-rose text-center" style="margin-bottom: 40px;">
-                <a [routerLink]="" *ngIf="step==2" style="color:white" (click)="step=1"> 
-                  <i style="margin-right:-25px;"
-                  class="material-icons pull-left">keyboard_arrow_left</i></a>
+                <a [routerLink]="" *ngIf="step==2" style="color:white" (click)="step=1">
+                  <i style="margin-right:-25px;" class="material-icons pull-left">keyboard_arrow_left</i></a>
                 <h4 class="card-title">Log in</h4>
                 <!--div class="social-line">
                   <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
@@ -26,33 +25,23 @@
               </div>
               <div class="card-body ">
                 <!--p class="card-description text-center">Or Be Classical</p-->
-                <mat-form-field *ngIf="step==1">
-                  <mat-icon matSuffix>email</mat-icon>
+
+                <mat-form-field>
+                  <mat-icon matSuffix>account_circle</mat-icon>
                   <input type="email" matInput placeholder="Email" formControlName="email">
                   <mat-error *ngIf="fval.email.errors&&fval.email.errors.required">
                     Email is <strong>required</strong>
                   </mat-error>
-                  <mat-error *ngIf="fval.email.errors&&fval.email.errors.email">
-                    Email must be a valid email address
-                  </mat-error>
                 </mat-form-field>
-                <mat-form-field *ngIf="step==2">
-                  <mat-label>Company</mat-label>
-                  <mat-select formControlName="enterprise" name="enterprise">
-                    <mat-option *ngFor="let enterprise of enterpriseList" [value]="enterprise">
-                      {{enterprise.name}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <mat-form-field *ngIf="step==2">
+                <mat-form-field>
                   <mat-icon matSuffix>lock_outline</mat-icon>
                   <input type="password" matInput placeholder="Password" formControlName="password">
                   <mat-error *ngIf="fval.password.errors&&fval.password.errors.required">
                     Password is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
-               
-                <a *ngIf="step==2" href="" routerLink="/auth/forgot-password" class="pull-right">Forgot Password?</a>
+
+                <a href="" routerLink="/auth/forgot-password" class="pull-right">Forgot Password?</a>
                 <!--span class="bmd-form-group">
                   <div class="input-group" style="margin-top: 40px;">
                     <div class="input-group-prepend">

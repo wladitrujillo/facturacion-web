@@ -25,14 +25,8 @@ export class AuthenticationService {
         return this.http.post<User>(`auth/register`, user).catch(this.errorHandler);
     }
 
-    login(email: string): Observable<Enterprise[]> {
-        let params = new HttpParams()
-            .set('email', email);
-        return this.http.get<Enterprise[]>(`auth/login`, { params }).catch(this.errorHandler);
-    }
-
-    authenticate(email: string, password: string, enterprise: string): Observable<User> {
-        return this.http.post<any>(`auth/login`, { email, password, enterprise })
+    login(email: string, password: string): Observable<User> {
+        return this.http.post<any>(`auth/login`, { email, password })
             .pipe(map(user => {
                 if (user && user.token) {
                     // store user details in local storage to keep user logged in

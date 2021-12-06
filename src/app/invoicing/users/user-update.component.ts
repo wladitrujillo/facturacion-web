@@ -1,12 +1,12 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from 'src/app/_services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Location } from '@angular/common';
-import { Role } from 'src/app/_models/role';
-import { RoleService } from 'src/app/_services/role.service';
+import { Role } from 'src/app/core/model/role';
+import { RoleService } from 'src/app/core/service/role.service';
+import { UserService } from 'src/app/core/service/user.service';
 
 
 @Component({

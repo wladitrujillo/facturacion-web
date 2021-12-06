@@ -1,14 +1,13 @@
 
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { ProductService } from 'src/app/_services/product.service';
-import { AlertService } from '../../_services/alert.service';
-import { Product } from 'src/app/_models/product';
-import { ProductDataSource } from '../../_services/product.datasource';
 import { MatPaginator } from '@angular/material';
 import { MatSort } from "@angular/material/sort";
 import { merge } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Product } from 'src/app/core/model/product';
+import { ProductDataSource } from 'src/app/core/service/product.datasource';
+import { ProductService } from 'src/app/core/service/product.service';
 
 @Component({
   selector: 'app-product-list',

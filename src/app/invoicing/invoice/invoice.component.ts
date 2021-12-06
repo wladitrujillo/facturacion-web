@@ -1,21 +1,20 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { Product } from 'src/app/_models/product';
-import { Customer } from 'src/app/_models/customer';
-import { CustomerService } from 'src/app/_services/customer.service';
-import { ProductService } from 'src/app/_services/product.service';
-import { Invoice } from 'src/app/_models/invoice';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { SearchProductComponent } from '../searchproduct/search-product.component';
 import { SearchCustomerComponent } from '../searchcustomer/search-customer.component';
-import { InvoiceService } from 'src/app/_services/invoice.service';
-import { EstablishmentService } from 'src/app/_services/establishment.service';
-import { BranchService } from 'src/app/_services/branch.service';
-import { Branch, User } from 'src/app/_models';
-import { InvoiceDetail } from 'src/app/_models/invoice-detail';
+import { Branch } from 'src/app/core/model';
+import { Customer } from 'src/app/core/model/customer';
+import { Invoice } from 'src/app/core/model/invoice';
+import { InvoiceDetail } from 'src/app/core/model/invoice-detail';
+import { User } from 'src/app/core/model/user';
+import { WayPayment } from 'src/app/core/model/waypayment';
+import { AuthenticationService } from 'src/app/core/service/authentication.service';
+import { BranchService } from 'src/app/core/service/branch.service';
+import { CustomerService } from 'src/app/core/service/customer.service';
+import { EstablishmentService } from 'src/app/core/service/establishment.service';
+import { InvoiceService } from 'src/app/core/service/invoice.service';
+import { ProductService } from 'src/app/core/service/product.service';
 import { AddCustomerComponent } from '../addcustomer/add-customer.component';
-import { WayPayment } from 'src/app/_models/waypayment';
-import { AuthenticationService } from 'src/app/_services';
-import { InnerSubscriber } from 'rxjs/internal/InnerSubscriber';
 
 
 declare const $: any;

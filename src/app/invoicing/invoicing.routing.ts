@@ -10,11 +10,11 @@ import { UserUpdateComponent } from './users/user-update.component';
 import { EstablishmentUpdateComponent } from './establishment/establishment-update.component';
 import { BranchComponent } from './branch/branch.component';
 import { BranchUpdateComponent } from './branch/branch-update.component';
-import { ProductResolver } from '../_services/product.resolver';
-import { CustomerResolver } from '../_services/customer.resolver';
-import { UserResolver } from '../_services/user.resolver';
-import { EstablishmentResolver } from '../_services/establishment.resolver';
-import { BranchResolver } from '../_services/branch.resolver';
+import { BranchResolver } from '../core/service/branch.resolver';
+import { CustomerResolver } from '../core/service/customer.resolver';
+import { EstablishmentResolver } from '../core/service/establishment.resolver';
+import { ProductResolver } from '../core/service/product.resolver';
+import { UserResolver } from '../core/service/user.resolver';
 import { QueryInvoicingComponent } from './queryinvocing/queryinvoicing.component';
 
 export const InvoicingRoutes: Routes = [

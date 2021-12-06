@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
@@ -50,14 +47,7 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-
-// services
-import { InterceptorService } from './_services/interceptor.service';
-import { UserService } from './_services/user.service';
-import { Catalog } from './_models/catalog';
-import { CatalogService } from './_services/catalog.service';
-import { InvoicingModule } from './invoicing/invoicing.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   exports: [
@@ -104,8 +94,7 @@ export class MaterialModule { }
     RouterModule.forRoot(AppRoutes, {
       useHash: true
     }),
-    HttpModule,
-    HttpClientModule,
+    CoreModule,
     MaterialModule,
     MatNativeDateModule,
     SidebarModule,
@@ -118,7 +107,6 @@ export class MaterialModule { }
     AdminLayoutComponent,
     AuthLayoutComponent
   ],
-  providers: [UserService, CatalogService, { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

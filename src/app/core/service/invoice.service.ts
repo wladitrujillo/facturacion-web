@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { Invoice } from '../_models/invoice';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import { Invoice } from '../model/invoice';
 
 @Injectable({ providedIn: 'root' })
 export class InvoiceService {

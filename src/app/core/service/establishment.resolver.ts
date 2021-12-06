@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { Establishment } from "../_models/establishment";
 import { Observable } from "rxjs";
+import { Establishment } from "../model";
 import { EstablishmentService } from "./establishment.service";
 
 @Injectable()

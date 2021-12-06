@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { Branch } from "../_models/branch";
 import { Observable } from "rxjs";
+import { Branch } from "../model/branch";
 import { BranchService } from "./branch.service";
 
 @Injectable()

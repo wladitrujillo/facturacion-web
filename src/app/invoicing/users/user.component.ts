@@ -6,10 +6,10 @@ import { MatSort } from "@angular/material/sort";
 import { merge } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { User } from 'src/app/_models/user';
-import { UserService } from 'src/app/_services/user.service';
-import { Role } from 'src/app/_models/role';
-import { RoleService } from 'src/app/_services/role.service';
+import { Role } from 'src/app/core/model/role';
+import { User } from 'src/app/core/model/user';
+import { RoleService } from 'src/app/core/service/role.service';
+import { UserService } from 'src/app/core/service/user.service';
 
 
 @Component({

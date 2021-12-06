@@ -1,14 +1,13 @@
 
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { AlertService } from '../../_services/alert.service';
 import { MatPaginator } from '@angular/material';
 import { MatSort } from "@angular/material/sort";
 import { merge } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { EstablishmentDataSource } from './establishment.datasource';
-import { EstablishmentService } from 'src/app/_services/establishment.service';
-import { Establishment } from 'src/app/_models';
+import { Establishment } from 'src/app/core/model';
+import { EstablishmentService } from 'src/app/core/service/establishment.service';
 
 
 declare interface DataTable {

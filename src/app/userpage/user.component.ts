@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services/user.service';
-import { User } from '../_models';
-import { AlertService } from '../_services/alert.service';
+import { User } from '../core/model/user';
+import { AlertService } from '../core/service/alert.service';
+import { UserService } from '../core/service/user.service';
 
 @Component({
     selector: 'app-user-cmp',

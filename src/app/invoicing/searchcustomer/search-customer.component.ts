@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { merge, fromEvent } from 'rxjs';
 import { tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { CustomerDataSource } from 'src/app/_services/customer.datasource';
+import { CustomerDataSource } from 'src/app/core/service/customer.datasource';
 
 @Component({
   selector: 'search-customer',

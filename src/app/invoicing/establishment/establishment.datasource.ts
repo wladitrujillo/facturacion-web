@@ -1,8 +1,8 @@
 import { DataSource } from "@angular/cdk/table";
-import { Establishment } from "../../_models/establishment";
 import { BehaviorSubject, of } from "rxjs";
 import { catchError, finalize } from "rxjs/operators";
 import { HttpClient, HttpResponse } from "@angular/common/http";
+import { Establishment } from "src/app/core/model";
 
 export class EstablishmentDataSource implements DataSource<Establishment>{
 

@@ -1,11 +1,10 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ProductService } from 'src/app/_services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Location } from '@angular/common';
-import { EstablishmentService } from 'src/app/_services/establishment.service';
+import { EstablishmentService } from 'src/app/core/service/establishment.service';
 
 
 @Component({

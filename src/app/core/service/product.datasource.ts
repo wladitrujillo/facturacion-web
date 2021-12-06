@@ -1,12 +1,12 @@
 import { DataSource } from "@angular/cdk/table";
-import { Customer } from "../_models/customer";
 import { BehaviorSubject, of } from "rxjs";
 import { catchError, finalize } from "rxjs/operators";
 import { HttpClient, HttpResponse } from "@angular/common/http";
+import { Product } from "../model/product";
 
-export class CustomerDataSource implements DataSource<Customer>{
+export class ProductDataSource implements DataSource<Product>{
 
-    private customersSubject = new BehaviorSubject<Customer[]>([]);
+    private productsSubject = new BehaviorSubject<Product[]>([]);
 
     private loadingSubject = new BehaviorSubject<boolean>(false);
 
@@ -16,20 +16,20 @@ export class CustomerDataSource implements DataSource<Customer>{
 
     public totalRows$ = this.totalRowSubject.asObservable();
 
+ 
     constructor(private http: HttpClient) {
 
     }
 
-    loadCustomers(
+    loadProducts(
         filter: string,
         sort: string,
         page: number,
         perPage: number) {
 
-        this.loadingSubject.next(true);
+        this.loadingSubject.next(true);      
 
-
-        this.http.get(`api/customer?q=${filter}&sort=${sort}&page=${page}&per_page=${perPage}`, { observe: 'response' })
+        this.http.get(`api/product?q=${filter}&sort=${sort}&page=${page}&per_page=${perPage}`, { observe: 'response' })
             .pipe(
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false))
@@ -38,11 +38,24 @@ export class CustomerDataSource implements DataSource<Customer>{
 
                 this.totalRowSubject.next(response.headers.get('x-total-count'))
 
-                this.customersSubject.next(response.body);
+                this.productsSubject.next(response.body);
+
+               
             });
 
+        /*this.productService.get(filter, sort, page, perPage).pipe(
+            catchError(() => of([])),
+            finalize(() => this.loadingSubject.next(false))
+        )
+            .subscribe(products => this.productsSubject.next(products));*/
 
+    }
 
+    
+    removeData(index:number){
+        const data = this.productsSubject.value;
+        data.splice(index, 1);
+        this.productsSubject.next(data);
     }
 
 
@@ -50,23 +63,17 @@ export class CustomerDataSource implements DataSource<Customer>{
 
     connect(collectionViewer: import("@angular/cdk/collections").CollectionViewer): import("rxjs").Observable<any[] | readonly any[]> {
         console.log("Connecting data source");
-        return this.customersSubject.asObservable();
+        return this.productsSubject.asObservable();
     }
 
 
 
     disconnect(collectionViewer: import("@angular/cdk/collections").CollectionViewer): void {
-        this.customersSubject.complete();
+        this.productsSubject.complete();
         this.totalRowSubject.complete();
         this.loadingSubject.complete();
     }
 
-
-    removeData(index: number) {
-        const data = this.customersSubject.value;
-        data.splice(index, 1);
-        this.customersSubject.next(data);
-    }
 
 
 

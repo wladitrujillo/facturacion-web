@@ -1,51 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { User } from '../_models/user';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import { Role } from '../model/role';
+import { User } from '../model/user';
 import { AlertService } from './alert.service';
-import { Menu } from '../_models/menu';
 
 @Injectable({ providedIn: 'root' })
-export class UserService {
+export class RoleService {
   constructor(private http: HttpClient, private alertService: AlertService) { }
 
 
-  create(customer: User): Observable<User> {
-    return this.http.post(`api/user`, customer)
-      .pipe(tap((newProduct: User) => this.log(`create Product w/ id=${newProduct._id}`)),
-        catchError(this.handleError<User>('create')));
-  }
-
-  delete(_id: string): Observable<any> {
-    return this.http.delete<any>(`api/user/${_id}`).catch(this.handleError<any>('delete'));
-  }
-
-  update(user: User): Observable<User> {
-    return this.http.put(`api/user/${user._id}`, user)
-      .pipe(tap((newUser: User) => this.log(`update user w/ id=${newUser._id}`)),
-        catchError(this.handleError<User>('update')));
-  }
-
   getById(_id: string): Observable<User> {
-    return this.http.get<User>(`api/user/${_id}`).catch(this.handleError<any>('getById'));
+    return this.http.get<User>(`api/role/${_id}`).catch(this.handleError<any>('getById'));
   }
 
 
-  getProfileInfo(): Observable<User> {
-    return this.http.get<User>(`api/user/profile-info`).catch(this.errorHandler);
+  getRoles(): Observable<Role[]> {
+    return this.http.get<Role[]>(`api/role/`).catch(this.handleError<any>('getRoles'));
   }
 
-
-  getMenu(): Observable<Menu[]> {
-    return this.http.get<Menu[]>(`api/menu/`).catch(this.errorHandler);
-  }
-
-
-
+  
   errorHandler(error: HttpErrorResponse) {
     return Observable.throw(error.error || "Server Error");
   }
@@ -59,7 +36,6 @@ export class UserService {
       // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
       this.alertService.error(error.error || error.message);
-
 
       // Let the app keep running by returning an empty result.
       return of(result as T);

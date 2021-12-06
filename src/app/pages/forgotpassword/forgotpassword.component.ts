@@ -1,9 +1,8 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../_services';
-
-import { AlertService } from '../../_services/alert.service';
+import { AlertService } from 'src/app/core/service/alert.service';
+import { AuthenticationService } from 'src/app/core/service/authentication.service';
 
 @Component({
     selector: 'app-forgot-password',

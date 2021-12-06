@@ -1,13 +1,12 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ProductService } from 'src/app/_services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Location } from '@angular/common';
-import { Product } from 'src/app/_models/product';
-import { CatalogService } from 'src/app/_services/catalog.service';
-import { Catalog } from 'src/app/_models/catalog';
+import { Catalog } from 'src/app/core/model/catalog';
+import { ProductService } from 'src/app/core/service/product.service';
+import { AdminService } from 'src/app/core/service/admin.service';
 
 
 @Component({
@@ -35,7 +34,7 @@ export class ProductUpdateComponent implements OnInit {
         private fb: FormBuilder,
         private route: ActivatedRoute,
         private productService: ProductService,
-        private catalogService: CatalogService
+        private catalogService: AdminService
     ) { }
 
     ngOnInit() {

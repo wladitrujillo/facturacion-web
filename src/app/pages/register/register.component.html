@@ -74,20 +74,17 @@
 
                     <mat-form-field class="has-default">
                       <mat-icon matSuffix>account_circle</mat-icon>
-                      <input type="text" matInput placeholder="Company Name" formControlName="companyName">
-                      <mat-error *ngIf="fval.companyName.errors&&fval.companyName.errors.required">
-                        Company <strong>required</strong>
+                      <input type="text" matInput placeholder="Nombre" formControlName="firstName">
+                      <mat-error *ngIf="fval.firstName.errors&&fval.firstName.errors.required">
+                        Primer Nombre <strong>requerido</strong>
                       </mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="has-default">
                       <mat-icon matSuffix>account_circle</mat-icon>
-                      <input type="text" matInput placeholder="RUC" formControlName="taxId" [maxlength]="13">
-                      <mat-error *ngIf="fval.taxId.errors&&fval.taxId.errors.required">
-                        RUC <strong>required</strong>
-                      </mat-error>
-                      <mat-error *ngIf="fval.taxId.errors&&fval.taxId.errors.minlength">
-                        Password must be at least 13 characters
+                      <input type="text" matInput placeholder="Apellido" formControlName="lastName">
+                      <mat-error *ngIf="fval.lastName.errors&&fval.lastName.errors.required">
+                        Apellido <strong>requiredo</strong>
                       </mat-error>
                     </mat-form-field>
 

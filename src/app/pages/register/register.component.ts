@@ -27,8 +27,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     body.classList.add('register-page');
     body.classList.add('off-canvas-sidebar');
     this.registerForm = this.formBuilder.group({
-      companyName: ['', Validators.required],
-      taxId: ['', [Validators.required, Validators.minLength(13)]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });

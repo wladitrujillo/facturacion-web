@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required]]
         });
+        console.log("Entro al ngOnInit del login");
     }
     sidebarToggle() {
         var toggleButton = this.toggleButton;
@@ -67,6 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         const body = document.getElementsByTagName('body')[0];
         body.classList.remove('login-page');
         body.classList.remove('off-canvas-sidebar');
+        console.log("Entro al ngDestroy del login");
     }
 
     // for accessing to form fields

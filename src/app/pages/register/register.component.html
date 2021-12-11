@@ -3,12 +3,12 @@
     style="background-image: url('./assets/img/register.jpg'); background-size: cover; background-position: top center;">
     <div class="container">
       <div class="row">
-        <div class="col-md-10 ml-auto mr-auto">
+        <div class="col-md-5 ml-auto mr-auto">
           <div class="card card-signup">
             <h2 class="card-title text-center">Register Facturero Ágil </h2>
             <div class="card-body">
-              <div class="row">              
-                <div class="col-md-5 mr-auto">
+              <div class="row">
+                <div class="col-md-12 mr-auto">
                   <div class="social text-center">
                     <button mat-raised-button class="btn btn-just-icon btn-round btn-twitter">
                       <i class="fa fa-twitter"></i>
@@ -18,9 +18,9 @@
                     </button>
                     <button mat-raised-button class="btn btn-just-icon btn-round btn-facebook">
                       <i class="fa fa-facebook"> </i>
-                    </button>      
+                    </button>
                   </div>
-                  <form class="form" [formGroup]="registerForm" (ngSubmit)="onFormSubmit()">
+                  <form class="form" [formGroup]="registerForm" (ngSubmit)="enviarRegistro()">
                     <!--div class="form-group has-default">
                       <div class="input-group">
                         <div class="input-group-prepend">
@@ -36,20 +36,17 @@
 
                     <mat-form-field class="has-default">
                       <mat-icon matSuffix>account_circle</mat-icon>
-                      <input type="text" matInput placeholder="Nombre" formControlName="firstName">
-                      <mat-error *ngIf="fval.firstName.errors&&fval.firstName.errors.required">
+                      <input type="text" matInput placeholder="Nombre" formControlName="nombre">
+                      <mat-error *ngIf="fval.nombre.errors&&fval.nombre.errors.required">
                         Primer Nombre <strong>requerido</strong>
                       </mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="has-default">
                       <mat-icon matSuffix>account_circle</mat-icon>
-                      <input type="text" matInput placeholder="RUC" formControlName="taxId" [maxlength]="13">
-                      <mat-error *ngIf="fval.taxId.errors&&fval.taxId.errors.required">
-                        RUC <strong>required</strong>
-                      </mat-error>
-                      <mat-error *ngIf="fval.taxId.errors&&fval.taxId.errors.minlength">
-                        La contraseña debe tener al menos 13 caracteres
+                      <input type="text" matInput placeholder="Apellido" formControlName="apellido">
+                      <mat-error *ngIf="fval.apellido.errors&&fval.apellido.errors.required">
+                        Apellido <strong>required</strong>
                       </mat-error>
                     </mat-form-field>
 
@@ -66,7 +63,7 @@
                     </mat-form-field>
                     <mat-form-field class="has-default">
                       <mat-icon matSuffix>lock_outline</mat-icon>
-                      <input type="password" matInput placeholder="Password" formControlName="password">
+                      <input type="password" matInput placeholder="Contraseña" formControlName="password">
                       <mat-error *ngIf="fval.password.errors&&fval.password.errors.required">
                         Password is <strong>required</strong>
                       </mat-error>
@@ -109,14 +106,14 @@
                         <span class="form-check-sign">
                           <span class="check"></span>
                         </span>
-                        I agree to the
-                        <a href="">terms and conditions</a>.
+                        Aceptar
+                        <a href="">términos y condiciones</a>.
                       </label>
                     </div>
                     <div class="text-center">
-                      <button class="btn btn-primary btn-round mt-4" [disabled]="loading">
+                      <button type="submit" class="btn btn-primary btn-round mt-4" [disabled]="loading">
                         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                        Get Started</button>
+                        Aceptar</button>
                     </div>
                   </form>
                 </div>

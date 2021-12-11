@@ -10,21 +10,11 @@
               <div class="card-header card-header-rose text-center" style="margin-bottom: 40px;">
                 <a [routerLink]="" *ngIf="step==2" style="color:white" (click)="step=1">
                   <i style="margin-right:-25px;" class="material-icons pull-left">keyboard_arrow_left</i></a>
-                <h4 class="card-title">Log in</h4>
-                <!--div class="social-line">
-                  <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                    <i class="fa fa-facebook-square"></i>
-                  </a>
-                  <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                    <i class="fa fa-twitter"></i>
-                  </a>
-                  <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                    <i class="fa fa-google-plus"></i>
-                  </a>
-                </div-->
+                <h4 class="card-title">Iniciar Sesión</h4>
+
               </div>
               <div class="card-body ">
-                <!--p class="card-description text-center">Or Be Classical</p-->
+
 
                 <mat-form-field>
                   <mat-icon matSuffix>account_circle</mat-icon>
@@ -41,83 +31,20 @@
                   </mat-error>
                 </mat-form-field>
 
-                <a href="" routerLink="/auth/forgot-password" class="pull-right">Forgot Password?</a>
-                <!--span class="bmd-form-group">
-                  <div class="input-group" style="margin-top: 40px;">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="material-icons">email</i>
-                      </span>
-                    </div>
-                    <input type="email" formControlName="email" class="form-control"
-                      [ngClass]="{ 'is-invalid': submitted && fval.email.errors }" placeholder="Email...">
-                    <div *ngIf="submitted && fval.email.errors" class="invalid-feedback">
-                      <div *ngIf="fval.email.errors.required">Email is required</div>
-                      <div *ngIf="fval.email.errors.email">Email must be a valid email address</div>
-                    </div>
-                  </div>
-                </span>
-                <span class="bmd-form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="material-icons">lock_outline</i>
-                      </span>
-                    </div>
-                    <input type="password" formControlName="password" class="form-control"
-                      [ngClass]="{ 'is-invalid': submitted && fval.password.errors }" placeholder="Password...">
-                    <div *ngIf="submitted && fval.password.errors" class="invalid-feedback">
-                      <div *ngIf="fval.password.errors.required">Password is required</div>
-                    </div>
-                  </div>
-                </span-->
+                <a href="" routerLink="/auth/forgot-password" class="pull-right">Olvidé mi Contraseña?</a>
+
               </div>
               <div class="card-footer justify-content-center">
-                <button *ngIf="step==1" class="btn btn-rose btn-link btn-lg" [disabled]="loading">
+                <button class="btn btn-rose btn-link btn-lg" [disabled]="loading">
                   <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                   Continuar</button>
-                <button *ngIf="step==2" class="btn btn-rose btn-link btn-lg" [disabled]="loading">
-                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                  Ingresar</button>
+               
               </div>
             </div>
           </form>
         </div>
       </div>
     </div>
-    <footer class="footer ">
-      <div class="container">
-        <nav class="pull-left">
-          <ul>
-            <li>
-              <a href="https://www.creative-tim.com">
-                Mobil Group
-              </a>
-            </li>
-            <li>
-              <a href="https://creative-tim.com/about-us">
-                About Us
-              </a>
-            </li>
-            <li>
-              <a href="http://blog.creative-tim.com">
-                Blog
-              </a>
-            </li>
-            <li>
-              <a href="https://www.creative-tim.com/license">
-                Prices
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <div class="copyright pull-right">
-          &copy;
-          {{test | date: 'yyyy'}}, made with <i class="material-icons">favorite</i> by
-          <a href="https://www.creative-tim.com" target="_blank">Mobil Group</a> for a better web.
-        </div>
 
-      </div>
-    </footer>
   </div>
 </div>

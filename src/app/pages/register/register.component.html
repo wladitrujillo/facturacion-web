@@ -5,34 +5,14 @@
       <div class="row">
         <div class="col-md-5 ml-auto mr-auto">
           <div class="card card-signup">
-            <h2 class="card-title text-center">Register Facturero Ágil </h2>
+            <h2 class="card-title text-center">Facturero Ágil </h2>
             <div class="card-body">
               <div class="row">
                 <div class="col-md-12 mr-auto">
-                  <div class="social text-center">
-                    <button mat-raised-button class="btn btn-just-icon btn-round btn-twitter">
-                      <i class="fa fa-twitter"></i>
-                    </button>
-                    <button mat-raised-button class="btn btn-just-icon btn-round btn-dribbble">
-                      <i class="fa fa-dribbble"></i>
-                    </button>
-                    <button mat-raised-button class="btn btn-just-icon btn-round btn-facebook">
-                      <i class="fa fa-facebook"> </i>
-                    </button>
-                  </div>
+                 
+
                   <form class="form" [formGroup]="registerForm" (ngSubmit)="enviarRegistro()">
-                    <!--div class="form-group has-default">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="material-icons">face</i>
-                          </span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="First Name...">
-                      </div>
-                    </div-->
-
-
+                    
 
                     <mat-form-field class="has-default">
                       <mat-icon matSuffix>account_circle</mat-icon>
@@ -61,6 +41,7 @@
                         Debe ser una dirección de correo electrónico válida
                       </mat-error>
                     </mat-form-field>
+
                     <mat-form-field class="has-default">
                       <mat-icon matSuffix>lock_outline</mat-icon>
                       <input type="password" matInput placeholder="Contraseña" formControlName="password">
@@ -72,34 +53,6 @@
                       </mat-error>
                     </mat-form-field>
 
-                    <!--div class="form-group has-default">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="material-icons">mail</i>
-                          </span>
-                        </div>                   
-                        <input type="text" placeholder="Email..." formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && fval.email.errors }" />
-                        <div *ngIf="submitted && fval.email.errors" class="invalid-feedback">
-                            <div *ngIf="fval.email.errors.required">Email is required</div>
-                            <div *ngIf="fval.email.errors.email">Email must be a valid email address</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group has-default">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="material-icons">lock_outline</i>
-                          </span>
-                        </div>
-                        <input type="password" placeholder="Password..." formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && fval.password.errors }" />
-                        <div *ngIf="submitted && fval.password.errors" class="invalid-feedback">
-                            <div *ngIf="fval.password.errors.required">Password is required</div>
-                            <div *ngIf="fval.password.errors.minlength">Password must be at least 6 characters</div>
-                        </div>
-                      </div>
-                    </div-->
                     <div class="form-check">
                       <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" value="" checked="">
@@ -110,11 +63,13 @@
                         <a href="">términos y condiciones</a>.
                       </label>
                     </div>
+
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary btn-round mt-4" [disabled]="loading">
                         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                         Aceptar</button>
                     </div>
+
                   </form>
                 </div>
               </div>
@@ -123,38 +78,6 @@
         </div>
       </div>
     </div>
-    <footer class="footer ">
-      <div class="container">
-        <nav class="pull-left">
-          <ul>
-            <li>
-              <a href="https://www.creative-tim.com">
-                Creative Tim
-              </a>
-            </li>
-            <li>
-              <a href="https://creative-tim.com/about-us">
-                About Us
-              </a>
-            </li>
-            <li>
-              <a href="http://blog.creative-tim.com">
-                Blog
-              </a>
-            </li>
-            <li>
-              <a href="https://www.creative-tim.com/license">
-                Licenses
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <div class="copyright pull-right">
-          &copy;
-          {{test | date: 'yyyy'}}, made with <i class="material-icons">favorite</i> by
-          <a href="https://www.creative-tim.com" target="_blank">Mobil Group</a> for a better web.
-        </div>
-      </div>
-    </footer>
+
   </div>
 </div>

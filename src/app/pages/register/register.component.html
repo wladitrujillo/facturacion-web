@@ -16,16 +16,16 @@
 
                     <mat-form-field class="has-default">
                       <mat-icon matSuffix>account_circle</mat-icon>
-                      <input type="text" matInput placeholder="Nombre" formControlName="nombre">
-                      <mat-error *ngIf="fval.nombre.errors&&fval.nombre.errors.required">
+                      <input type="text" matInput placeholder="Nombre" formControlName="firstName">
+                      <mat-error *ngIf="fval.firstName.errors&&fval.firstName.errors.required">
                         Primer Nombre <strong>requerido</strong>
                       </mat-error>
                     </mat-form-field>
 
                     <mat-form-field class="has-default">
                       <mat-icon matSuffix>account_circle</mat-icon>
-                      <input type="text" matInput placeholder="Apellido" formControlName="apellido">
-                      <mat-error *ngIf="fval.apellido.errors&&fval.apellido.errors.required">
+                      <input type="text" matInput placeholder="Apellido" formControlName="lastName">
+                      <mat-error *ngIf="fval.lastName.errors&&fval.lastName.errors.required">
                         Apellido <strong>required</strong>
                       </mat-error>
                     </mat-form-field>

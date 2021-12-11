@@ -1,8 +1,8 @@
 import { DataSource } from "@angular/cdk/table";
-import { Invoice } from "../_models/invoice";
 import { BehaviorSubject, of } from "rxjs";
 import { catchError, finalize } from "rxjs/operators";
 import { HttpClient, HttpResponse } from "@angular/common/http";
+import { Invoice } from "../model/invoice";
 
 export class InvoiceDataSource implements DataSource<Invoice>{
 

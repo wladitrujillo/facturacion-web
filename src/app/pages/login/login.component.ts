@@ -1,9 +1,8 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../_services';
-import { AlertService } from '../../_services/alert.service';
-import { Enterprise } from 'src/app/_models/enterprise';
+import { AlertService } from 'src/app/core/service/alert.service';
+import { AuthenticationService } from 'src/app/core/service/authentication.service';
 
 @Component({
     selector: 'app-login-cmp',
@@ -15,7 +14,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     loginForm: FormGroup;
     loading = false;
     step: number;
-    enterpriseList: Enterprise[];
     submitted = false;
     private toggleButton: any;
     private sidebarVisible: boolean;

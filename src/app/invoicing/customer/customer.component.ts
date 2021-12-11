@@ -1,13 +1,13 @@
 
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { CustomerDataSource } from '../../_services/customer.datasource';
 import { MatPaginator } from '@angular/material';
 import { MatSort } from "@angular/material/sort";
 import { merge } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Customer } from 'src/app/_models/customer';
-import { CustomerService } from 'src/app/_services/customer.service';
+import { CustomerDataSource } from 'src/app/core/service/customer.datasource';
+import { Customer } from 'src/app/core/model/customer';
+import { CustomerService } from 'src/app/core/service/customer.service';
 
 
 @Component({

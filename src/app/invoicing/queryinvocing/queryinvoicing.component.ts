@@ -8,8 +8,8 @@ import { HttpClient } from '@angular/common/http';
 import { merge, fromEvent } from 'rxjs';
 import { tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { InvoiceService } from 'src/app/_services/invoice.service';
-import { InvoiceDataSource } from 'src/app/_services/invoice.datasource';
+import { InvoiceDataSource } from 'src/app/core/service/invoice.datasource';
+import { InvoiceService } from 'src/app/core/service/invoice.service';
 
 
 @Component({

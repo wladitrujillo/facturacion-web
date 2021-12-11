@@ -3,10 +3,10 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { CustomerService } from 'src/app/_services/customer.service';
-import { CatalogService } from 'src/app/_services/catalog.service';
 import { MatDialogRef } from '@angular/material';
-import { Catalog } from 'src/app/_models/catalog';
+import { Catalog } from 'src/app/core/model/catalog';
+import { CustomerService } from 'src/app/core/service/customer.service';
+import { AdminService } from 'src/app/core/service/admin.service';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class AddCustomerComponent implements OnInit {
         private fb: FormBuilder,
         private route: ActivatedRoute,
         private customerService: CustomerService,
-        private catalogService: CatalogService
+        private catalogService: AdminService
     ) {
 
     }
@@ -76,9 +76,9 @@ export class AddCustomerComponent implements OnInit {
 
 
 
-  close() {
-    this.dialogRef.close(undefined);
-  }
+    close() {
+        this.dialogRef.close(undefined);
+    }
 
 
 

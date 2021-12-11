@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { Router } from '@angular/router';
-
-import { AuthenticationService, UserService } from '../_services';
-import { User } from '../_models';
-import { Menu } from '../_models/menu';
+import { Menu } from '../core/model/menu';
+import { User } from '../core/model/user';
+import { AuthenticationService } from '../core/service/authentication.service';
+import { AdminService } from '../core/service/admin.service';
 
 declare const $: any;
 
@@ -165,7 +165,7 @@ export class SidebarComponent implements OnInit {
     constructor(
         private router: Router,
         private authenticationService: AuthenticationService,
-        private userService: UserService
+        private adminService: AdminService
     ) {
 
     }
@@ -179,7 +179,7 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         //this.menuItems = ROUTES.filter(menuItem => menuItem);
-        this.userService.getMenu().subscribe(menus => this.menuItems = menus);
+        this.adminService.getMenu().subscribe(menus => this.menuItems = menus);
         this.user = this.authenticationService.currentUserValue;
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
             const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');

@@ -1,10 +1,9 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthenticationService } from '../../_services';
+import { AlertService } from 'src/app/core/service/alert.service';
+import { AuthenticationService } from 'src/app/core/service/authentication.service';
 import { PasswordValidation } from '../../_helpers/password.validator';
-import { AlertService } from '../../_services/alert.service';
-import { VirtualTimeScheduler } from 'rxjs';
 
 @Component({
     selector: 'app-reset-password',

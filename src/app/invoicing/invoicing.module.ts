@@ -9,26 +9,26 @@ import { ProductListComponent } from './product/product-list.component';
 import { CustomerComponent } from './customer/customer.component';
 import { EstablishmentComponent } from './establishment/establishment.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { ProductService } from '../_services/product.service';
 import { ProductUpdateComponent } from './product/product-update.component';
 import { CustomerUpdateComponent } from './customer/customer-update.component';
 import { UserComponent } from './users/user.component';
 import { UserUpdateComponent } from './users/user-update.component';
-import { RoleService } from '../_services/role.service';
 import { EstablishmentUpdateComponent } from './establishment/establishment-update.component';
-import { EstablishmentService } from '../_services/establishment.service';
 import { BranchComponent } from './branch/branch.component';
 import { BranchUpdateComponent } from './branch/branch-update.component';
-import { BranchService } from '../_services/branch.service';
-import { ProductResolver } from '../_services/product.resolver';
-import { CustomerResolver } from '../_services/customer.resolver';
-import { EstablishmentResolver } from '../_services/establishment.resolver';
-import { BranchResolver } from '../_services/branch.resolver';
-import { UserResolver } from '../_services/user.resolver';
 import { SearchProductComponent } from './searchproduct/search-product.component';
 import { SearchCustomerComponent } from './searchcustomer/search-customer.component';
 import { AddCustomerComponent } from './addcustomer/add-customer.component';
 import { QueryInvoicingComponent } from './queryinvocing/queryinvoicing.component';
+import { BranchResolver } from '../core/service/branch.resolver';
+import { BranchService } from '../core/service/branch.service';
+import { CustomerResolver } from '../core/service/customer.resolver';
+import { EstablishmentResolver } from '../core/service/establishment.resolver';
+import { EstablishmentService } from '../core/service/establishment.service';
+import { ProductResolver } from '../core/service/product.resolver';
+import { ProductService } from '../core/service/product.service';
+import { RoleService } from '../core/service/role.service';
+import { UserResolver } from '../core/service/user.resolver';
 
 
 

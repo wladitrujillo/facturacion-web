@@ -1,15 +1,14 @@
 
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { AlertService } from '../../_services/alert.service';
 import { MatPaginator } from '@angular/material';
 import { MatSort } from "@angular/material/sort";
 import { merge } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { BranchDataSource } from './branch.datasource';
-import { BranchService } from 'src/app/_services/branch.service';
-import { Branch } from 'src/app/_models';
 import { ActivatedRoute } from '@angular/router';
+import { Branch } from 'src/app/core/model';
+import { BranchService } from 'src/app/core/service/branch.service';
 
 declare interface DataTable {
   headerRow: string[];

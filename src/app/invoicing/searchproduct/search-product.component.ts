@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { MatDialogRef } from "@angular/material/dialog";
 
-import { ProductDataSource } from 'src/app/_services/product.datasource';
 import { MatPaginator, MatSort } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 
 import { merge, fromEvent } from 'rxjs';
 import { tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ProductDataSource } from 'src/app/core/service/product.datasource';
 
 @Component({
   selector: 'search-product',

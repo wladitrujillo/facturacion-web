@@ -1,12 +1,12 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CustomerService } from 'src/app/_services/customer.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Location } from '@angular/common';
-import { CatalogService } from 'src/app/_services/catalog.service';
-import { Catalog } from 'src/app/_models/catalog';
+import { Catalog } from 'src/app/core/model/catalog';
+import { CustomerService } from 'src/app/core/service/customer.service';
+import { AdminService } from 'src/app/core/service/admin.service';
 
 
 @Component({
@@ -35,7 +35,7 @@ export class CustomerUpdateComponent implements OnInit {
         private fb: FormBuilder,
         private route: ActivatedRoute,
         private customerService: CustomerService,
-        private catalogService: CatalogService
+        private catalogService: AdminService
     ) {
 
     }

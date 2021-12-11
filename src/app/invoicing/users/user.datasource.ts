@@ -1,8 +1,8 @@
 import { DataSource } from "@angular/cdk/table";
-import { User } from "../../_models/user";
 import { BehaviorSubject, of } from "rxjs";
 import { catchError, finalize } from "rxjs/operators";
 import { HttpClient, HttpResponse } from "@angular/common/http";
+import { User } from "src/app/core/model/user";
 
 export class UserDataSource implements DataSource<User>{
 

@@ -1,29 +1,25 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-
-import { User } from '../_models/user';
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+import { Catalog } from '../model/catalog';
+import { Menu } from '../model/menu';
 import { AlertService } from './alert.service';
-import { Role } from '../_models/role';
 
-@Injectable({ providedIn: 'root' })
-export class RoleService {
+@Injectable({
+  providedIn: 'root'
+})
+export class AdminService {
+
   constructor(private http: HttpClient, private alertService: AlertService) { }
 
-
-  getById(_id: string): Observable<User> {
-    return this.http.get<User>(`api/role/${_id}`).catch(this.handleError<any>('getById'));
+  getMenu(): Observable<Menu[]> {
+    return this.http.get<Menu[]>(`api/admin/menu/`).catch(this.errorHandler);
   }
 
-
-  getRoles(): Observable<Role[]> {
-    return this.http.get<Role[]>(`api/role/`).catch(this.handleError<any>('getRoles'));
+  getCatalog(tableId: string): Observable<Catalog[]> {
+    return this.http.get<Catalog[]>(`api/table/${tableId}/catalog`).catch(this.handleError<any>('getCatalog'));
   }
 
-  
   errorHandler(error: HttpErrorResponse) {
     return Observable.throw(error.error || "Server Error");
   }
@@ -37,6 +33,7 @@ export class RoleService {
       // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
       this.alertService.error(error.error || error.message);
+
 
       // Let the app keep running by returning an empty result.
       return of(result as T);

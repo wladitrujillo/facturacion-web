@@ -7,7 +7,6 @@ export class User {
     phone: string;
     active: boolean;
     hash: string;
-    urlImage: string;
     address: string;
     city: string;
     country: string;

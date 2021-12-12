@@ -47,11 +47,11 @@ export class AuthenticationService {
   }
 
   forgotPassword(email: String): Observable<any> {
-    return this.http.post<any>(`api/user/forgot-password`, { email }).catch(this.errorHandler);
+    return this.http.post<any>(`auth/forgot-password`, { email }).catch(this.errorHandler);
   }
 
-  resetPassword(requestId: string, password: string): Observable<any> {
-    return this.http.put<any>(`api/user/reset-password/${requestId}`, { password }).catch(this.errorHandler);
+  resetPassword(token: string, password: string): Observable<any> {
+    return this.http.put<any>(`auth/reset-password`, { token, password }).catch(this.errorHandler);
   }
 
   errorHandler(error: HttpErrorResponse) {

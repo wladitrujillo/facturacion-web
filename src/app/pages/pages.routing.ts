@@ -31,7 +31,7 @@ export const PagesRoutes: Routes = [
         component: ForgotPasswordComponent
     },
     {
-        path: 'reset-password/:id',
+        path: 'reset-password/:token',
         component: ResetPasswordComponent
     }
 

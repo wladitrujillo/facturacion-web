@@ -35,7 +35,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         return !form.get(field).valid && form.get(field).touched;
     }
 
-  
+
     ngOnInit() {
         var navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
@@ -86,7 +86,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
             return;
         }
 
-        const requestId = this.activateRoute.snapshot.paramMap.get('id');
+        const requestId = this.activateRoute.snapshot.paramMap.get('token');
         this.loading = true;
         this.authenticationService
             .resetPassword(requestId, this.fval.password.value).subscribe(

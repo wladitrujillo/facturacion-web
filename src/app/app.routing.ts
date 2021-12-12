@@ -18,9 +18,6 @@ export const AppRoutes: Routes = [
                 path: '',
                 loadChildren: './dashboard/dashboard.module#DashboardModule'
             }, {
-                path: 'invoicing',
-                loadChildren: './invoicing/invoicing.module#InvoicingModule'
-            }, {
                 path: '',
                 loadChildren: './userpage/user.module#UserModule'
             }

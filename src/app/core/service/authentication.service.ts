@@ -20,7 +20,7 @@ export class AuthenticationService {
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
   }
-//en facturacion api carpeta routh archivo Auth.Routes.ts
+  //en facturacion api carpeta routh archivo Auth.Routes.ts
   register(user: User): Observable<User> {
     return this.http.post<User>(`auth/register`, user).catch(this.errorHandler);
   }
@@ -40,7 +40,7 @@ export class AuthenticationService {
 
 
   logout() {
-  // cierra sesión
+    // cierra sesión
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     localStorage.removeItem('auth_token');
@@ -53,7 +53,10 @@ export class AuthenticationService {
   resetPassword(token: string, password: string): Observable<any> {
     return this.http.put<any>(`auth/reset-password`, { token, password }).catch(this.errorHandler);
   }
-
+  //en facturacion api carpeta routh archivo Auth.Routes.ts
+  activateAccount(userId: string): Observable<any> {
+    return this.http.put<any>(`auth/activate-account/${userId}`, {}).catch(this.errorHandler);
+  }
   errorHandler(error: HttpErrorResponse) {
     console.log(error);
     return Observable.throw(error.error || error.message);

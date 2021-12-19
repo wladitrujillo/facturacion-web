@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetPasswordComponent } from "./resetpassword/resetpassword.component";
+import { ActivateAccountComponent } from './activate-account/activate-account.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ResetPasswordComponent } from "./resetpassword/resetpassword.component"
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ActivateAccountComponent
   ]
 })
 

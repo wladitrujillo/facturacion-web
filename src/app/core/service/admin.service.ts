@@ -16,8 +16,8 @@ export class AdminService {
     return this.http.get<Menu[]>(`api/admin/menu/`).catch(this.errorHandler);
   }
 
-  getCatalog(tableId: string): Observable<Catalog[]> {
-    return this.http.get<Catalog[]>(`api/table/${tableId}/catalog`).catch(this.handleError<any>('getCatalog'));
+  getCatalogByName(name: string): Observable<Catalog> {
+    return this.http.get<Catalog>(`api/admin/catalog/${name}`).catch(this.handleError<any>('getCatalog'));
   }
 
   errorHandler(error: HttpErrorResponse) {

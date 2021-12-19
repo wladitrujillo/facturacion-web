@@ -25,8 +25,8 @@ export class CustomerUpdateComponent implements OnInit {
     @ViewChild('resetCustomerForm', { static: true }) myNgForm;
     readonly separatorKeysCodes: number[] = [ENTER, COMMA];
     customerForm: FormGroup;
-    identificationTypes: Catalog[];
-    customerTypes: Catalog[];
+    identificationTypes: Catalog;
+    customerTypes: Catalog;
 
 
 
@@ -56,9 +56,9 @@ export class CustomerUpdateComponent implements OnInit {
         });
 
 
-        this.catalogService.getCatalog("customer_type").subscribe(response => this.customerTypes = response);
+        this.catalogService.getCatalogByName("customer_type").subscribe(response => this.customerTypes = response);
 
-        this.catalogService.getCatalog("identification_type").subscribe(response => this.identificationTypes = response);
+        this.catalogService.getCatalogByName("identification_type").subscribe(response => this.identificationTypes = response);
 
 
     }

@@ -27,7 +27,7 @@ export class ProductUpdateComponent implements OnInit {
     productForm: FormGroup;
     SectioinArray: any = ['A', 'B', 'C', 'D', 'E'];
 
-    productTypes: Catalog[];
+    productTypes: Catalog;
 
     constructor(
         private location: Location,
@@ -50,7 +50,7 @@ export class ProductUpdateComponent implements OnInit {
             type: [product.type || 'B', [Validators.required]]
         })
 
-        this.catalogService.getCatalog('product_type').subscribe(types => this.productTypes = types);
+        this.catalogService.getCatalogByName('product_type').subscribe(types => this.productTypes = types);
 
     }
 

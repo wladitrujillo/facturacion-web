@@ -16,8 +16,8 @@ import { AdminService } from 'src/app/core/service/admin.service';
 })
 export class AddCustomerComponent implements OnInit {
     customerForm: any;
-    customerTypes: Catalog[];
-    identificationTypes: Catalog[];
+    customerTypes: Catalog;
+    identificationTypes: Catalog;
 
 
     constructor(
@@ -46,9 +46,9 @@ export class AddCustomerComponent implements OnInit {
         });
 
 
-        this.catalogService.getCatalog("customer_type").subscribe(response => this.customerTypes = response);
+        this.catalogService.getCatalogByName("customer_type").subscribe(response => this.customerTypes = response);
 
-        this.catalogService.getCatalog("identification_type").subscribe(response => this.identificationTypes = response);
+        this.catalogService.getCatalogByName("identification_type").subscribe(response => this.identificationTypes = response);
 
 
     }

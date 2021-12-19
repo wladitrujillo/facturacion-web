@@ -58,7 +58,7 @@
                             <!-- Type -->
                             <mat-form-field class="example-full-width">
                                 <mat-select placeholder="Tipo de producto" formControlName="type">
-                                    <mat-option *ngFor="let t of productTypes" [value]="t.code">
+                                    <mat-option *ngFor="let t of productTypes.items" [value]="t.code">
                                         {{t.value}}
                                     </mat-option>
                                 </mat-select>

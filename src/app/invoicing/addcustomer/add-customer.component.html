@@ -28,7 +28,7 @@
 
         <mat-form-field class="example-full-width">
             <mat-select placeholder="Tipo de cliente" formControlName="type">
-                <mat-option *ngFor="let ct of customerTypes" [value]="ct.code">
+                <mat-option *ngFor="let ct of customerTypes.items" [value]="ct.code">
                     {{ct.value}}
                 </mat-option>
             </mat-select>
@@ -38,7 +38,7 @@
 
         <mat-form-field class="example-full-width">
             <mat-select placeholder="Tipo de Identificacion" formControlName="taxIdType">
-                <mat-option *ngFor="let type of identificationTypes" [value]="type.code">
+                <mat-option *ngFor="let type of identificationTypes.items" [value]="type.code">
                     {{type.value}}
                 </mat-option>
             </mat-select>

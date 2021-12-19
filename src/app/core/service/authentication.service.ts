@@ -20,7 +20,7 @@ export class AuthenticationService {
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
   }
-
+//en facturacion api carpeta routh archivo Auth.Routes.ts
   register(user: User): Observable<User> {
     return this.http.post<User>(`auth/register`, user).catch(this.errorHandler);
   }
@@ -29,7 +29,7 @@ export class AuthenticationService {
     return this.http.put<any>(`auth/login`, { email, password })
       .pipe(map(user => {
         if (user && user.token) {
-          // store user details in local storage to keep user logged in
+          //almacena los detallees del usuario para localStorage para mantener la cesion del usuario
           localStorage.setItem('currentUser', JSON.stringify(user.result));
           localStorage.setItem('auth_token', user.token);
           this.currentUserSubject.next(user.result);
@@ -40,16 +40,16 @@ export class AuthenticationService {
 
 
   logout() {
-    // remove user data from local storage for log out
+  // cierra sesión
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     localStorage.removeItem('auth_token');
   }
-
+  //en facturacion api carpeta routh archivo Auth.Routes.ts
   forgotPassword(email: String): Observable<any> {
     return this.http.post<any>(`auth/forgot-password`, { email }).catch(this.errorHandler);
   }
-
+  //en facturacion api carpeta routh archivo Auth.Routes.ts
   resetPassword(token: string, password: string): Observable<any> {
     return this.http.put<any>(`auth/reset-password`, { token, password }).catch(this.errorHandler);
   }

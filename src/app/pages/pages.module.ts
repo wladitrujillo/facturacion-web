@@ -12,6 +12,7 @@ import { ResetPasswordComponent } from "./resetpassword/resetpassword.component"
 
 
 @NgModule({
+  //importación de módulos
   imports: [
     CommonModule,
     RouterModule.forChild(PagesRoutes),
@@ -19,6 +20,7 @@ import { ResetPasswordComponent } from "./resetpassword/resetpassword.component"
     MaterialModule,
     ReactiveFormsModule
   ],
+  //declara los componentes o pantallas 
   declarations: [
     LoginComponent,
     RegisterComponent,

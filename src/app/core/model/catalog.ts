@@ -1,4 +1,5 @@
 export class Catalog {
-    code: string;
-    value: string;
+    name: string;
+    active: boolean;
+    items: [{ code: string, value: string }];
 }

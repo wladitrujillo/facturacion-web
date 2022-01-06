@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+import { ProductResolver } from '../core/service/product.resolver';
+import { ProductListComponent } from './product/product-list.component';
+import { ProductUpdateComponent } from './product/product-update.component'
 import { EstablishmentComponent } from './establishment/establishment.component';
 import { EstablishmentUpdateComponent } from './establishment/establishment-update.component';
 import { BranchComponent } from './branch/branch.component';
@@ -8,6 +11,17 @@ import { EstablishmentResolver } from '../core/service/establishment.resolver';
 import { UserResolver } from '../core/service/user.resolver';
 
 export const InvoicingRoutes: Routes = [
+  {
+    path: 'product',
+    children: [
+      { path: '', component: ProductListComponent },
+      { path: 'new', component: ProductUpdateComponent },
+      {
+        path: ':_id/edit', component: ProductUpdateComponent, resolve: {
+          product: ProductResolver
+        }
+      }]
+  },
   {
     path: 'establishment',
     children: [
@@ -27,4 +41,5 @@ export const InvoicingRoutes: Routes = [
           branch: BranchResolver
         }
       }]
-  }];
+  }
+];

@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { BranchDataSource } from './branch.datasource';
 import { ActivatedRoute } from '@angular/router';
-import { Branch } from 'src/app/core/model';
+import { Branch } from 'src/app/core/model/branch';
 import { BranchService } from 'src/app/core/service/branch.service';
 
 declare interface DataTable {

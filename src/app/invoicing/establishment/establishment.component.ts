@@ -6,7 +6,7 @@ import { merge } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { EstablishmentDataSource } from './establishment.datasource';
-import { Establishment } from 'src/app/core/model';
+import { Establishment } from 'src/app/core/model/establishment';
 import { EstablishmentService } from 'src/app/core/service/establishment.service';
 
 

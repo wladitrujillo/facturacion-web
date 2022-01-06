@@ -1,7 +1,7 @@
 import { DataSource } from "@angular/cdk/table";
 import { BehaviorSubject, of } from "rxjs";
 import { catchError, finalize } from "rxjs/operators";
-import { Branch } from "src/app/core/model";
+import { Branch } from "src/app/core/model/branch";
 import { BranchService } from "src/app/core/service/branch.service";
 
 export class BranchDataSource implements DataSource<Branch>{

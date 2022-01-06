@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { Branch } from '../model';
+import { Branch } from '../model/branch';
 import { AlertService } from './alert.service';
 
 @Injectable({ providedIn: 'root' })

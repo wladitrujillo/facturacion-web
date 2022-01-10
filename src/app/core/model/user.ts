@@ -14,4 +14,5 @@ export class User {
     postal: string;
     about: string;
     role: string;
+    password: string;
 }

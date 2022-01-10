@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Company } from 'src/app/core/model/company';
+import { User } from 'src/app/core/model/user';
 import { AlertService } from 'src/app/core/service/alert.service';
 import { AuthenticationService } from 'src/app/core/service/authentication.service';
 @Component({
@@ -28,6 +30,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     body.classList.add('register-page');
     body.classList.add('off-canvas-sidebar');
     this.registerForm = this.formBuilder.group({
+      ruc: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -51,10 +54,21 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if (this.registerForm.invalid) {
       return;
     }
-
-
     this.loading = true;
-    this.authenticationService.register(this.registerForm.value)
+
+    let company: Company = {
+      ruc: this.registerForm.value.ruc,
+      name: '',
+      address: ''
+    }
+    let user: User = new User()
+
+    user.firstName = this.registerForm.value.firstName;
+    user.lastName = this.registerForm.value.lastName;
+    user.email = this.registerForm.value.email;
+    user.password = this.registerForm.value.password;
+
+    this.authenticationService.register(company, user)
       .subscribe(
         data => {
           this.loading = false;

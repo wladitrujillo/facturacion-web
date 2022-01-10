@@ -5,20 +5,32 @@
       <div class="row">
         <div class="col-md-5 ml-auto mr-auto">
           <div class="card card-signup">
-            <h2 class="card-title text-center">Facturero Ágil </h2>
+            <h2 class="card-title text-center">Facturero Ágil</h2>
             <div class="card-body">
               <div class="row">
                 <div class="col-md-12 mr-auto">
-                 
 
                   <form class="form" [formGroup]="registerForm" (ngSubmit)="enviarRegistro()">
-                    
+
+                    <mat-form-field class="has-default">
+                      <mat-icon matSuffix>store</mat-icon>
+                      <input type="text" matInput placeholder="RUC" formControlName="ruc">
+                      <mat-error *ngIf="fval.ruc.errors&&fval.ruc.errors.required">
+                        Este campo es <strong>requerido</strong>
+                      </mat-error>
+                      <mat-error *ngIf="fval.ruc.errors&&fval.ruc.errors.minlength">
+                        Debe tener 13 caracteres
+                      </mat-error>
+                      <mat-error *ngIf="fval.ruc.errors&&fval.ruc.errors.maxlength">
+                        Debe tener 13 caracteres
+                      </mat-error>
+                    </mat-form-field>
 
                     <mat-form-field class="has-default">
                       <mat-icon matSuffix>account_circle</mat-icon>
                       <input type="text" matInput placeholder="Nombre" formControlName="firstName">
                       <mat-error *ngIf="fval.firstName.errors&&fval.firstName.errors.required">
-                        Primer Nombre <strong>requerido</strong>
+                        Esta campo es <strong>requerido</strong>
                       </mat-error>
                     </mat-form-field>
 
@@ -26,7 +38,7 @@
                       <mat-icon matSuffix>account_circle</mat-icon>
                       <input type="text" matInput placeholder="Apellido" formControlName="lastName">
                       <mat-error *ngIf="fval.lastName.errors&&fval.lastName.errors.required">
-                        Apellido <strong>required</strong>
+                        Este campo es <strong>required</strong>
                       </mat-error>
                     </mat-form-field>
 
@@ -35,7 +47,7 @@
                       <mat-icon matSuffix>email</mat-icon>
                       <input type="email" matInput placeholder="Email" formControlName="email">
                       <mat-error *ngIf="fval.email.errors&&fval.email.errors.required">
-                        Email is <strong>required</strong>
+                        Este campo es <strong>required</strong>
                       </mat-error>
                       <mat-error *ngIf="fval.email.errors&&fval.email.errors.email">
                         Debe ser una dirección de correo electrónico válida
@@ -46,7 +58,7 @@
                       <mat-icon matSuffix>lock_outline</mat-icon>
                       <input type="password" matInput placeholder="Contraseña" formControlName="password">
                       <mat-error *ngIf="fval.password.errors&&fval.password.errors.required">
-                        Password is <strong>required</strong>
+                        Este campo es <strong>required</strong>
                       </mat-error>
                       <mat-error *ngIf="fval.password.errors&&fval.password.errors.minlength">
                         La contraseña debe tener al menos 6 caracteres
@@ -71,6 +83,7 @@
                     </div>
 
                   </form>
+
                 </div>
               </div>
             </div>

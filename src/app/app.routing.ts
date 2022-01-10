@@ -30,7 +30,7 @@ export const AppRoutes: Routes = [
         component: AuthLayoutComponent,
         children: [{
             path: '',
-            loadChildren: './pages/pages.module#PagesModule'
+            loadChildren: './auth/auth.module#PagesModule'
         }]
     }
 ];

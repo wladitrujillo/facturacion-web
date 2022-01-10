@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Company } from '../model/company';
 import { User } from '../model/user';
 
 @Injectable({
@@ -21,8 +22,8 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
   //en facturacion api carpeta routh archivo Auth.Routes.ts
-  register(user: User): Observable<User> {
-    return this.http.post<User>(`auth/register`, user).catch(this.errorHandler);
+  register(company: Company, user: User): Observable<User> {
+    return this.http.post<User>(`auth/register`, { company, user }).catch(this.errorHandler);
   }
 
   login(email: string, password: string): Observable<any> {

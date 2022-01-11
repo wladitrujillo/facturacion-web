@@ -8,8 +8,8 @@ import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Role } from 'src/app/core/model/role';
 import { User } from 'src/app/core/model/user';
-import { RoleService } from 'src/app/core/service/role.service';
 import { UserService } from 'src/app/core/service/user.service';
+import { AdminService } from 'src/app/core/service/admin.service';
 
 
 @Component({
@@ -32,7 +32,7 @@ export class UserComponent implements OnInit, AfterViewInit {
 
   constructor(
     private userService: UserService,
-    private roleService: RoleService,
+    private adminService: AdminService,
     private http: HttpClient) {
   }
 
@@ -43,7 +43,7 @@ export class UserComponent implements OnInit, AfterViewInit {
 
     this.dataSource.load('', 'asc', 0, 5);
 
-    this.roleService.getRoles().subscribe(roles => this.roles = roles);
+    this.adminService.getRoles().subscribe(roles => this.roles = roles);
 
   }
 

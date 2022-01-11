@@ -18,7 +18,6 @@ import { EstablishmentResolver } from '../core/service/establishment.resolver';
 import { EstablishmentService } from '../core/service/establishment.service';
 import { ProductResolver } from '../core/service/product.resolver';
 import { ProductService } from '../core/service/product.service';
-import { RoleService } from '../core/service/role.service';
 import { UserComponent } from './users/user.component';
 import { UserResolver } from '../core/service/user.resolver';
 import { CustomerComponent } from './customer/customer.component';
@@ -59,7 +58,6 @@ import { QueryInvoicingComponent } from './queryinvocing/queryinvoicing.componen
   providers: [
     ProductService,
     ProductResolver,
-    RoleService,
     EstablishmentService,
     EstablishmentResolver,
     BranchService,

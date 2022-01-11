@@ -31,7 +31,7 @@
               <span class="sidebar-normal">Mi Perfil</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li *ngIf="user.role=='SUPERADMIN'" class="nav-item">
             <a [routerLink]="['/pages/company']" class="nav-link">
               <span class="sidebar-mini">E</span>
               <span class="sidebar-normal">Empresa</span>

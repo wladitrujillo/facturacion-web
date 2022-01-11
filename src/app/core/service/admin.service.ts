@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Catalog } from '../model/catalog';
 import { Company } from '../model/company';
 import { Menu } from '../model/menu';
+import { Role } from '../model/role';
 import { AlertService } from './alert.service';
 
 @Injectable({
@@ -19,6 +20,10 @@ export class AdminService {
 
   getCatalogByName(name: string): Observable<Catalog> {
     return this.http.get<Catalog>(`api/admin/catalog/${name}`).catch(this.handleError<any>('getCatalog'));
+  }
+
+  getRoles(): Observable<Role[]> {
+    return this.http.get<Role[]>(`api/admin/role/`).catch(this.handleError<any>('getRoles'));
   }
 
   getCompany(): Observable<Company> {

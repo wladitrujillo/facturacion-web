@@ -5,8 +5,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Location } from '@angular/common';
 import { Role } from 'src/app/core/model/role';
-import { RoleService } from 'src/app/core/service/role.service';
 import { UserService } from 'src/app/core/service/user.service';
+import { AdminService } from 'src/app/core/service/admin.service';
 
 
 @Component({
@@ -34,7 +34,7 @@ export class UserUpdateComponent implements OnInit {
         private fb: FormBuilder,
         private route: ActivatedRoute,
         private userService: UserService,
-        private roleService: RoleService
+        private adminSerice: AdminService
     ) {
 
     }
@@ -52,7 +52,7 @@ export class UserUpdateComponent implements OnInit {
             role: [user.role || '', [Validators.required]]
         })
 
-        this.roleService.getRoles().subscribe(roles => this.roles = roles);
+        this.adminSerice.getRoles().subscribe(roles => this.roles = roles);
 
 
     }

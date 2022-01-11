@@ -199,6 +199,7 @@ export class SidebarComponent implements OnInit {
         return bool;
     }
 
+
     logout() {
         this.authenticationService.logout();
         this.router.navigate(['/pages/login']);

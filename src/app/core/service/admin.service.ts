@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Catalog } from '../model/catalog';
+import { Company } from '../model/company';
 import { Menu } from '../model/menu';
 import { AlertService } from './alert.service';
 
@@ -18,6 +19,14 @@ export class AdminService {
 
   getCatalogByName(name: string): Observable<Catalog> {
     return this.http.get<Catalog>(`api/admin/catalog/${name}`).catch(this.handleError<any>('getCatalog'));
+  }
+
+  getCompany(): Observable<Company> {
+    return this.http.get<Company>('api/admin/company').catch(this.handleError<any>('getCompany'));
+  }
+
+  updateCompany(company: Company): Observable<void> {
+    return this.http.put('api/admin/company', company).catch(this.handleError<any>('updateCompany'));
   }
 
   errorHandler(error: HttpErrorResponse) {

@@ -1,5 +1,6 @@
 export class Company {
-    ruc:string;
-    name:string;
-    address:string;
+    ruc: string;
+    name: string;
+    address: string;
+    email: string
 }

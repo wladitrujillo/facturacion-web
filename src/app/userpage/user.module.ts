@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UserComponent } from './user.component';
 import { UserRoutes } from './user.routing';
+import { CompanyComponent } from './company.component';
 
 @NgModule({
     imports: [
@@ -12,7 +13,7 @@ import { UserRoutes } from './user.routing';
         RouterModule.forChild(UserRoutes),
         FormsModule
     ],
-    declarations: [UserComponent]
+    declarations: [UserComponent, CompanyComponent]
 })
 
 export class UserModule {}

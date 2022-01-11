@@ -13,8 +13,10 @@ export class UserComponent implements OnInit {
     user: User = new User();
     loading = false;
 
-    constructor(private alertService: AlertService,
-        private userService: UserService) { }
+    constructor(
+        private alertService: AlertService,
+        private userService: UserService
+    ) { }
 
     ngOnInit() {
 
@@ -30,14 +32,14 @@ export class UserComponent implements OnInit {
 
     }
 
-    onSubmit(){
-        this.loading=true;
+    onSubmit() {
+        this.loading = true;
         this.userService.update(this.user).subscribe(
             user => {
-                this.loading=false;              
+                this.loading = false;
             },
             error => {
-                this.loading=false;
+                this.loading = false;
                 this.alertService.error(error);
             });
     }

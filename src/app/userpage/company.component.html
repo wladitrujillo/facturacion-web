@@ -1,0 +1,58 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-rose">
+            <h4 class="card-title">Empresa
+            </h4>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Nombre de la Empresa</label>
+                    <input type="text" class="form-control" [(ngModel)]="company.name" name="name">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">RUC (deshabilitado)</label>
+                    <input type="text" class="form-control" [(ngModel)]="company.ruc" name="ruc" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Correo Electronico</label>
+                    <input type="email" class="form-control" [(ngModel)]="company.email" name="email">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Telefono</label>
+                    <input type="text" class="form-control" [(ngModel)]="company.phone" name="phone">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Direccion</label>
+                    <input type="text" class="form-control" [(ngModel)]="company.address" name="address">
+                  </div>
+                </div>
+              </div>
+              <button mat-raised-button type="submit" class="btn btn-rose pull-right" [disabled]="loading">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Guardar
+              </button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

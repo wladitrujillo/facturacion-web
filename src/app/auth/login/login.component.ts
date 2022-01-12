@@ -93,9 +93,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loading = true;
         this.authenticationService.login(this.fval.email.value, this.fval.password.value)
             .subscribe(
-                data => {
+                user => {
                     this.loading = false;
-                    this.router.navigate(['/dashboard']);
+                    let nextRoute = '/dashboard';
+                    if (user.hasToUpdatePassword) nextRoute = '/auth/update-password';
+                    this.router.navigate([nextRoute]);
                 },
                 error => {
                     //this.toastr.error(error.error.message, 'Error');

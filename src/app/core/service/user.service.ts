@@ -28,11 +28,13 @@ export class UserService {
       .pipe(tap((newUser: User) => this.log(`update user w/ id=${newUser._id}`)),
         catchError(this.handleError<User>('update')));
   }
+  updatePassword(password): Observable<void> {
+    return this.http.put<void>('api/user/password', { password }).catch(this.handleError<void>('updatePassword'));
+  }
 
   getById(_id: string): Observable<User> {
     return this.http.get<User>(`api/user/${_id}`).catch(this.handleError<any>('getById'));
   }
-
 
   getProfileInfo(): Observable<User> {
     return this.http.get<User>(`api/user/profile-info`).catch(this.errorHandler);

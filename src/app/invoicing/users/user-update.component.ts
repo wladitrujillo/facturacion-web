@@ -43,13 +43,15 @@ export class UserUpdateComponent implements OnInit {
 
         let user = this.route.snapshot.data["user"] || {};
 
+
         this.userForm = this.fb.group({
             firstName: [user.firstName || '', [Validators.required]],
             lastName: [user.lastName || '', [Validators.required]],
             email: [user.email || '', [Validators.required, Validators.email]],
             phone: [user.phone || ''],
             address: [user.address || ''],
-            role: [user.role || '', [Validators.required]]
+            role: [user.role || '', [Validators.required]],
+            password: ['', user._id ? [] : [Validators.required]]
         })
 
         this.adminSerice.getRoles().subscribe(roles => this.roles = roles);

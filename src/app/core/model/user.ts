@@ -15,4 +15,5 @@ export class User {
     about: string;
     role: string;
     password: string;
+    hasToUpdatePassword: string;
 }

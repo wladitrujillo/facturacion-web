@@ -12,6 +12,8 @@ import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetPasswordComponent } from "./resetpassword/resetpassword.component";
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
+import { LoginCompanyComponent } from './login-company/login-company.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { ActivateAccountComponent } from './activate-account/activate-account.co
     LockComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    ActivateAccountComponent
+    ActivateAccountComponent,
+    UpdatePasswordComponent,
+    LoginCompanyComponent
   ]
 })
 

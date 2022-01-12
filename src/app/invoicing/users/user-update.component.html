@@ -21,48 +21,54 @@
                             <mat-form-field class="example-full-width">
                                 <mat-label>Rol</mat-label>
                                 <mat-select formControlName="role">
-                                  <mat-option *ngFor="let r of roles" [value]="r._id" >
-                                   {{r.name}}
-                                  </mat-option>
+                                    <mat-option *ngFor="let r of roles" [value]="r._id">
+                                        {{r.name}}
+                                    </mat-option>
                                 </mat-select>
-                              </mat-form-field>
-                         
+                            </mat-form-field>
+
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="First Name" formControlName="firstName">
                                 <mat-error *ngIf="handleError('firstName', 'required')">
-                                    You must provide a<strong> First Name</strong>
+                                    Este campo es <strong>requerido</strong>
                                 </mat-error>
                             </mat-form-field>
 
-                            
+
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Last Name" formControlName="lastName">
                                 <mat-error *ngIf="handleError('lastName', 'required')">
-                                    You must provide a<strong> Last Name</strong>
+                                    Este campo es <strong>requerido</strong>
                                 </mat-error>
                             </mat-form-field>
- 
+
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Email" formControlName="email">
                                 <mat-error *ngIf="handleError('email', 'required')">
-                                    You must provide a<strong> Email</strong>
+                                    Este campo es <strong>requerido</strong>
                                 </mat-error>
                             </mat-form-field>
 
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Phone" formControlName="phone">
                                 <mat-error *ngIf="handleError('phone', 'required')">
-                                    You must provide a<strong> Phone</strong>
+                                    Este campo es <strong>requerido</strong>
                                 </mat-error>
                             </mat-form-field>
 
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Address" formControlName="address">
                                 <mat-error *ngIf="handleError('address', 'required')">
-                                    You must provide a<strong> Address</strong>
+                                    Este campo es <strong>requerido</strong>
                                 </mat-error>
                             </mat-form-field>
 
+                            <mat-form-field class="example-full-width">
+                                <input type="password" matInput placeholder="Password" formControlName="password">
+                                <mat-error *ngIf="handleError('password', 'required')">
+                                    Esta campo es <strong>requerido</strong>
+                                </mat-error>
+                            </mat-form-field>
                         </div>
 
 

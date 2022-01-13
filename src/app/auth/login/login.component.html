@@ -20,14 +20,14 @@
                   <mat-icon matSuffix>account_circle</mat-icon>
                   <input type="email" matInput placeholder="Email" formControlName="email">
                   <mat-error *ngIf="fval.email.errors&&fval.email.errors.required">
-                    Email is <strong>required</strong>
+                    Email es <strong>requerido</strong>
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field>
                   <mat-icon matSuffix>lock_outline</mat-icon>
-                  <input type="password" matInput placeholder="Password" formControlName="password">
+                  <input type="password" matInput placeholder="Contraseña" formControlName="password">
                   <mat-error *ngIf="fval.password.errors&&fval.password.errors.required">
-                    Password is <strong>required</strong>
+                    Contraseña es <strong>requerida</strong>
                   </mat-error>
                 </mat-form-field>
 

@@ -7,7 +7,7 @@
                 <div class="card-header card-header-rose card-header-text">
                     <div class="card-text">
 
-                        <h4 class="card-title">Branch</h4>
+                        <h4 class="card-title">Puntos de Emisión</h4>
                     </div>
                 </div>
 
@@ -20,23 +20,23 @@
                         <div class="controlers-wrapper">
                             <!-- Name -->
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Name" formControlName="name">
+                                <input matInput placeholder="Nombre" formControlName="name">
                                 <mat-error *ngIf="handleError('name', 'required')">
-                                    You must provide a<strong>Name</strong>
+                                    Requiere ingresar <strong>Nombre</strong>
                                 </mat-error>
                             </mat-form-field>
                             <!-- Code -->
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Code" formControlName="code">
                                 <mat-error *ngIf="handleError('code', 'required')">
-                                    You must provide a<strong>Code</strong>
+                                    Requiere ingresar <strong>Código</strong>
                                 </mat-error>
                             </mat-form-field>
                         </div>
 
                         <div class="full-wrapper button-wrapper">
                             <div class="button-wrapper">
-                                <button mat-flat-button color="warn">Save</button>
+                                <button mat-flat-button color="warn">Guardar</button>
                             </div>
                         </div>
 

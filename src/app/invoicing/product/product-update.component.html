@@ -17,7 +17,7 @@
                     <form [formGroup]="productForm" (ngSubmit)="onSubmit()" #resetProductForm="ngForm" novalidate>
 
                         <div class="controlers-wrapper">
-                            <!-- Name -->
+                            <!-- Nombre -->
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Nombre" formControlName="name">
                                 <mat-error *ngIf="handleError('name', 'required')">
@@ -26,20 +26,20 @@
                             </mat-form-field>
 
 
-                            <!-- Codigo -->
+                            <!-- Código -->
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Codigo" formControlName="code">
+                                <input matInput placeholder="Código" formControlName="code">
                                 <mat-error *ngIf="handleError('code', 'required')">
                                     Este campo es <strong>requerido</strong>
                                 </mat-error>
                             </mat-form-field>
 
-                            <!-- Codigo Auxiliar -->
+                            <!-- Código Auxiliar -->
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Codigo Auxiliar" formControlName="auxCode">
                             </mat-form-field>
 
-                            <!-- Price -->
+                            <!-- Precio -->
                             <mat-form-field class="example-full-width">
                                 <input type="number" matInput placeholder="Precio" formControlName="price">
                                 <mat-error *ngIf="handleError('price', 'required')">
@@ -67,7 +67,7 @@
 
                             <!-- Description -->
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Descripcion" formControlName="description">
+                                <input matInput placeholder="Descripción" formControlName="description">
                                 <mat-error *ngIf="handleError('description', 'required')">
                                     Este campo es <strong>requerido</strong>
                                 </mat-error>

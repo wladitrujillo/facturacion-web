@@ -12,7 +12,7 @@
 
         <ng-container matColumnDef="firstName">
 
-          <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
 
           <mat-cell *matCellDef="let customer">{{customer.firstName}}</mat-cell>
 
@@ -20,7 +20,7 @@
 
         <ng-container matColumnDef="lastName">
 
-          <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>Apellido</mat-header-cell>
 
           <mat-cell *matCellDef="let customer">{{customer.lastName}}</mat-cell>
 
@@ -28,7 +28,7 @@
 
         <ng-container matColumnDef="taxId">
 
-          <mat-header-cell *matHeaderCellDef>TaxId</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>Documento de Identificación</mat-header-cell>
 
           <mat-cell class="description-cell" *matCellDef="let customer">{{customer.taxId}}</mat-cell>
 

@@ -17,7 +17,7 @@
 
         <ng-container matColumnDef="name">
 
-          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
 
           <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
 
@@ -25,7 +25,7 @@
 
         <ng-container matColumnDef="code">
 
-          <mat-header-cell *matHeaderCellDef>Code</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>Código</mat-header-cell>
 
           <mat-cell class="description-cell" *matCellDef="let element">{{element.code}}</mat-cell>
 
@@ -33,7 +33,7 @@
 
         <ng-container matColumnDef="address">
 
-          <mat-header-cell *matHeaderCellDef>Address</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>Dirección</mat-header-cell>
 
           <mat-cell class="description-cell" *matCellDef="let element">{{element.address}}</mat-cell>
 
@@ -53,7 +53,7 @@
               <mat-icon>close</mat-icon>
             </button>
             <button mat-raised-button class="btn btn-link"
-              [routerLink]="['../', element._id, 'branch']">Branch</button>
+              [routerLink]="['../', element._id, 'branch']">Punto emisión</button>
           </td>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

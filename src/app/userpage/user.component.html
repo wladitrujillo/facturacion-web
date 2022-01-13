@@ -4,8 +4,8 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-icon card-header-rose">
-            <h4 class="card-title">Editar
-              <small class="category">Completa tu Perfil</small>
+            <h4 class="card-title">
+              <small class="category"> Completa tu Perfil</small>
             </h4>
           </div>
           <div class="card-body">
@@ -27,13 +27,13 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="bmd-label-floating">Correo Electronico (deshabilitado)</label>
+                    <label class="bmd-label-floating">Correo Electrónico</label>
                     <input type="email" class="form-control" [(ngModel)]="user.email" name="email" disabled>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="bmd-label-floating">Telefono</label>
+                    <label class="bmd-label-floating">Teléfono</label>
                     <input type="text" class="form-control" [(ngModel)]="user.phone" name="phone">
                   </div>
                 </div>
@@ -41,7 +41,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label class="bmd-label-floating">Direccion</label>
+                    <label class="bmd-label-floating">Dirección</label>
                     <input type="text" class="form-control" [(ngModel)]="user.address" name="address">
                   </div>
                 </div>
@@ -49,7 +49,7 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label class="bmd-label-floating">Pais</label>
+                    <label class="bmd-label-floating">País</label>
                     <input type="text" class="form-control" [(ngModel)]="user.country" name="country">
                   </div>
                 </div>
@@ -77,7 +77,7 @@
                 </div>
               </div>
               <button mat-raised-button type="submit" class="btn btn-rose pull-right" [disabled]="loading">
-                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Actuliza mi Perfil</button>
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Actualizar mi Perfil</button>
               <div class="clearfix"></div>
             </form>
           </div>

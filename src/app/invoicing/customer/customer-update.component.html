@@ -7,7 +7,7 @@
                 <div class="card-header card-header-rose card-header-text">
                     <div class="card-text">
 
-                        <h4 class="card-title">Customer</h4>
+                        <h4 class="card-title">Cliente</h4>
                     </div>
                 </div>
 
@@ -19,17 +19,17 @@
                         <div class="controlers-wrapper">
 
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="First Name" formControlName="firstName">
+                                <input matInput placeholder="Nombre" formControlName="firstName">
                                 <mat-error *ngIf="handleError('firstName', 'required')">
-                                    You must provide a<strong> First Name</strong>
+                                    Requiere ingresar <strong>Nombre</strong>
                                 </mat-error>
                             </mat-form-field>
 
 
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Last Name" formControlName="lastName">
+                                <input matInput placeholder="Apellido" formControlName="lastName">
                                 <mat-error *ngIf="handleError('lastName', 'required')">
-                                    You must provide a<strong> Last Name</strong>
+                                    Requiere ingresar <strong>Apellido</strong>
                                 </mat-error>
                             </mat-form-field>
 
@@ -37,7 +37,7 @@
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Email" formControlName="email">
                                 <mat-error *ngIf="handleError('email', 'required')">
-                                    You must provide a<strong> Email</strong>
+                                    Requiere ingresar <strong>Email</strong>
                                 </mat-error>
                             </mat-form-field>
 
@@ -53,7 +53,7 @@
 
 
                             <mat-form-field class="example-full-width">
-                                <mat-select placeholder="Tipo de Identificacion" formControlName="taxIdType">
+                                <mat-select placeholder="Tipo de Identificación" formControlName="taxIdType">
                                     <mat-option *ngFor="let type of identificationTypes.items" [value]="type.code">
                                         {{type.value}}
                                     </mat-option>
@@ -62,28 +62,28 @@
 
 
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Tax Id" formControlName="taxId" [maxlength]="13">
+                                <input matInput placeholder="Cédula de Identidad" formControlName="taxId" [maxlength]="13">
                                 <mat-error *ngIf="handleError('taxId', 'required')">
-                                    You must provide a<strong> Tax Id</strong>
+                                    Requiere ingresar <strong>Cédula de Identidad</strong>
                                 </mat-error>
                                 <mat-error *ngIf="handleError('taxId', 'minlength')">
-                                    TaxId must be at least 10 characters
+                                    Cédula de identidad requiere mínimo 10 caracteres
                                 </mat-error>
                             </mat-form-field>
 
 
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Phone" formControlName="phone">
+                                <input matInput placeholder="Teléfono" formControlName="phone">
                                 <mat-error *ngIf="handleError('phone', 'required')">
-                                    You must provide a<strong> Phone</strong>
+                                    Requiere ingresar <strong>Teléfono</strong>
                                 </mat-error>
                             </mat-form-field>
 
 
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Address" formControlName="address">
+                                <input matInput placeholder="Dirección" formControlName="address">
                                 <mat-error *ngIf="handleError('address', 'required')">
-                                    You must provide a<strong> Address</strong>
+                                    Requiere ingresar <strong>Dirección</strong>
                                 </mat-error>
                             </mat-form-field>
 
@@ -95,7 +95,7 @@
 
                         <div class="full-wrapper button-wrapper">
                             <div class="button-wrapper">
-                                <button mat-flat-button color="warn">Save</button>
+                                <button mat-flat-button color="warn">Guardar</button>
                             </div>
                         </div>
 

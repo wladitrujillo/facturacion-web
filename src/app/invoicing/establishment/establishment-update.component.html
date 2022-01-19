@@ -7,10 +7,9 @@
                 <div class="card-header card-header-rose card-header-text">
                     <div class="card-text">
 
-                        <h4 class="card-title">Establishment</h4>
+                        <h4 class="card-title">Establecimiento</h4>
                     </div>
                 </div>
-
 
                 <div class="card-body">
 
@@ -18,41 +17,37 @@
                         novalidate>
 
                         <div class="controlers-wrapper">
-                            <!-- Name -->
+                            <!-- Nombre -->
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Name" formControlName="name">
+                                <input matInput placeholder="Nombre" formControlName="name">
                                 <mat-error *ngIf="handleError('name', 'required')">
-                                    You must provide a<strong>Establishment name</strong>
+                                    Requiere ingresar <strong>Nombre del Establecimiento</strong>
                                 </mat-error>
                             </mat-form-field>
-                            <!-- Code -->
+                            <!-- Código -->
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Code" formControlName="code">
+                                <input matInput placeholder="Código" formControlName="code">
                                 <mat-error *ngIf="handleError('code', 'required')">
-                                    You must provide a<strong>Code</strong>
+                                    Requiere ingresar <strong>Código</strong>
                                 </mat-error>
                             </mat-form-field>
-                            <!-- Address -->
+                            <!-- Dirección -->
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Address" formControlName="address">
+                                <input matInput placeholder="Dirección" formControlName="address">
                                 <mat-error *ngIf="handleError('address', 'required')">
-                                    You must provide a<strong>Address</strong>
+                                    Requiere ingresar <strong>Dirección</strong>
                                 </mat-error>
                             </mat-form-field>
                         </div>
 
                         <div class="full-wrapper button-wrapper">
                             <div class="button-wrapper">
-                                <button mat-flat-button color="warn">Save</button>
+                                <button mat-flat-button color="warn">Guardar</button>
                             </div>
                         </div>
-
                     </form>
-
-
                 </div>
             </div>
-
         </div>
     </div>
 </div>

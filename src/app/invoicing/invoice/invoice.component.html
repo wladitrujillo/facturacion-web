@@ -34,7 +34,7 @@
                 <small>{{branch?.code}}</small>
 
 
-                {{invoice.createdAt}}
+                {{invoice.createdAt|date}}
 
               </div>
 
@@ -106,9 +106,10 @@
 
         </div>
 
+        <br>
 
         <div class="row">
-          <div class="col-md-4 mr-auto">
+          <!--div class="col-md-4 mr-auto">
             <legend>Forma De pago</legend>
 
             <button (click)="addProduct()" mat-icon-button matTooltip="Agregar item" [matTooltipPosition]="'right'"
@@ -151,7 +152,8 @@
                 </tbody>
               </table>
             </div>
-          </div>
+          </div-->
+          <div class="col-md-4 mr-auto"></div>
           <div class="col-md-4"></div>
           <div class="col-md-4 mr-auto">
             <div class="card">

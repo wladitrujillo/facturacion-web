@@ -13,27 +13,27 @@ export class ProductService {
   constructor(private http: HttpClient, private alertService: AlertService) { }
 
   create(product: Product): Observable<Product> {
-    return this.http.post(`api/product`, product)
+    return this.http.post(`/api/product`, product)
       .pipe(tap((newProduct: Product) => this.log(`create Product w/ id=${newProduct._id}`)),
         catchError(this.handleError<Product>('create')));
   }
 
   update(product: Product): Observable<Product> {
-    return this.http.put(`api/product/${product._id}`, product)
+    return this.http.put(`/api/product/${product._id}`, product)
       .pipe(tap((product: Product) => this.log(`update Product w/ id=${product._id}`)),
         catchError(this.handleError<Product>('update')));
   }
 
   delete(_id: string): Observable<any> {
-    return this.http.delete<Product>(`api/product/${_id}`).catch(this.handleError<any>('delete'));
+    return this.http.delete<Product>(`/api/product/${_id}`).catch(this.handleError<any>('delete'));
   }
 
   get(filter: string, sort: string, page: number, perPage: number): Observable<Product[]> {
-    return this.http.get<Product[]>(`api/product?q=${filter}&sort=${sort}&page=${page}&per_page=${perPage}`).catch(this.handleError<Product[]>('get'));
+    return this.http.get<Product[]>(`/api/product?q=${filter}&sort=${sort}&page=${page}&per_page=${perPage}`).catch(this.handleError<Product[]>('get'));
   }
 
   getById(_id: string): Observable<Product> {
-    return this.http.get<Product>(`api/product/${_id}`).catch(this.handleError<Product>('getById'));
+    return this.http.get<Product>(`/api/product/${_id}`).catch(this.handleError<Product>('getById'));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

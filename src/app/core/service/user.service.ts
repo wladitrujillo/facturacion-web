@@ -14,30 +14,30 @@ export class UserService {
 
 
   create(customer: User): Observable<User> {
-    return this.http.post(`api/user`, customer)
+    return this.http.post(`/api/user`, customer)
       .pipe(tap((newProduct: User) => this.log(`create Product w/ id=${newProduct._id}`)),
         catchError(this.handleError<User>('create')));
   }
 
   delete(_id: string): Observable<any> {
-    return this.http.delete<any>(`api/user/${_id}`).catch(this.handleError<any>('delete'));
+    return this.http.delete<any>(`/api/user/${_id}`).catch(this.handleError<any>('delete'));
   }
 
   update(user: User): Observable<User> {
-    return this.http.put(`api/user/${user._id}`, user)
+    return this.http.put(`/api/user/${user._id}`, user)
       .pipe(tap((newUser: User) => this.log(`update user w/ id=${newUser._id}`)),
         catchError(this.handleError<User>('update')));
   }
   updatePassword(password): Observable<void> {
-    return this.http.put<void>('api/user/password', { password }).catch(this.handleError<void>('updatePassword'));
+    return this.http.put<void>('/api/user/password', { password }).catch(this.handleError<void>('updatePassword'));
   }
 
   getById(_id: string): Observable<User> {
-    return this.http.get<User>(`api/user/${_id}`).catch(this.handleError<any>('getById'));
+    return this.http.get<User>(`/api/user/${_id}`).catch(this.handleError<any>('getById'));
   }
 
   getProfileInfo(): Observable<User> {
-    return this.http.get<User>(`api/user/profile-info`).catch(this.errorHandler);
+    return this.http.get<User>(`/api/user/profile-info`).catch(this.errorHandler);
   }
 
 

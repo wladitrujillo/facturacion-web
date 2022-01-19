@@ -23,11 +23,11 @@ export class AuthenticationService {
   }
   //en facturacion api carpeta routh archivo Auth.Routes.ts
   register(company: Company, user: User): Observable<User> {
-    return this.http.post<User>(`auth/register`, { company, user }).catch(this.errorHandler);
+    return this.http.post<User>(`/auth/register`, { company, user }).catch(this.errorHandler);
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.put<any>(`auth/login`, { email, password })
+    return this.http.put<any>(`/auth/login`, { email, password })
       .pipe(map(data => {
         if (data && data.token) {
           //almacena los detallees del usuario para localStorage para mantener la cesion del usuario
@@ -40,7 +40,7 @@ export class AuthenticationService {
   }
 
   loginCompany(ruc: string, email: string, password: string): Observable<any> {
-    return this.http.put<any>(`auth/company/${ruc}/login`, { email, password })
+    return this.http.put<any>(`/auth/company/${ruc}/login`, { email, password })
       .pipe(map(data => {
         if (data && data.token) {
           //almacena los detallees del usuario para localStorage para mantener la cesion del usuario
@@ -60,19 +60,19 @@ export class AuthenticationService {
   }
   //en facturacion api carpeta routh archivo Auth.Routes.ts
   forgotPassword(email: String): Observable<any> {
-    return this.http.post<any>(`auth/forgot-password`, { email }).catch(this.errorHandler);
+    return this.http.post<any>(`/auth/forgot-password`, { email }).catch(this.errorHandler);
   }
   //en facturacion api carpeta routh archivo Auth.Routes.ts
   forgotPasswordCompany(ruc: string, email: String): Observable<any> {
-    return this.http.post<any>(`auth/company/${ruc}/forgot-password`, { email }).catch(this.errorHandler);
+    return this.http.post<any>(`/auth/company/${ruc}/forgot-password`, { email }).catch(this.errorHandler);
   }
   //en facturacion api carpeta routh archivo Auth.Routes.ts
   resetPassword(token: string, password: string): Observable<any> {
-    return this.http.put<any>(`auth/reset-password`, { token, password }).catch(this.errorHandler);
+    return this.http.put<any>(`/auth/reset-password`, { token, password }).catch(this.errorHandler);
   }
   //en facturacion api carpeta routh archivo Auth.Routes.ts
   activateAccount(userId: string): Observable<any> {
-    return this.http.put<any>(`auth/activate-account/${userId}`, {}).catch(this.errorHandler);
+    return this.http.put<any>(`/auth/activate-account/${userId}`, {}).catch(this.errorHandler);
   }
 
 

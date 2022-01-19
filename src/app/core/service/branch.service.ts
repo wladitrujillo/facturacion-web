@@ -15,30 +15,30 @@ export class BranchService {
 
   create(establishmentId: string, branch: Branch): Observable<Branch> {
     branch.next=0;
-    return this.http.post(`api/establishment/${establishmentId}/branch`, branch)
+    return this.http.post(`/api/establishment/${establishmentId}/branch`, branch)
       .pipe(tap((newBranch: Branch) => this.log(`create Branch w/ id=${newBranch._id}`)),
         catchError(this.handleError<Branch>('create')));
   }
 
 
   update(establishmentId:string,branch: Branch): Observable<Branch> {
-    return this.http.put(`api/establishment/${establishmentId}/branch/${branch._id}`, branch)
+    return this.http.put(`/api/establishment/${establishmentId}/branch/${branch._id}`, branch)
       .pipe(tap((branch: Branch) => this.log(`update Branch w/ id=${branch._id}`)),
         catchError(this.handleError<Branch>('update')));
   }
 
   delete(establishmentId:string,_id: string): Observable<any> {
-    return this.http.delete<Branch>(`api/establishment/${establishmentId}/branch/${_id}`).catch(this.handleError<any>('delete'));
+    return this.http.delete<Branch>(`/api/establishment/${establishmentId}/branch/${_id}`).catch(this.handleError<any>('delete'));
   }
 
 
   get(establishmentId: string, filter: string, sort: string, page: number, sizePage: number): Observable<Branch[]> {
-    return this.http.get<Branch[]>(`api/establishment/${establishmentId}/branch?q=${filter}&sort=${sort}&page=${page}&per_page=${sizePage}`).catch(this.errorHandler);
+    return this.http.get<Branch[]>(`/api/establishment/${establishmentId}/branch?q=${filter}&sort=${sort}&page=${page}&per_page=${sizePage}`).catch(this.errorHandler);
   }
 
 
   getById(establishmentId: string, _id: string): Observable<Branch> {
-    return this.http.get<Branch>(`api/establishment/${establishmentId}/branch/${_id}`).catch(this.errorHandler);
+    return this.http.get<Branch>(`/api/establishment/${establishmentId}/branch/${_id}`).catch(this.errorHandler);
   }
 
   errorHandler(error: HttpErrorResponse) {

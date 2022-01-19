@@ -13,27 +13,27 @@ export class EstablishmentService {
   constructor(private http: HttpClient, private alertService: AlertService) { }
 
   create(establishment: Establishment): Observable<Establishment> {
-    return this.http.post(`api/establishment`, establishment)
+    return this.http.post(`/api/establishment`, establishment)
       .pipe(tap((newEstablishment: Establishment) => this.log(`create Establishment w/ id=${newEstablishment._id}`)),
         catchError(this.handleError<Establishment>('create')));
   }
 
   update(establishment: Establishment): Observable<Establishment> {
-    return this.http.put(`api/establishment/${establishment._id}`, establishment)
+    return this.http.put(`/api/establishment/${establishment._id}`, establishment)
       .pipe(tap((establishment: Establishment) => this.log(`update Establishment w/ id=${establishment._id}`)),
         catchError(this.handleError<Establishment>('update')));
   }
 
   delete(_id: string): Observable<any> {
-    return this.http.delete<Establishment>(`api/establishment/${_id}`).catch(this.handleError<any>('delete'));
+    return this.http.delete<Establishment>(`/api/establishment/${_id}`).catch(this.handleError<any>('delete'));
   }
 
   get(filter: String, sort: string, page: number, sizePage: number): Observable<Establishment[]> {
-    return this.http.get<Establishment[]>(`api/establishment?q=${filter}&sort=${sort}&page=${page}&per_page=${sizePage}`).catch(this.errorHandler);
+    return this.http.get<Establishment[]>(`/api/establishment?q=${filter}&sort=${sort}&page=${page}&per_page=${sizePage}`).catch(this.errorHandler);
   }
 
   getById(_id: string): Observable<Establishment> {
-    return this.http.get<Establishment>(`api/establishment/${_id}`).catch(this.errorHandler);
+    return this.http.get<Establishment>(`/api/establishment/${_id}`).catch(this.errorHandler);
   }
   errorHandler(error: HttpErrorResponse) {
     return Observable.throw(error.error || "Server Error");

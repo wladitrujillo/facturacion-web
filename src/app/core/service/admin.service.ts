@@ -15,23 +15,23 @@ export class AdminService {
   constructor(private http: HttpClient, private alertService: AlertService) { }
 
   getMenu(): Observable<Menu[]> {
-    return this.http.get<Menu[]>(`api/admin/menu/`).catch(this.errorHandler);
+    return this.http.get<Menu[]>(`/api/admin/menu/`).catch(this.errorHandler);
   }
 
   getCatalogByName(name: string): Observable<Catalog> {
-    return this.http.get<Catalog>(`api/admin/catalog/${name}`).catch(this.handleError<any>('getCatalog'));
+    return this.http.get<Catalog>(`/api/admin/catalog/${name}`).catch(this.handleError<any>('getCatalog'));
   }
 
   getRoles(): Observable<Role[]> {
-    return this.http.get<Role[]>(`api/admin/role/`).catch(this.handleError<any>('getRoles'));
+    return this.http.get<Role[]>(`/api/admin/role/`).catch(this.handleError<any>('getRoles'));
   }
 
   getCompany(): Observable<Company> {
-    return this.http.get<Company>('api/admin/company').catch(this.handleError<any>('getCompany'));
+    return this.http.get<Company>('/api/admin/company').catch(this.handleError<any>('getCompany'));
   }
 
   updateCompany(company: Company): Observable<void> {
-    return this.http.put('api/admin/company', company).catch(this.handleError<any>('updateCompany'));
+    return this.http.put('/api/admin/company', company).catch(this.handleError<any>('updateCompany'));
   }
 
   errorHandler(error: HttpErrorResponse) {

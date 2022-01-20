@@ -26,7 +26,7 @@ export class EstablishmentDataSource implements DataSource<Establishment>{
 
         this.loadingSubject.next(true);
 
-        this.http.get(`api/establishment?q=${filter}&sort=${sort}&page=${page}&per_page=${perPage}`, { observe: 'response' })
+        this.http.get(`/api/establishment?q=${filter}&sort=${sort}&page=${page}&per_page=${perPage}`, { observe: 'response' })
             .pipe(
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false))

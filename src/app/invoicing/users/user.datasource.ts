@@ -29,7 +29,7 @@ export class UserDataSource implements DataSource<User>{
 
         this.loadingSubject.next(true);
 
-        this.http.get(`api/user?q=${filter}&sort=${sort}&page=${page}&per_page=${perPage}`, { observe: 'response' })
+        this.http.get(`/api/user?q=${filter}&sort=${sort}&page=${page}&per_page=${perPage}`, { observe: 'response' })
             .pipe(
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false))

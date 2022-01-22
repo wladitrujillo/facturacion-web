@@ -77,7 +77,7 @@
                     </td>
                     <td class="td-number text-right"> {{detail.product.price | currency}}</td>
                     <td class="td-number">
-                      {{detail.count}}
+                      {{detail.quantity}}
                       <div class="btn-group btn-group-sm">
                         <button mat-raised-button class="btn btn-round btn-info btn-xs" [disabled]="detail.count<=0"
                           (click)="decreaseCount(detail)">

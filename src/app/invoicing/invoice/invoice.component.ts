@@ -15,6 +15,7 @@ import { EstablishmentService } from 'src/app/core/service/establishment.service
 import { InvoiceService } from 'src/app/core/service/invoice.service';
 import { ProductService } from 'src/app/core/service/product.service';
 import { AddCustomerComponent } from '../addcustomer/add-customer.component';
+import { AlertService } from 'src/app/core/service/alert.service';
 
 
 declare const $: any;
@@ -52,7 +53,8 @@ export class InvoiceComponent implements OnInit {
     private establishmentService: EstablishmentService,
     private branchService: BranchService,
     private authenticationService: AuthenticationService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private alertService: AlertService) { }
 
 
   ngOnInit() {
@@ -86,6 +88,14 @@ export class InvoiceComponent implements OnInit {
   }
 
   createInvoice(branch: Branch, customer: Customer, invoice: Invoice) {
+    if (!customer._id) {
+      this.alertService.error("Debes seleccionar el cliente");
+      return;
+    }
+    if (this.details.length <= 0) {
+      this.alertService.error("Debes ingresar al menos un producto a la factura");
+      return;
+    }
     invoice.customer = customer._id;
     invoice.detail = this.details;
     this.invoiceService.create(branch._id, invoice)
@@ -100,14 +110,14 @@ export class InvoiceComponent implements OnInit {
   };
 
   decreaseCount(detail: InvoiceDetail): void {
-    if (detail.count > 0) detail.count--;
-    detail.total = detail.count * detail.product.price;
+    if (detail.quantity > 0) detail.quantity--;
+    detail.total = detail.quantity * detail.product.price;
     this.setTotal();
   }
 
   increaseCount(detail: InvoiceDetail): void {
-    detail.count++;
-    detail.total = detail.count * detail.product.price;
+    detail.quantity++;
+    detail.total = detail.quantity * detail.product.price;
     this.setTotal();
   }
 
@@ -178,7 +188,13 @@ export class InvoiceComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       val => {
-        if (val) this.details.push({ product: val, count: 1, total: val.price });
+        if (val) this.details.push({
+          product: val,
+          quantity: 1,
+          price: val.price,
+          totalWhitoutTax: val.price,
+          total: val.price
+        });
         this.setTotal();
       }
     );

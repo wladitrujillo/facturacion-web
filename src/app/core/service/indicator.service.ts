@@ -17,6 +17,9 @@ export class IndicatorService {
   monthlyIndicator(year: number): Observable<Indicator[]> {
     return this.http.get<Indicator[]>(`/api/invoice/indicator/monthly?year=${year}`).catch(this.errorHandler);
   }
+  topProductIndicator(): Observable<Indicator[]> {
+    return this.http.get<Indicator[]>(`/api/invoice/indicator/topProduct`).catch(this.errorHandler);
+  }
   errorHandler(error: HttpErrorResponse) {
     return Observable.throw(error.error || "Server Error");
   }

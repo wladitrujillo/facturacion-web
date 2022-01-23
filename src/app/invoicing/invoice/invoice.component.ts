@@ -45,6 +45,8 @@ export class InvoiceComponent implements OnInit {
 
   user: User;
 
+  IVA: number = 0.12;
+
 
   constructor(
     private customerService: CustomerService,
@@ -103,21 +105,22 @@ export class InvoiceComponent implements OnInit {
   }
 
   setTotal(): void {
-    let totalWithoutTax = this.details.map(d => d.total).reduce((a, i) => a + i, 0);
-    let iva = 0.12 * totalWithoutTax;
+    let totalWithoutTax = this.details.map(d => d.totalWhitoutTax).reduce((a, i) => a + i, 0);
     this.invoice.totalWithoutTax = totalWithoutTax;
-    this.invoice.total = totalWithoutTax + iva;
+    this.invoice.total = totalWithoutTax * (1 + this.IVA);
   };
 
   decreaseCount(detail: InvoiceDetail): void {
     if (detail.quantity > 0) detail.quantity--;
-    detail.total = detail.quantity * detail.product.price;
+    detail.totalWhitoutTax = detail.quantity * detail.product.price;
+    detail.total = detail.totalWhitoutTax * (1 + this.IVA);
     this.setTotal();
   }
 
   increaseCount(detail: InvoiceDetail): void {
     detail.quantity++;
-    detail.total = detail.quantity * detail.product.price;
+    detail.totalWhitoutTax = detail.quantity * detail.product.price;
+    detail.total = detail.totalWhitoutTax * (1 + this.IVA);
     this.setTotal();
   }
 
@@ -193,7 +196,7 @@ export class InvoiceComponent implements OnInit {
           quantity: 1,
           price: val.price,
           totalWhitoutTax: val.price,
-          total: val.price
+          total: val.price * (1 + this.IVA)
         });
         this.setTotal();
       }

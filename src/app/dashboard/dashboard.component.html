@@ -36,7 +36,7 @@
                 <i class="material-icons">build</i> Fix Header!
               </button>
               <button mat-raised-button type="button" class="btn btn-info btn-link" matTooltip="Refresh"
-                [matTooltipPosition]="'below'" (click)="loadMonthlyData()">
+                [matTooltipPosition]="'below'" (click)="loadTopProductsData()">
                 <i class="material-icons">refresh</i>
               </button>
               <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Change Date"
@@ -44,8 +44,8 @@
                 <i class="material-icons">edit</i>
               </button>
             </div>
-            <h4 class="card-title">Ventas Mensuales</h4>
-            <p class="card-category">Año {{today.getFullYear()}}</p>
+            <h4 class="card-title">Top 5</h4>
+            <p class="card-category">Productos mas vendidos</p>
           </div>
           <div class="card-footer">
             <div class="stats">
@@ -96,7 +96,7 @@
                 <i class="material-icons">build</i> Fix Header!
               </button>
               <button mat-raised-button type="button" class="btn btn-info btn-link" matTooltip="Refresh"
-                [matTooltipPosition]="'below'">
+                [matTooltipPosition]="'below'" (click)="loadMonthlyData()">
                 <i class="material-icons">refresh</i>
               </button>
               <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Change Date"
@@ -104,12 +104,12 @@
                 <i class="material-icons">edit</i>
               </button>
             </div>
-            <h4 class="card-title">Completed Tasks</h4>
-            <p class="card-category">Last Campaign Performance</p>
+            <h4 class="card-title">Ventas Mensuales</h4>
+            <p class="card-category">Año {{today.getFullYear()}}</p>
           </div>
           <div class="card-footer">
             <div class="stats">
-              <i class="material-icons">access_time</i> campaign sent 2 days ago
+              <i class="material-icons">access_time</i> actualizado 2 minutos atrás
             </div>
           </div>
         </div>

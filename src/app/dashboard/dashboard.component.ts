@@ -138,6 +138,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     this.startAnimationForLineChart(completedTasksChart);
 
+    this.loadMonthlyData();
+
     /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
 
     const dataWebsiteViewsChart = {
@@ -171,7 +173,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     this.startAnimationForBarChart(this.websiteViewsChart);
 
-    this.loadMonthlyData();
+    this.loadTopProductsData();
 
     $('#worldMap').vectorMap({
       map: 'world_en',
@@ -259,6 +261,41 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
 
   loadMonthlyData() {
+
+    let dataCompletedTasksChart = {
+      labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
+      series: [
+        [230, 750, 450, 300, 280, 240, 200, 190]
+      ]
+    };
+    this.indicatorService.monthlyIndicator(this.today.getFullYear())
+
+      .subscribe(data => {
+
+        let labels = data.map(item => item.description);
+        let totals = data.map(item => item.total);
+        dataCompletedTasksChart.labels = labels;
+        dataCompletedTasksChart.series = [totals];
+
+        const optionsCompletedTasksChart = {
+          lineSmooth: Chartist.Interpolation.cardinal({
+            tension: 0
+          }),
+          low: 0,
+          high: Math.max(...totals) + 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better
+          chartPadding: { top: 0, right: 0, bottom: 0, left: 0 }
+        };
+
+        const completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart,
+          optionsCompletedTasksChart);
+
+        this.startAnimationForLineChart(completedTasksChart);
+
+
+      });
+  }
+
+  loadTopProductsData() {
     let dataWebsiteViewsChart = {
       labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
       series: [
@@ -267,10 +304,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       ]
     };
 
-
-    this.indicatorService.monthlyIndicator(this.today.getFullYear())
-
+    this.indicatorService.topProductIndicator()
       .subscribe(data => {
+        console.log(data);
         let labels = data.map(item => item.description);
         let totals = data.map(item => item.total);
         dataWebsiteViewsChart.labels = labels;
@@ -281,7 +317,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             showGrid: false
           },
           low: 0,
-          high: Math.max(...totals) + 500,
+          high: Math.max(...totals) + 5,
           chartPadding: { top: 0, right: 5, bottom: 0, left: 0 }
         };
         const responsiveOptions: any = [
@@ -297,7 +333,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.websiteViewsChart = new Chartist.Bar('#websiteViewsChart', dataWebsiteViewsChart, optionsWebsiteViewsChart, responsiveOptions);
 
         this.startAnimationForBarChart(this.websiteViewsChart);
-      });
+      })
   }
 
 }

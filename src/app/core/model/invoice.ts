@@ -8,11 +8,11 @@ export class Invoice {
   company: string;
   branch: Branch | string;
   customer: Customer | string;
-  secuence: Number;
+  secuence: number;
   createdAt: Date;
-  totalWithoutTax: Number;
-  tax: Number;
-  ice: Number;
-  total: Number;
+  totalWithoutTax: number;
+  tax: number;
+  ice: number;
+  total: number;
   detail: InvoiceDetail[];
 }

@@ -182,7 +182,7 @@
                           IVA
                         </td>
                         <td class="text-right">
-                          {{invoice.total-invoice.totalWithoutTax | currency}}
+                          {{(invoice.total - invoice.totalWithoutTax) | currency}}
                         </td>
                       </tr>
                       <tr>

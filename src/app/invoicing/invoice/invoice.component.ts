@@ -107,7 +107,8 @@ export class InvoiceComponent implements OnInit {
   setTotal(): void {
     let totalWithoutTax = this.details.map(d => d.totalWhitoutTax).reduce((a, i) => a + i, 0);
     this.invoice.totalWithoutTax = totalWithoutTax;
-    this.invoice.total = totalWithoutTax * (1 + this.IVA);
+    this.invoice.tax = (1 + this.IVA);
+    this.invoice.total = totalWithoutTax * this.invoice.tax;
   };
 
   decreaseCount(detail: InvoiceDetail): void {

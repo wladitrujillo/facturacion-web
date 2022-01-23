@@ -60,7 +60,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       ruc: this.registerForm.value.ruc,
       name: '',
       address: '',
-      email: ''
+      email: '',
+      phone: ''
     }
     let user: User = new User()
 

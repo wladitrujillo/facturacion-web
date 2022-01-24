@@ -30,7 +30,7 @@
                       <mat-icon matSuffix>account_circle</mat-icon>
                       <input type="text" matInput placeholder="Nombre" formControlName="firstName">
                       <mat-error *ngIf="fval.firstName.errors&&fval.firstName.errors.required">
-                        Esta campo es <strong>requerido</strong>
+                        Este campo es <strong>requerido</strong>
                       </mat-error>
                     </mat-form-field>
 
@@ -38,7 +38,7 @@
                       <mat-icon matSuffix>account_circle</mat-icon>
                       <input type="text" matInput placeholder="Apellido" formControlName="lastName">
                       <mat-error *ngIf="fval.lastName.errors&&fval.lastName.errors.required">
-                        Este campo es <strong>required</strong>
+                        Este campo es <strong>requiredo</strong>
                       </mat-error>
                     </mat-form-field>
 
@@ -47,7 +47,7 @@
                       <mat-icon matSuffix>email</mat-icon>
                       <input type="email" matInput placeholder="Email" formControlName="email">
                       <mat-error *ngIf="fval.email.errors&&fval.email.errors.required">
-                        Este campo es <strong>required</strong>
+                        Este campo es <strong>requiredo</strong>
                       </mat-error>
                       <mat-error *ngIf="fval.email.errors&&fval.email.errors.email">
                         Debe ser una dirección de correo electrónico válida
@@ -58,7 +58,7 @@
                       <mat-icon matSuffix>lock_outline</mat-icon>
                       <input type="password" matInput placeholder="Contraseña" formControlName="password">
                       <mat-error *ngIf="fval.password.errors&&fval.password.errors.required">
-                        Este campo es <strong>required</strong>
+                        Este campo es <strong>requiredo</strong>
                       </mat-error>
                       <mat-error *ngIf="fval.password.errors&&fval.password.errors.minlength">
                         La contraseña debe tener al menos 6 caracteres

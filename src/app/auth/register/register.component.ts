@@ -74,6 +74,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       .subscribe(
         data => {
           this.loading = false;
+          this.alertService.info("Revisa tu correo electrónico para activar tu cuenta");
           this.router.navigate(['/auth/login']);
         },
         error => {

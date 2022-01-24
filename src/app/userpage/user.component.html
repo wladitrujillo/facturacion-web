@@ -50,7 +50,9 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">País</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.country" name="country">
+                    <select type="text" class="form-control" [(ngModel)]="user.country" name="country">
+                      <option [value]="EC">ECUADOR</option>
+                    </select>
                   </div>
                 </div>
                 <div class="col-md-4">

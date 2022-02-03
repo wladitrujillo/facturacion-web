@@ -21,21 +21,28 @@
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Nombre" formControlName="name">
                                 <mat-error *ngIf="handleError('name', 'required')">
-                                    Requiere ingresar <strong>Nombre del Establecimiento</strong>
+                                    Este campo es <strong>requerido</strong>
                                 </mat-error>
                             </mat-form-field>
                             <!-- Código -->
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Código" formControlName="code">
                                 <mat-error *ngIf="handleError('code', 'required')">
-                                    Requiere ingresar <strong>Código</strong>
+                                    Este campo es <strong>requerido</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- Telefono -->
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Teléfono" formControlName="phone">
+                                <mat-error *ngIf="handleError('phone', 'required')">
+                                    Este campo <strong>requerido</strong>
                                 </mat-error>
                             </mat-form-field>
                             <!-- Dirección -->
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Dirección" formControlName="address">
                                 <mat-error *ngIf="handleError('address', 'required')">
-                                    Requiere ingresar <strong>Dirección</strong>
+                                    Este campo es <strong>requerido</strong>
                                 </mat-error>
                             </mat-form-field>
                         </div>

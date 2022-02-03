@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/core/service/alert.service';
 import { AuthenticationService } from 'src/app/core/service/authentication.service';
 
@@ -19,7 +19,8 @@ export class LoginCompanyComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthenticationService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private activatedRoute: ActivatedRoute) { }
 
 
   ngOnInit() {
@@ -32,19 +33,18 @@ export class LoginCompanyComponent implements OnInit, OnDestroy {
       card.classList.remove('card-hidden');
     }, 300);
 
+    const ruc = this.activatedRoute.snapshot.queryParamMap.get('ruc') || '';
     this.loginForm = this.formBuilder.group({
-      ruc: ['', Validators.required],
+      ruc: [ruc, Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
-    console.log("Entro al ngOnInit del login");
   }
 
   ngOnDestroy(): void {
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('login-page');
     body.classList.remove('off-canvas-sidebar');
-    console.log("Entro al ngDestroy del login");
   }
 
   onLoginSubmit() {

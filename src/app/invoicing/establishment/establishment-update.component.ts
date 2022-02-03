@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Location } from '@angular/common';
 import { EstablishmentService } from 'src/app/core/service/establishment.service';
+import { Establishment } from 'src/app/core/model';
 
 
 @Component({
@@ -34,11 +35,12 @@ export class EstablishmentUpdateComponent implements OnInit {
 
     ngOnInit() {
 
-        let establishment = this.route.snapshot.data["establishment"] || {};
+        let establishment: Establishment = this.route.snapshot.data["establishment"] || {};
 
         this.establishmentForm = this.fb.group({
             name: [establishment.name || '', [Validators.required]],
-            code: [establishment.code || ''],
+            code: [establishment.code || '', Validators.required],
+            phone: [establishment.phone || ''],
             address: [establishment.address || '']
         })
 

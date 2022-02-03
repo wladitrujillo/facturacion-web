@@ -29,7 +29,7 @@ export class EstablishmentComponent implements OnInit, AfterViewInit {
 
   dataSource: EstablishmentDataSource;
 
-  displayedColumns = ["name", "code", "address", "actions"];
+  displayedColumns = ["name", "code", "phone", "address", "actions"];
 
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;

@@ -27,7 +27,7 @@ export class AlertService {
   }
 
   public error(message: string) {
-    this.showNotification(message, 'top', 'center', type[4], 3000);
+    this.showNotification(message, 'top', 'center', type[4], 5000);
   }
 
 

@@ -47,6 +47,7 @@ export class CompanyComponent implements OnInit {
 
   private onSuccess = () => {
     this.loading = false;
+    //Notifica de exito
     this.alertService.success("Guardado exitosamente", 1000);
   }
 

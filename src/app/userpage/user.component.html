@@ -46,6 +46,12 @@
                   <div class="form-group">
                     <label class="bmd-label-floating">Teléfono</label>
                     <input type="text" class="form-control" formControlName="phone">
+                    <app-field-error [displayError]="handleError('phone', 'required')"
+                      errorMsg="Este campo es requerido">
+                    </app-field-error>
+                    <app-field-error [displayError]="handleError('phone', 'maxlength')"
+                      errorMsg="El tamaño debe ser menor a 10 caracteres">
+                    </app-field-error>
                   </div>
                 </div>
               </div>
@@ -70,12 +76,18 @@
                   <div class="form-group">
                     <label class="bmd-label-floating">Ciudad</label>
                     <input type="text" class="form-control" formControlName="city">
+                    <app-field-error [displayError]="handleError('city', 'required')"
+                      errorMsg="Este campo es requerido">
+                    </app-field-error>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">Código Postal</label>
                     <input type="text" class="form-control" formControlName="postal">
+                    <app-field-error [displayError]="handleError('postal', 'required')"
+                      errorMsg="Este campo es requerido">
+                    </app-field-error>
                   </div>
                 </div>
               </div>

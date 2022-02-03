@@ -79,7 +79,9 @@
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary btn-round mt-4" [disabled]="loading">
                         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                        Aceptar</button>
+                        Registrarse</button>
+                      <button type="button" [routerLink]="['/auth/login']" class="btn btn-round mt-4">Iniciar
+                        Sesión</button>
                     </div>
 
                   </form>

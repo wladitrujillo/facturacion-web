@@ -34,6 +34,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatStepperModule,
+  MatPaginatorIntl,
 } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
@@ -48,6 +49,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
 import { CoreModule } from './core/core.module';
+import { getSpanishPaginatorIntl } from './es-paginator-intl';
 
 @NgModule({
   exports: [
@@ -106,6 +108,9 @@ export class MaterialModule { }
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent
+  ],
+  providers: [
+    { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }
   ],
   bootstrap: [AppComponent]
 })

@@ -7,15 +7,14 @@
                 <div class="card-header card-header-rose card-header-text">
                     <div class="card-text">
 
-                        <h4 class="card-title">Puntos de Emisión</h4>
+                        <h4 class="card-title">Punto de Emisión</h4>
                     </div>
                 </div>
 
 
                 <div class="card-body">
 
-                    <form [formGroup]="branchForm" (ngSubmit)="onSubmit()" #resetBranchForm="ngForm"
-                        novalidate>
+                    <form [formGroup]="branchForm" (ngSubmit)="onSubmit()" #resetBranchForm="ngForm" novalidate>
 
                         <div class="controlers-wrapper">
                             <!-- Name -->
@@ -27,9 +26,16 @@
                             </mat-form-field>
                             <!-- Code -->
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Code" formControlName="code">
+                                <input matInput placeholder="Número Punto de Venta" formControlName="code">
                                 <mat-error *ngIf="handleError('code', 'required')">
-                                    Requiere ingresar <strong>Código</strong>
+                                    Este campo es <strong>requerido</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- Secuencial -->
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Secuencial" formControlName="next">
+                                <mat-error *ngIf="handleError('next', 'required')">
+                                    Este campo es <strong>requerido</strong>
                                 </mat-error>
                             </mat-form-field>
                         </div>

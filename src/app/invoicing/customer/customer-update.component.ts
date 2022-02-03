@@ -28,6 +28,7 @@ export class CustomerUpdateComponent implements OnInit {
     customerForm: FormGroup;
     identificationTypes: Catalog;
     customerTypes: Catalog;
+    isModalWindow: boolean = false;
 
 
 
@@ -43,6 +44,8 @@ export class CustomerUpdateComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        if (this.dialogRef) this.isModalWindow = true;
 
         let customer = this.route.snapshot.data["customer"] || {};
 
@@ -86,14 +89,18 @@ export class CustomerUpdateComponent implements OnInit {
 
     }
 
+    close() {
+        this.dialogRef.close(undefined);
+    }
+
 
     /* Get errors */
-    public handleError = (controlName: string, errorName: string) => {
+    handleError = (controlName: string, errorName: string) => {
         return this.customerForm.controls[controlName].hasError(errorName);
     }
 
     private onSuccess = (customer) => {
-        if (this.dialogRef) {
+        if (this.isModalWindow) {
             console.log("from dialogRef calling close with customer:", customer);
             this.dialogRef.close(customer);
         } else {

@@ -28,7 +28,7 @@
 
         <mat-form-field class="example-full-width">
             <mat-select placeholder="Tipo de cliente" formControlName="type">
-                <mat-option *ngFor="let ct of customerTypes.items" [value]="ct.code">
+                <mat-option *ngFor="let ct of customerTypes?.items" [value]="ct.code">
                     {{ct.value}}
                 </mat-option>
             </mat-select>
@@ -38,7 +38,7 @@
 
         <mat-form-field class="example-full-width">
             <mat-select placeholder="Tipo de Identificación" formControlName="taxIdType">
-                <mat-option *ngFor="let type of identificationTypes.items" [value]="type.code">
+                <mat-option *ngFor="let type of identificationTypes?.items" [value]="type.code">
                     {{type.value}}
                 </mat-option>
             </mat-select>
@@ -51,7 +51,7 @@
                 You must provide a<strong> Tax Id</strong>
             </mat-error>
             <mat-error *ngIf="handleError('taxId', 'minlength')">
-                Cédula de Identidad de tener mínimo 10 caracteres
+                Cédula de Identidad debe tener mínimo 10 caracteres
             </mat-error>
         </mat-form-field>
 

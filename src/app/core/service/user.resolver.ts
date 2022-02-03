@@ -10,7 +10,10 @@ export class UserResolver implements Resolve<User> {
     constructor(private userService: UserService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> {
-        return this.userService.getById(route.params['_id']);
+        if (route.params['_id'])
+            return this.userService.getById(route.params['_id']);
+        else
+            return this.userService.getProfileInfo();
     }
 
 }

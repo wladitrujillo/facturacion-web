@@ -1,5 +1,5 @@
 
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Optional } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -21,7 +21,7 @@ export class AddCustomerComponent implements OnInit {
 
 
     constructor(
-        private dialogRef: MatDialogRef<AddCustomerComponent>,
+        @Optional() private dialogRef: MatDialogRef<AddCustomerComponent>,
         private fb: FormBuilder,
         private route: ActivatedRoute,
         private customerService: CustomerService,

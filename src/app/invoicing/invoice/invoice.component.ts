@@ -14,8 +14,8 @@ import { CustomerService } from 'src/app/core/service/customer.service';
 import { EstablishmentService } from 'src/app/core/service/establishment.service';
 import { InvoiceService } from 'src/app/core/service/invoice.service';
 import { ProductService } from 'src/app/core/service/product.service';
-import { AddCustomerComponent } from '../addcustomer/add-customer.component';
 import { AlertService } from 'src/app/core/service/alert.service';
+import { CustomerUpdateComponent } from '../customer/customer-update.component';
 
 
 declare const $: any;
@@ -142,14 +142,15 @@ export class InvoiceComponent implements OnInit {
 
   addCustomer() {
 
-    const dialogConfig = new MatDialogConfig();
+    const dialogConfig: MatDialogConfig = {
+      disableClose: false,
+      autoFocus: true,
+      data: {},
+      minWidth: "30%",
+      panelClass: 'icon-outside'
+    }
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-
-    dialogConfig.data = {};
-
-    const dialogRef = this.dialog.open(AddCustomerComponent, dialogConfig);
+    const dialogRef = this.dialog.open(CustomerUpdateComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
       customer => {

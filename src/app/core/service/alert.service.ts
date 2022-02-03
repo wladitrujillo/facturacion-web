@@ -14,32 +14,33 @@ export class AlertService {
   constructor() { }
 
   public info(message: string) {
-    this.showNotification(message, 'top', 'center', type[1]);
+    this.showNotification(message, 'top', 'center', type[1], 3000);
   }
 
-  public success(message: string) {
-    this.showNotification(message, 'top', 'center', type[2]);
+  public success(message: string, timer: number = 3000) {
+    console.log(timer);
+    this.showNotification(message, 'top', 'center', type[2], timer);
   }
 
   public warning(message: string) {
-    this.showNotification(message, 'top', 'center', type[3]);
+    this.showNotification(message, 'top', 'center', type[3], 3000);
   }
 
   public error(message: string) {
-    this.showNotification(message, 'top', 'center', type[4]);
+    this.showNotification(message, 'top', 'center', type[4], 3000);
   }
 
 
 
 
-  private showNotification(message: string, from: string, align: string, type: string) {
+  private showNotification(message: string, from: string, align: string, type: string, timer) {
 
     $.notify({
       icon: 'notifications',
       message: message
     }, {
-      type: type,
-      timer: 3000,
+      type,
+      delay: timer,
       placement: {
         from: from,
         align: align

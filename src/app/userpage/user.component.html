@@ -9,32 +9,43 @@
             </h4>
           </div>
           <div class="card-body">
-            <form (ngSubmit)="onSubmit()">
+            <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="bmd-label-floating">Nombre</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.firstName" name="firstName">
+                    <input type="text" class="form-control" formControlName="firstName">
+                    <app-field-error [displayError]="handleError('firstName', 'required')"
+                      errorMsg="Este campo es requerido">
+                    </app-field-error>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="bmd-label-floating">Apellido</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.lastName" name="lastName">
+                    <input type="text" class="form-control" formControlName="lastName">
+                    <app-field-error [displayError]="handleError('lastName', 'required')"
+                      errorMsg="Este campo es requerido">
+                    </app-field-error>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="bmd-label-floating">Correo Electrónico</label>
-                    <input type="email" class="form-control" [(ngModel)]="user.email" name="email" disabled>
+                    <label class="bmd-label-floating">Correo Electrónico (deshabilitado)</label>
+                    <input type="email" class="form-control" formControlName="email" disabled>
+                    <app-field-error [displayError]="handleError('email', 'required')"
+                      errorMsg="Este campo es requerido">
+                    </app-field-error>
+                    <app-field-error [displayError]="handleError('email', 'email')" errorMsg="Email invalido">
+                    </app-field-error>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="bmd-label-floating">Teléfono</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.phone" name="phone">
+                    <input type="text" class="form-control" formControlName="phone">
                   </div>
                 </div>
               </div>
@@ -42,7 +53,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="bmd-label-floating">Dirección</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.address" name="address">
+                    <input type="text" class="form-control" formControlName="address">
                   </div>
                 </div>
               </div>
@@ -50,7 +61,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">País</label>
-                    <select type="text" class="form-control" [(ngModel)]="user.country" name="country">
+                    <select type="text" class="form-control" formControlName="country">
                       <option [value]="'EC'">ECUADOR</option>
                     </select>
                   </div>
@@ -58,13 +69,13 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">Ciudad</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.city" name="city">
+                    <input type="text" class="form-control" formControlName="city">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">Código Postal</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.postal" name="postal">
+                    <input type="text" class="form-control" formControlName="postal">
                   </div>
                 </div>
               </div>
@@ -73,13 +84,14 @@
                   <div class="form-group">
                     <label>Sobre mi</label>
                     <div class="form-group">
-                      <textarea class="form-control" [(ngModel)]="user.about" name="about" rows="5"></textarea>
+                      <textarea class="form-control" formControlName="about" rows="5"></textarea>
                     </div>
                   </div>
                 </div>
               </div>
               <button mat-raised-button type="submit" class="btn btn-rose pull-right" [disabled]="loading">
-                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Actualizar mi Perfil</button>
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Actualizar mi
+                Perfil</button>
               <div class="clearfix"></div>
             </form>
           </div>

@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { Role } from 'src/app/core/model/role';
 import { UserService } from 'src/app/core/service/user.service';
 import { AdminService } from 'src/app/core/service/admin.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 
 @Component({
@@ -72,7 +73,10 @@ export class UserUpdateComponent implements OnInit {
             this.userForm.value._id = user._id;
             this.userService.update(this.userForm.value)
                 .subscribe(
-                    user => { this.location.back() });
+                    user => {
+                        console.log("from location calling back");
+                        this.location.back()
+                    });
         } else {
             this.userService.create(this.userForm.value)
                 .subscribe(user => { this.location.back() });

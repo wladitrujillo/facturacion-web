@@ -44,7 +44,7 @@
 
                             <mat-form-field class="example-full-width">
                                 <mat-select placeholder="Tipo de cliente" formControlName="type">
-                                    <mat-option *ngFor="let ct of customerTypes.items" [value]="ct.code">
+                                    <mat-option *ngFor="let ct of customerTypes?.items" [value]="ct.code">
                                         {{ct.value}}
                                     </mat-option>
                                 </mat-select>
@@ -54,7 +54,7 @@
 
                             <mat-form-field class="example-full-width">
                                 <mat-select placeholder="Tipo de Identificación" formControlName="taxIdType">
-                                    <mat-option *ngFor="let type of identificationTypes.items" [value]="type.code">
+                                    <mat-option *ngFor="let type of identificationTypes?.items" [value]="type.code">
                                         {{type.value}}
                                     </mat-option>
                                 </mat-select>
@@ -62,7 +62,8 @@
 
 
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Cédula de Identidad" formControlName="taxId" [maxlength]="13">
+                                <input matInput placeholder="Cédula de Identidad" formControlName="taxId"
+                                    [maxlength]="13">
                                 <mat-error *ngIf="handleError('taxId', 'required')">
                                     Requiere ingresar <strong>Cédula de Identidad</strong>
                                 </mat-error>

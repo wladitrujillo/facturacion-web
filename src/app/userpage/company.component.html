@@ -8,18 +8,23 @@
             </h4>
           </div>
           <div class="card-body">
-            <form (ngSubmit)="onSubmit()">
+            <form [formGroup]="companyForm" (ngSubmit)="onFormSubmit()">
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="bmd-label-floating">Nombre de la Empresa</label>
-                    <input type="text" class="form-control" [(ngModel)]="company.name" name="name">
+                    <input type="text" class="form-control" formControlName="name">
+                    <app-field-error [displayError]="handleError('name', 'required')"
+                      errorMsg="Este campo es requerido">
+                    </app-field-error>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="bmd-label-floating">RUC (deshabilitado)</label>
-                    <input type="text" class="form-control" [(ngModel)]="company.ruc" name="ruc" disabled>
+                    <input type="text" class="form-control" formControlName="ruc" disabled>
+                    <app-field-error [displayError]="handleError('ruc', 'required')" errorMsg="Este campo es requerido">
+                    </app-field-error>
                   </div>
                 </div>
               </div>
@@ -27,13 +32,21 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="bmd-label-floating">Correo Electrónico</label>
-                    <input type="email" class="form-control" [(ngModel)]="company.email" name="email">
+                    <input type="email" class="form-control" formControlName="email">
+                    <app-field-error [displayError]="handleError('email', 'required')"
+                      errorMsg="Este campo es requerido">
+                    </app-field-error>
+                    <app-field-error [displayError]="handleError('email', 'email')" errorMsg="Email invalido">
+                    </app-field-error>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="bmd-label-floating">Teléfono</label>
-                    <input type="text" class="form-control" [(ngModel)]="company.phone" name="phone">
+                    <input type="text" class="form-control" formControlName="phone">
+                    <app-field-error [displayError]="handleError('phone', 'required')"
+                      errorMsg="Este campo es requerido">
+                    </app-field-error>
                   </div>
                 </div>
               </div>
@@ -41,7 +54,10 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="bmd-label-floating">Dirección</label>
-                    <input type="text" class="form-control" [(ngModel)]="company.address" name="address">
+                    <input type="text" class="form-control" formControlName="address">
+                    <app-field-error [displayError]="handleError('address', 'required')"
+                      errorMsg="Este campo es requerido">
+                    </app-field-error>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Optional, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { Catalog } from 'src/app/core/model/catalog';
 import { CustomerService } from 'src/app/core/service/customer.service';
 import { AdminService } from 'src/app/core/service/admin.service';
+import { MatDialogRef } from '@angular/material';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class CustomerUpdateComponent implements OnInit {
         private fb: FormBuilder,
         private route: ActivatedRoute,
         private customerService: CustomerService,
-        private catalogService: AdminService
+        private catalogService: AdminService,
+        @Optional() private dialogRef: MatDialogRef<CustomerUpdateComponent>
     ) {
 
     }
@@ -45,6 +47,7 @@ export class CustomerUpdateComponent implements OnInit {
         let customer = this.route.snapshot.data["customer"] || {};
 
         this.customerForm = this.fb.group({
+            _id: [customer._id],
             firstName: [customer.firstName || '', [Validators.required]],
             lastName: [customer.lastName || '', [Validators.required]],
             email: [customer.email || '', [Validators.required, Validators.email]],
@@ -75,11 +78,10 @@ export class CustomerUpdateComponent implements OnInit {
         if (customer) {
             this.customerForm.value._id = customer._id;
             this.customerService.update(this.customerForm.value)
-                .subscribe(
-                    customer => { this.location.back() });
+                .subscribe(this.onSuccess);
         } else {
             this.customerService.create(this.customerForm.value)
-                .subscribe(customer => { this.location.back() });
+                .subscribe(this.onSuccess);
         }
 
     }
@@ -90,6 +92,15 @@ export class CustomerUpdateComponent implements OnInit {
         return this.customerForm.controls[controlName].hasError(errorName);
     }
 
+    private onSuccess = (customer) => {
+        if (this.dialogRef) {
+            console.log("from dialogRef calling close with customer:", customer);
+            this.dialogRef.close(customer);
+        } else {
+            console.log("from location calling back");
+            this.location.back()
+        }
+    }
 
 
 

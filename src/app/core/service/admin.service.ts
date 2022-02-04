@@ -2,9 +2,12 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Catalog } from '../model/catalog';
+import { City } from '../model/city';
 import { Company } from '../model/company';
+import { Country } from '../model/country';
 import { Menu } from '../model/menu';
 import { Role } from '../model/role';
+import { State } from '../model/state';
 import { AlertService } from './alert.service';
 
 @Injectable({
@@ -28,6 +31,18 @@ export class AdminService {
 
   getCompany(): Observable<Company> {
     return this.http.get<Company>('/api/admin/company').catch(this.handleError<any>('getCompany'));
+  }
+
+  getCountries(): Observable<Country[]> {
+    return this.http.get<Country[]>('/api/admin/country').catch(this.handleError<any>('getCountries'));
+  }
+
+  getStates(country: string): Observable<State[]> {
+    return this.http.get<State[]>(`/api/admin/country/${country}/state`).catch(this.handleError<any>('getState'));
+  }
+
+  getCities(country: string, state: string): Observable<City[]> {
+    return this.http.get<City[]>(`/api/admin/country/${country}/state/${state}/city`).catch(this.handleError<any>('getCities'));
   }
 
   updateCompany(company: Company): Observable<void> {

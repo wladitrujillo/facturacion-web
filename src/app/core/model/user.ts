@@ -11,6 +11,7 @@ export class User {
     address: string;
     city: string;
     country: string;
+    state: string;
     postal: string;
     about: string;
     role: string;

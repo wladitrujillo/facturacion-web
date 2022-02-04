@@ -67,15 +67,20 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">País</label>
-                    <select type="text" class="form-control" formControlName="country">
-                      <option [value]="'EC'">ECUADOR</option>
+                    <select type="text" class="form-control" formControlName="country" (change)="getStates(country)">
+                      <option *ngFor="let country of countries$ | async" [value]="country._id">{{country.name}}
+                      </option>
                     </select>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label class="bmd-label-floating">Ciudad</label>
-                    <input type="text" class="form-control" formControlName="city">
+                    <label class="bmd-label-floating">Provincia</label>
+                    <select class="selectpicker" type="text" class="form-control" formControlName="state"
+                      (change)="getCities(country,state)">
+                      <option *ngFor="let state of states" [value]="state._id">{{state.name}}
+                      </option>
+                    </select>
                     <app-field-error [displayError]="handleError('city', 'required')"
                       errorMsg="Este campo es requerido">
                     </app-field-error>
@@ -83,8 +88,11 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label class="bmd-label-floating">Código Postal</label>
-                    <input type="text" class="form-control" formControlName="postal">
+                    <label class="bmd-label-floating">Ciudad</label>
+                    <select type="text" class="form-control" formControlName="city">
+                      <option *ngFor="let city of cities" [value]="city._id">{{city.name}}
+                      </option>
+                    </select>
                     <app-field-error [displayError]="handleError('postal', 'required')"
                       errorMsg="Este campo es requerido">
                     </app-field-error>

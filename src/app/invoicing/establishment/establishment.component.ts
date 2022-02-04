@@ -1,9 +1,9 @@
 
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { MatSort } from "@angular/material/sort";
-import { merge } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { fromEvent, merge } from 'rxjs';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { EstablishmentDataSource } from './establishment.datasource';
 import { Establishment } from 'src/app/core/model/establishment';
@@ -36,6 +36,11 @@ export class EstablishmentComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
+  @ViewChild('search', { static: false }) search: ElementRef;
+
+  debounceTime: number = 500;
+
+
   constructor(private http: HttpClient, private establishmentService: EstablishmentService) {
 
   }
@@ -44,7 +49,7 @@ export class EstablishmentComponent implements OnInit, AfterViewInit {
 
     this.dataSource = new EstablishmentDataSource(this.http);
 
-    this.dataSource.load('', 'asc', 0, 5);
+    this.dataSource.load('', 'name', 0, 5);
 
   }
 
@@ -52,18 +57,29 @@ export class EstablishmentComponent implements OnInit, AfterViewInit {
 
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
+
+
+    fromEvent(this.search.nativeElement, 'keyup')
+      .pipe(debounceTime(this.debounceTime), distinctUntilChanged(), tap(() => {
+        this.paginator.pageIndex = 0;
+        this.loadData();
+      })
+      ).subscribe();
+
+
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
-        tap(() => this.loadProductsPage())
+        tap(() => this.loadData())
       )
       .subscribe();
 
   }
 
-  loadProductsPage() {
+  loadData() {
+    let sortDirection = this.sort.direction == 'desc' ? '-' : '';
     this.dataSource.load(
-      '',
-      this.sort.direction,
+      this.search.nativeElement.value,
+      sortDirection + this.sort.active,
       this.paginator.pageIndex,
       this.paginator.pageSize);
   }

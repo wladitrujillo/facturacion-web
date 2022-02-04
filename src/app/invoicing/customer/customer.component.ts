@@ -1,9 +1,9 @@
 
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { MatSort } from "@angular/material/sort";
-import { merge } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { fromEvent, merge } from 'rxjs';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { CustomerDataSource } from 'src/app/core/service/customer.datasource';
 import { Customer } from 'src/app/core/model/customer';
@@ -26,6 +26,10 @@ export class CustomerComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
+  @ViewChild('search', { static: false }) search: ElementRef;
+
+  debounceTime: number = 500;
+
   constructor(private customerService: CustomerService, private http: HttpClient) {
   }
 
@@ -34,13 +38,20 @@ export class CustomerComponent implements OnInit, AfterViewInit {
 
     this.dataSource = new CustomerDataSource(this.http);
 
-    this.dataSource.loadCustomers('', 'asc', 0, 5);
+    this.dataSource.loadCustomers('', 'firstName', 0, 5);
 
   }
 
   ngAfterViewInit() {
 
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+    fromEvent(this.search.nativeElement, 'keyup')
+      .pipe(debounceTime(this.debounceTime), distinctUntilChanged(), tap(() => {
+        this.paginator.pageIndex = 0;
+        this.loadCustomersPage();
+      })
+      ).subscribe();
 
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
@@ -51,9 +62,10 @@ export class CustomerComponent implements OnInit, AfterViewInit {
   }
 
   loadCustomersPage() {
+    let sortDirection = this.sort.direction == 'desc' ? '-' : '';
     this.dataSource.loadCustomers(
-      '',
-      this.sort.direction,
+      this.search.nativeElement.value,
+      sortDirection + this.sort.active,
       this.paginator.pageIndex,
       this.paginator.pageSize);
   }
@@ -66,3 +78,7 @@ export class CustomerComponent implements OnInit, AfterViewInit {
   }
 
 }
+function Debounce(arg0: number) {
+  throw new Error('Function not implemented.');
+}
+

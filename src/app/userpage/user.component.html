@@ -67,7 +67,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="bmd-label-floating">País</label>
-                    <select type="text" class="form-control" formControlName="country" (change)="getStates(country)">
+                    <select class="form-control" formControlName="country" (change)="getStates(country)">
                       <option *ngFor="let country of countries$ | async" [value]="country._id">{{country.name}}
                       </option>
                     </select>

@@ -1,9 +1,9 @@
 
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { MatSort } from "@angular/material/sort";
-import { merge } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { fromEvent, merge } from 'rxjs';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { BranchDataSource } from './branch.datasource';
 import { ActivatedRoute } from '@angular/router';
@@ -29,13 +29,18 @@ export class BranchComponent implements OnInit, AfterViewInit {
 
   dataSource: BranchDataSource;
 
-  displayedColumns = ["name", "code", "next","actions"];
+  displayedColumns = ["name", "code", "next", "actions"];
 
   establishmentId: string;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
+
+  @ViewChild('search', { static: false }) search: ElementRef;
+
+  debounceTime: number = 500;
+
 
   constructor(private http: HttpClient, private actRoute: ActivatedRoute, private branchService: BranchService) {
     this.establishmentId = this.actRoute.snapshot.paramMap.get('establishmentId');
@@ -45,7 +50,7 @@ export class BranchComponent implements OnInit, AfterViewInit {
 
     this.dataSource = new BranchDataSource(this.branchService);
 
-    this.dataSource.loadEstablishments(this.establishmentId, '', 'asc', 0, 5);
+    this.dataSource.loadEstablishments(this.establishmentId, '', 'name', 0, 5);
 
   }
 
@@ -53,25 +58,35 @@ export class BranchComponent implements OnInit, AfterViewInit {
 
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
+
+    fromEvent(this.search.nativeElement, 'keyup')
+      .pipe(debounceTime(this.debounceTime), distinctUntilChanged(), tap(() => {
+        this.paginator.pageIndex = 0;
+        this.loadData();
+      })
+      ).subscribe();
+
+
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
-        tap(() => this.loadProductsPage())
+        tap(() => this.loadData())
       )
       .subscribe();
 
   }
 
-  loadProductsPage() {
+  loadData() {
+    let sortDirection = this.sort.direction == 'desc' ? '-' : '';
     this.dataSource.loadEstablishments(
       this.establishmentId,
-      '',
-      this.sort.direction,
+      this.search.nativeElement.value,
+      sortDirection + this.sort.active,
       this.paginator.pageIndex,
       this.paginator.pageSize);
   }
 
   onDelete(index: number, e: Branch) {
-    this.branchService.delete(this.establishmentId,e._id)
+    this.branchService.delete(this.establishmentId, e._id)
       .subscribe(() => this.dataSource.removeData((this.paginator.pageIndex * this.paginator.pageSize) + index));
 
   }

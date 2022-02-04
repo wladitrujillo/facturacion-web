@@ -34,7 +34,7 @@ export class SearchProductComponent implements OnInit, AfterViewInit {
 
     this.dataSource = new ProductDataSource(this.http);
 
-    this.dataSource.loadProducts('', 'asc', 0, 3);
+    this.dataSource.loadProducts('', 'code', 0, 3);
   }
 
   ngAfterViewInit() {
@@ -42,7 +42,7 @@ export class SearchProductComponent implements OnInit, AfterViewInit {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
     fromEvent(this.search.nativeElement, 'keyup')
-      .pipe(debounceTime(250), distinctUntilChanged(), tap(() => {
+      .pipe(debounceTime(500), distinctUntilChanged(), tap(() => {
         this.paginator.pageIndex = 0;
         this.loadProductsPage();
       })
@@ -57,9 +57,10 @@ export class SearchProductComponent implements OnInit, AfterViewInit {
   }
 
   loadProductsPage() {
+    let sortDirection = this.sort.direction == 'desc' ? '-' : '';
     this.dataSource.loadProducts(
       this.search.nativeElement.value,
-      this.sort.direction,
+      sortDirection + this.sort.active,
       this.paginator.pageIndex,
       this.paginator.pageSize);
   }

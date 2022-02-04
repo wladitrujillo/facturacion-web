@@ -35,7 +35,7 @@ export class SearchCustomerComponent implements OnInit, AfterViewInit {
 
     this.dataSource = new CustomerDataSource(this.http);
 
-    this.dataSource.loadCustomers('', 'asc', 0, 3);
+    this.dataSource.loadCustomers('', 'firstName', 0, 3);
   }
 
   ngAfterViewInit() {
@@ -43,7 +43,7 @@ export class SearchCustomerComponent implements OnInit, AfterViewInit {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
     fromEvent(this.search.nativeElement, 'keyup')
-      .pipe(debounceTime(250), distinctUntilChanged(), tap(() => {
+      .pipe(debounceTime(500), distinctUntilChanged(), tap(() => {
         this.paginator.pageIndex = 0;
         this.loadCustomerPage();
       })
@@ -58,9 +58,10 @@ export class SearchCustomerComponent implements OnInit, AfterViewInit {
   }
 
   loadCustomerPage() {
+    let sortDirection = this.sort.direction == 'desc' ? '-' : '';
     this.dataSource.loadCustomers(
       this.search.nativeElement.value,
-      this.sort.direction,
+      sortDirection + this.sort.active,
       this.paginator.pageIndex,
       this.paginator.pageSize);
   }

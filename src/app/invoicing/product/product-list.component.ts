@@ -1,9 +1,9 @@
 
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { MatSort } from "@angular/material/sort";
-import { merge } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { fromEvent, merge } from 'rxjs';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Product } from 'src/app/core/model/product';
 import { ProductDataSource } from 'src/app/core/service/product.datasource';
@@ -26,6 +26,11 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
+  @ViewChild('search', { static: false }) search: ElementRef;
+
+  debounceTime: number = 500;
+
+
   constructor(private http: HttpClient, private productService: ProductService) {
 
   }
@@ -34,13 +39,21 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
     this.dataSource = new ProductDataSource(this.http);
 
-    this.dataSource.loadProducts('', 'asc', 0, 5);
+    this.dataSource.loadProducts('', 'name', 0, 5);
 
   }
 
   ngAfterViewInit() {
 
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+    fromEvent(this.search.nativeElement, 'keyup')
+      .pipe(debounceTime(this.debounceTime), distinctUntilChanged(), tap(() => {
+        this.paginator.pageIndex = 0;
+        this.loadProductsPage();
+      })
+      ).subscribe();
+
 
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
@@ -51,12 +64,14 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   loadProductsPage() {
+    let sortDirection = this.sort.direction == 'desc' ? '-' : '';
     this.dataSource.loadProducts(
-      '',
-      this.sort.direction,
+      this.search.nativeElement.value,
+      sortDirection + this.sort.active,
       this.paginator.pageIndex,
       this.paginator.pageSize);
   }
+
 
   onDelete(index: number, e: Product) {
     this.productService.delete(e._id)

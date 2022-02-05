@@ -18,6 +18,7 @@
 
                         <div class="controlers-wrapper">
 
+
                             <div class="row">
                                 <div class="col-md-4">
                                     <!-- Product Category -->
@@ -37,71 +38,133 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+
+                                <div class="col-12">
+                                    <!-- Nombre -->
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Nombre" formControlName="name">
+                                        <mat-error *ngIf="handleError('name', 'required')">
+                                            Este campo es <strong>requerido</strong>
+                                        </mat-error>
+                                    </mat-form-field>
 
 
-                            <!-- Nombre -->
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Nombre" formControlName="name">
-                                <mat-error *ngIf="handleError('name', 'required')">
-                                    Este campo es <strong>requerido</strong>
-                                </mat-error>
-                            </mat-form-field>
+                                    <!-- Código -->
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Código" formControlName="code">
+                                        <mat-error *ngIf="handleError('code', 'required')">
+                                            Este campo es <strong>requerido</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <!-- Código Auxiliar -->
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Codigo Auxiliar" formControlName="auxCode">
+                                    </mat-form-field>
+
+                                    <!-- Precio -->
+                                    <mat-form-field class="example-full-width">
+                                        <input type="number" matInput placeholder="Precio" formControlName="price">
+                                        <mat-error *ngIf="handleError('price', 'required')">
+                                            Este campo es <strong>requerido</strong>
+                                        </mat-error>
+                                        <mat-error *ngIf="handleError('price', 'min')">
+                                            El valor minimo es {{minPrice}}.
+                                        </mat-error>
+                                    </mat-form-field>
 
 
-                            <!-- Código -->
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Código" formControlName="code">
-                                <mat-error *ngIf="handleError('code', 'required')">
-                                    Este campo es <strong>requerido</strong>
-                                </mat-error>
-                            </mat-form-field>
+                                    <!-- haveTaxes -->
 
-                            <!-- Código Auxiliar -->
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Codigo Auxiliar" formControlName="auxCode">
-                            </mat-form-field>
+                                    <!--mat-slide-toggle formControlName="haveTaxes">Have Taxes</mat-slide-toggle-->
 
-                            <!-- Precio -->
-                            <mat-form-field class="example-full-width">
-                                <input type="number" matInput placeholder="Precio" formControlName="price">
-                                <mat-error *ngIf="handleError('price', 'required')">
-                                    Este campo es <strong>requerido</strong>
-                                </mat-error>
-                                <mat-error *ngIf="handleError('price', 'min')">
-                                    El valor minimo es {{minPrice}}.
-                                </mat-error>
-                            </mat-form-field>
+                                    <!-- Type -->
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select placeholder="Tipo de producto" formControlName="type">
+                                            <mat-option *ngFor="let item of (productTypes$ | async)?.items"
+                                                [value]="item.code">
+                                                {{item.value}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
 
 
-                            <!-- haveTaxes -->
+                                    <!-- Description -->
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Descripción" formControlName="description">
+                                        <mat-error *ngIf="handleError('description', 'required')">
+                                            Este campo es <strong>requerido</strong>
+                                        </mat-error>
+                                    </mat-form-field>
 
-                            <!--mat-slide-toggle formControlName="haveTaxes">Have Taxes</mat-slide-toggle-->
+                                </div>
 
-                            <!-- Type -->
-                            <mat-form-field class="example-full-width">
-                                <mat-select placeholder="Tipo de producto" formControlName="type">
-                                    <mat-option *ngFor="let item of (productTypes$ | async)?.items" [value]="item.code">
-                                        {{item.value}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-
-                            <!-- Description -->
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Descripción" formControlName="description">
-                                <mat-error *ngIf="handleError('description', 'required')">
-                                    Este campo es <strong>requerido</strong>
-                                </mat-error>
-                            </mat-form-field>
-
-                        </div>
-
-                        <div class="full-wrapper button-wrapper">
-                            <div class="button-wrapper">
-                                <button mat-flat-button color="warn">Guardar</button>
                             </div>
+
+
+                            <div class="row">
+
+                                <div class="col-6">
+
+                                    <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+                                        <mat-spinner></mat-spinner>
+                                    </div>
+
+                                    <mat-table class="invoice-table mat-elevation-z8" [dataSource]="dataSource">
+
+
+                                        <ng-container matColumnDef="tax">
+
+                                            <mat-header-cell *matHeaderCellDef>Impuesto</mat-header-cell>
+
+                                            <mat-cell *matCellDef="let element">{{element.tax}}</mat-cell>
+
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="percentage">
+
+                                            <mat-header-cell *matHeaderCellDef>Porcentaje</mat-header-cell>
+
+                                            <mat-cell class="description-cell" *matCellDef="let element">
+                                                {{element.percentage}}</mat-cell>
+
+                                        </ng-container>
+
+                                        <!-- actions -->
+
+                                        <ng-container matColumnDef="actions">
+                                            <th mat-header-cell *matHeaderCellDef>
+                                                <a mat-icon-button color="primary" (click)="addTaxValue()">
+                                                    <mat-icon aria-label="Example icon-button with a heart icon">add
+                                                    </mat-icon>
+                                                </a>
+                                            </th>
+                                            <td mat-cell *matCellDef="let element; let i = index;"
+                                                class="group-actions text-right">
+                                                <button mat-raised-button class="btn btn-danger btn-link"
+                                                    (click)="onDeleteTaxValue(i, element)">
+                                                    <mat-icon>close</mat-icon>
+                                                </button>
+
+                                            </td>
+                                        </ng-container>
+
+                                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+                                        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+                                    </mat-table>
+
+                                </div>
+
+                            </div>
+
                         </div>
+
+                        <button mat-raised-button type="submit" class="btn btn-rose pull-right"
+                            [disabled]="loading">Guardar</button>
+
 
                     </form>
 

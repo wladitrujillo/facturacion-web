@@ -1,6 +1,6 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Location } from '@angular/common';
@@ -10,14 +10,19 @@ import { AdminService } from 'src/app/core/service/admin.service';
 import { ProductCategory } from 'src/app/core/model/product-category';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ProductCategoryService } from 'src/app/core/service/product-category.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatPaginator, MatTable } from '@angular/material';
 import { ProductCategoryComponent } from '../product-category/product-category.component';
 import { switchMap } from 'rxjs/operators';
+import { TaxValue } from 'src/app/core/model/tax-value';
+import { Product } from 'src/app/core/model/product';
+import { TaxValueComponent } from '../tax-value/tax-value.component';
+import { TaxValueListComponent } from '../tax-value/tax-value-list.component';
 
 
 @Component({
     selector: 'app-product-update',
-    templateUrl: './product-update.component.html'
+    templateUrl: './product-update.component.html',
+    styleUrls: ['./product-update.component.css']
 
 })
 
@@ -38,6 +43,13 @@ export class ProductUpdateComponent implements OnInit {
 
     productTypes$: Observable<Catalog>;
 
+    @ViewChild(MatTable, { static: true }) table: MatTable<any>;
+
+    dataSource: TaxValue[] = [];
+
+    displayedColumns = ["tax", "percentage", "actions"];
+
+
     constructor(
         private location: Location,
         private fb: FormBuilder,
@@ -53,7 +65,9 @@ export class ProductUpdateComponent implements OnInit {
         this.productCategory$ = this.refreshProductCategory$.pipe(switchMap(_ => this.productCategoryService.get('', '', 0, 50)));
         this.productTypes$ = this.catalogService.getCatalogByName('product_type');
 
-        let product = this.route.snapshot.data["product"] || {};
+        let product: Product = this.route.snapshot.data["product"] || {};
+
+        this.dataSource = product.taxes;
 
         this.productForm = this.fb.group({
             category: [product.category, [Validators.required]],
@@ -78,14 +92,17 @@ export class ProductUpdateComponent implements OnInit {
         let product = this.route.snapshot.data["product"];
 
 
+        let productValue = this.productForm.value;
+        productValue.taxes = this.dataSource;
+
 
         if (product) {
             this.productForm.value._id = product._id;
-            this.productService.update(this.productForm.value)
+            this.productService.update(productValue)
                 .subscribe(
                     product => { this.location.back() });
         } else {
-            this.productService.create(this.productForm.value)
+            this.productService.create(productValue)
                 .subscribe(product => { this.location.back() });
         }
 
@@ -115,6 +132,34 @@ export class ProductUpdateComponent implements OnInit {
 
     }
 
+    addTaxValue() {
+
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+
+        dialogConfig.data = {};
+
+        const dialogRef = this.dialog.open(TaxValueListComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(
+            value => {
+                console.log("close modal", value);
+                if (value && !this.dataSource.find(e => e._id == value._id)) {
+                    this.dataSource.push(value);
+                    this.table.renderRows();
+                }
+            }
+        );
+
+    }
+    onDeleteTaxValue(index: number, row_obj: TaxValue) {
+        this.dataSource = this.dataSource.filter((value, key) => {
+            return value._id != row_obj._id;
+        });
+
+    }
 
 
 }

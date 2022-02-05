@@ -12,7 +12,7 @@ import { ProductService } from 'src/app/core/service/product.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product-list.component.css']
 })
 
 export class ProductListComponent implements OnInit, AfterViewInit {

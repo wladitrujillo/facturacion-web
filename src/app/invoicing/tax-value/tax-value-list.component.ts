@@ -1,10 +1,11 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { MatPaginator } from '@angular/material';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Optional } from '@angular/core';
+import { MatDialogRef, MatPaginator } from '@angular/material';
 import { merge } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TaxValueService } from 'src/app/core/service/tax-value.service';
 import { TaxValueDataSource } from 'src/app/core/service/tax.value.datasource';
 import { tap } from 'rxjs/operators';
+import { TaxValue } from 'src/app/core/model/tax-value';
 
 @Component({
     selector: 'app-tax-value-list',
@@ -21,13 +22,19 @@ export class TaxValueListComponent implements OnInit, AfterViewInit {
 
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
+    isModalWindow: boolean = false;
+    readonly: boolean = false;
 
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient,
+        @Optional() private dialogRef: MatDialogRef<TaxValueListComponent>) {
 
     }
 
     ngOnInit() {
+        if (this.dialogRef) this.isModalWindow = true;
+        if (this.dialogRef) this.readonly = true;
 
         this.dataSource = new TaxValueDataSource(this.http);
 
@@ -52,6 +59,12 @@ export class TaxValueListComponent implements OnInit, AfterViewInit {
             '',
             this.paginator.pageIndex,
             this.paginator.pageSize);
+    }
+
+
+    onCloseModalWindow(element: TaxValue) {
+        if (this.dialogRef)
+            this.dialogRef.close(element);
     }
 
 }

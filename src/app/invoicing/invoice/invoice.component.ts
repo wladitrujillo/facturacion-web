@@ -45,8 +45,6 @@ export class InvoiceComponent implements OnInit {
 
   user: User;
 
-  IVA: number = 0.12;
-
 
   constructor(
     private customerService: CustomerService,
@@ -105,23 +103,25 @@ export class InvoiceComponent implements OnInit {
   }
 
   setTotal(): void {
-    let totalWithoutTax = this.details.map(d => d.totalWhitoutTax).reduce((a, i) => a + i, 0);
-    this.invoice.totalWithoutTax = totalWithoutTax;
-    this.invoice.tax = (1 + this.IVA);
-    this.invoice.total = totalWithoutTax * this.invoice.tax;
+    this.invoice.totalWithoutTax = this.details.reduce((a, d) => a + d.totalWhitoutTax, 0);
+    this.invoice.total = this.details.reduce((a, d) => a + d.total, 0);
   };
 
   decreaseCount(detail: InvoiceDetail): void {
     if (detail.quantity > 0) detail.quantity--;
     detail.totalWhitoutTax = detail.quantity * detail.product.price;
-    detail.total = detail.totalWhitoutTax * (1 + this.IVA);
+    let iva = detail.product.taxes.find(e => e.tax == 'IVA');
+    let ivaValue = iva ? iva.percentage / 100 : 0;
+    detail.total = detail.totalWhitoutTax * (1 + ivaValue);
     this.setTotal();
   }
 
   increaseCount(detail: InvoiceDetail): void {
     detail.quantity++;
     detail.totalWhitoutTax = detail.quantity * detail.product.price;
-    detail.total = detail.totalWhitoutTax * (1 + this.IVA);
+    let iva = detail.product.taxes.find(e => e.tax == 'IVA');
+    let ivaValue = iva ? iva.percentage / 100 : 0;
+    detail.total = detail.totalWhitoutTax * (1 + ivaValue);
     this.setTotal();
   }
 
@@ -193,12 +193,14 @@ export class InvoiceComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       val => {
+        let iva = val.taxes.find(e => e.tax == 'IVA');
+        let ivaValue = iva ? iva.percentage / 100 : 0;
         if (val) this.details.push({
           product: val,
           quantity: 1,
           price: val.price,
           totalWhitoutTax: val.price,
-          total: val.price * (1 + this.IVA)
+          total: val.price * (1 + ivaValue)
         });
         this.setTotal();
       }

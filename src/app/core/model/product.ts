@@ -1,3 +1,5 @@
+import { TaxValue } from "./tax-value";
+
 export class Product {
   _id: string;
   category: string;
@@ -9,4 +11,5 @@ export class Product {
   active: boolean;
   type: string;
   price: number;
+  taxes: TaxValue[];
 }

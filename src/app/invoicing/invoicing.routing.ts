@@ -19,6 +19,9 @@ import { QueryInvoicingComponent } from './queryinvocing/queryinvoicing.componen
 import { ProductCategoryListComponent } from './product-category/product-category-list.component';
 import { ProductCategoryComponent } from './product-category/product-category.component';
 import { ProductCategoryResolver } from '../core/service/product-category.resolver';
+import { TaxValueListComponent } from './tax-value/tax-value-list.component';
+import { TaxValueComponent } from './tax-value/tax-value.component';
+import { TaxValueResolver } from '../core/service/tax.value.resolver';
 
 export const InvoicingRoutes: Routes = [
   {
@@ -30,6 +33,18 @@ export const InvoicingRoutes: Routes = [
         path: ':_id/edit', component: ProductCategoryComponent,
         resolve: {
           productCategory: ProductCategoryResolver
+        }
+      }]
+  },
+  {
+    path: 'tax-value',
+    children: [
+      { path: '', component: TaxValueListComponent },
+      { path: 'new', component: TaxValueComponent },
+      {
+        path: ':_id/edit', component: TaxValueComponent,
+        resolve: {
+          taxValue: TaxValueResolver
         }
       }]
   },

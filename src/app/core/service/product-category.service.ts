@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-import { Product } from '../model/product';
 import { ProductCategory } from '../model/product-category';
 import { AlertService } from './alert.service';
 

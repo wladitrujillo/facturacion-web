@@ -31,6 +31,9 @@ import { QueryInvoicingComponent } from './queryinvocing/queryinvoicing.componen
 import { ProductCategoryComponent } from './product-category/product-category.component';
 import { ProductCategoryListComponent } from './product-category/product-category-list.component';
 import { ProductCategoryResolver } from '../core/service/product-category.resolver';
+import { TaxValueComponent } from './tax-value/tax-value.component';
+import { TaxValueResolver } from '../core/service/tax.value.resolver';
+import { TaxValueListComponent } from './tax-value/tax-value-list.component';
 
 
 @NgModule({
@@ -58,7 +61,9 @@ import { ProductCategoryResolver } from '../core/service/product-category.resolv
     QueryInvoicingComponent,
     InvoiceComponent,
     ProductCategoryComponent,
-    ProductCategoryListComponent
+    ProductCategoryListComponent,
+    TaxValueComponent,
+    TaxValueListComponent
   ],
   providers: [
     ProductService,
@@ -69,7 +74,8 @@ import { ProductCategoryResolver } from '../core/service/product-category.resolv
     BranchService,
     BranchResolver,
     CustomerResolver,
-    UserResolver
+    UserResolver,
+    TaxValueResolver
   ],
   entryComponents: [
     SearchProductComponent,

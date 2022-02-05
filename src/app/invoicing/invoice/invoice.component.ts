@@ -193,16 +193,18 @@ export class InvoiceComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       val => {
-        let iva = val.taxes.find(e => e.tax == 'IVA');
-        let ivaValue = iva ? iva.percentage / 100 : 0;
-        if (val) this.details.push({
-          product: val,
-          quantity: 1,
-          price: val.price,
-          totalWhitoutTax: val.price,
-          total: val.price * (1 + ivaValue)
-        });
-        this.setTotal();
+        if (val) {
+          let iva = val.taxes.find(e => e.tax == 'IVA');
+          let ivaValue = iva ? iva.percentage / 100 : 0;
+          this.details.push({
+            product: val,
+            quantity: 1,
+            price: val.price,
+            totalWhitoutTax: val.price,
+            total: val.price * (1 + ivaValue)
+          });
+          this.setTotal();
+        }
       }
     );
 

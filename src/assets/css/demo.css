@@ -95,3 +95,6 @@
     margin-left: 50px;
 
 }
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+    z-index: 10000 !important;
+}

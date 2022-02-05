@@ -10,9 +10,8 @@
 }
 
 .invoice-table {
-    min-height: 360px;
-    margin-top: 10px;
     width: 100%;
+    margin-top: 30px;
 }
 
 .invoice-table .group-actions .btn {
@@ -22,6 +21,7 @@
 
 .invoice-paginator {   
     width: 100%;
+    margin-bottom: 5px;
 }
 
 td.mat-cell, td.mat-footer-cell, th.mat-header-cell {

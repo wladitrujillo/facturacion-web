@@ -10,9 +10,9 @@
 }
 
 .invoice-table {
-    min-height: 360px;
     margin-top: 10px;
     width: 100%;
+    margin-bottom: 1px;
 }
 
 .invoice-table .group-actions .btn {

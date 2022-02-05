@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from "@angular/material/dialog";
 
 
@@ -12,7 +12,8 @@ import { CustomerDataSource } from 'src/app/core/service/customer.datasource';
 @Component({
   selector: 'search-customer',
   templateUrl: './search-customer.component.html',
-  styleUrls: ['./search-customer.component.css']
+  styleUrls: ['./search-customer.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SearchCustomerComponent implements OnInit, AfterViewInit {
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from "@angular/material/dialog";
 
 import { MatPaginator, MatSort } from '@angular/material';
@@ -11,7 +11,8 @@ import { ProductDataSource } from 'src/app/core/service/product.datasource';
 @Component({
   selector: 'search-product',
   templateUrl: './search-product.component.html',
-  styleUrls: ['./search-product.component.css']
+  styleUrls: ['./search-product.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SearchProductComponent implements OnInit, AfterViewInit {
 

@@ -2,12 +2,9 @@
   <div class="container-fluid">
     <div class="row">
 
-
       <div class="spinner-container" *ngIf="dataSource.loading$ | async">
         <mat-spinner></mat-spinner>
       </div>
-
-
 
       <mat-form-field appearance="standard">
         <mat-label>Buscar</mat-label>
@@ -72,38 +69,15 @@
           </td>
         </ng-container>
 
-        <!--ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef>
-            <a mat-icon-button color="primary" [routerLink]="['74742gdr43']">
-              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-            </a>
-          </mat-header-cell>
-
-          <mat-cell *matCellDef="let row; let i=index;">
-
-            <button mat-icon-button color="accent"
-              (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
-              <mat-icon aria-label="Edit">edit</mat-icon>
-            </button>
-
-            <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
-              <mat-icon aria-label="Delete">delete</mat-icon>
-            </button>
-          </mat-cell>
-        </ng-container-->
-
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 
       </mat-table>
 
-      <mat-paginator class="invoice-paginator" [length]="dataSource.totalRows$ | async" [pageSizeOptions]="[5, 10, 15]"
-        showFirstLastButtons>
+      <mat-paginator class="invoice-paginator mat-elevation-z8" [length]="dataSource.totalRows$ | async"
+        [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
       </mat-paginator>
-
-
-
 
     </div>
   </div>

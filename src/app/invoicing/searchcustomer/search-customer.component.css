@@ -10,9 +10,9 @@
 }
 
 .invoice-table {
-    min-height: 150px;
     margin-top: 10px;
     width: 100%;
+    margin-bottom: 1px;
 }
 
 .invoice-table .group-actions .btn {
@@ -22,8 +22,15 @@
 
 .invoice-paginator {   
     width: 100%;
+    margin-bottom: 5px;
 }
 
 td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
     border-bottom-style:unset;
+}
+
+.cdk-overlay-connected-position-bounding-box,
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container{
+    z-index: 99999 !important;
 }

@@ -28,3 +28,8 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
     border-bottom-style:unset;
 }
 
+.cdk-overlay-connected-position-bounding-box,
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container{
+    z-index: 99999 !important;
+}

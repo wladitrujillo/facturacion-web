@@ -67,8 +67,8 @@
 
     </mat-table>
 
-    <mat-paginator class="invoice-paginator" [length]="dataSource.totalRows$ | async" [pageSizeOptions]="[3,5,10]"
-        showFirstLastButtons>
+    <mat-paginator class="invoice-paginator" [length]="dataSource.totalRows$ | async"
+        [pageSizeOptions]="[3,5]" showFirstLastButtons>
     </mat-paginator>
 
 
@@ -78,7 +78,7 @@
 <mat-dialog-actions>
 
     <button class="mat-raised-button" (click)="close(undefined)">
-        Close
+        Cerrar
     </button>
 
 </mat-dialog-actions>

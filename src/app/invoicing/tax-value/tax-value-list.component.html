@@ -59,10 +59,15 @@
 
             </mat-table>
 
-            <mat-paginator class="invoice-paginator" [length]="dataSource.totalRows$ | async"
+            <mat-paginator class="invoice-paginator mat-elevation-z8" [length]="dataSource.totalRows$ | async"
                 [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
             </mat-paginator>
 
+        </div>
+        <div *ngIf="isModalWindow" class="row">
+            <button class="mat-raised-button" (click)="onCloseModalWindow()">
+                Close
+            </button>
         </div>
     </div>
 </div>

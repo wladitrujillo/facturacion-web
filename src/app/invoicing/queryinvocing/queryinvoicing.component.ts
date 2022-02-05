@@ -18,7 +18,7 @@ export class QueryInvoicingComponent implements OnInit, AfterViewInit {
 
   dataSource: InvoiceDataSource;
 
-  displayedColumns = ["secuence", "totalWithoutTax", "total", "actions"];
+  displayedColumns = ["secuence", "createdAt", "totalWithoutTax", "total", "actions"];
 
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;

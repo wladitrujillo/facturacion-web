@@ -7,6 +7,12 @@ import { Location } from '@angular/common';
 import { Catalog } from 'src/app/core/model/catalog';
 import { ProductService } from 'src/app/core/service/product.service';
 import { AdminService } from 'src/app/core/service/admin.service';
+import { ProductCategory } from 'src/app/core/model/product-category';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ProductCategoryService } from 'src/app/core/service/product-category.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { ProductCategoryComponent } from '../product-category/product-category.component';
+import { switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -27,30 +33,38 @@ export class ProductUpdateComponent implements OnInit {
     productForm: FormGroup;
     SectioinArray: any = ['A', 'B', 'C', 'D', 'E'];
 
-    productTypes: Catalog;
+    productCategory$: Observable<ProductCategory[]>;
+    refreshProductCategory$: BehaviorSubject<ProductCategory> = new BehaviorSubject<ProductCategory>(new ProductCategory());
+
+    productTypes$: Observable<Catalog>;
 
     constructor(
         private location: Location,
         private fb: FormBuilder,
         private route: ActivatedRoute,
+        private dialog: MatDialog,
         private productService: ProductService,
+        private productCategoryService: ProductCategoryService,
         private catalogService: AdminService
     ) { }
 
     ngOnInit() {
 
+        this.productCategory$ = this.refreshProductCategory$.pipe(switchMap(_ => this.productCategoryService.get('', '', 0, 50)));
+        this.productTypes$ = this.catalogService.getCatalogByName('product_type');
+
         let product = this.route.snapshot.data["product"] || {};
 
         this.productForm = this.fb.group({
-            name: [product.name || '', [Validators.required]],
-            code: [product.code || '', [Validators.required]],
-            auxCode: [product.auxCode || ''],
-            description: [product.description || ''],
+            category: [product.category, [Validators.required]],
+            name: [product.name, [Validators.required]],
+            code: [product.code, [Validators.required]],
+            auxCode: [product.auxCode],
+            description: [product.description],
             price: [product.price || 0, [Validators.required, Validators.min(this.minPrice)]],
             type: [product.type || 'B', [Validators.required]]
         })
 
-        this.catalogService.getCatalogByName('product_type').subscribe(types => this.productTypes = types);
 
     }
 
@@ -78,11 +92,28 @@ export class ProductUpdateComponent implements OnInit {
     }
 
 
-    /* Get errors */
-    public handleError = (controlName: string, errorName: string) => {
+    handleError = (controlName: string, errorName: string) => {
         return this.productForm.controls[controlName].hasError(errorName);
     }
+    addCategory() {
 
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+
+        dialogConfig.data = {};
+
+        const dialogRef = this.dialog.open(ProductCategoryComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(
+            value => {
+                if (value)
+                    this.refreshProductCategory$.next(value);
+            }
+        );
+
+    }
 
 
 

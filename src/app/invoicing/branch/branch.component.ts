@@ -41,6 +41,7 @@ export class BranchComponent implements OnInit, AfterViewInit {
 
   debounceTime: number = 500;
 
+  readonly: boolean = false;
 
   constructor(private http: HttpClient, private actRoute: ActivatedRoute, private branchService: BranchService) {
     this.establishmentId = this.actRoute.snapshot.paramMap.get('establishmentId');

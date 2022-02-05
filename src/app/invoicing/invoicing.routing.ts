@@ -16,15 +16,31 @@ import { UserComponent } from './users/user.component';
 import { UserUpdateComponent } from './users/user-update.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { QueryInvoicingComponent } from './queryinvocing/queryinvoicing.component';
+import { ProductCategoryListComponent } from './product-category/product-category-list.component';
+import { ProductCategoryComponent } from './product-category/product-category.component';
+import { ProductCategoryResolver } from '../core/service/product-category.resolver';
 
 export const InvoicingRoutes: Routes = [
+  {
+    path: 'product-category',
+    children: [
+      { path: '', component: ProductCategoryListComponent },
+      { path: 'new', component: ProductCategoryComponent },
+      {
+        path: ':_id/edit', component: ProductCategoryComponent,
+        resolve: {
+          productCategory: ProductCategoryResolver
+        }
+      }]
+  },
   {
     path: 'product',
     children: [
       { path: '', component: ProductListComponent },
       { path: 'new', component: ProductUpdateComponent },
       {
-        path: ':_id/edit', component: ProductUpdateComponent, resolve: {
+        path: ':_id/edit', component: ProductUpdateComponent,
+        resolve: {
           product: ProductResolver
         }
       }]

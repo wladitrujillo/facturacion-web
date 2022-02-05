@@ -17,6 +17,28 @@
                     <form [formGroup]="productForm" (ngSubmit)="onSubmit()" #resetProductForm="ngForm" novalidate>
 
                         <div class="controlers-wrapper">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <!-- Product Category -->
+                                    <mat-form-field>
+                                        <mat-select placeholder="Categoria de producto" formControlName="category">
+                                            <mat-option *ngFor="let item of productCategory$ | async"
+                                                [value]="item._id">
+                                                {{item.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button type="button" class="btn btn-rose"
+                                        (click)="addCategory()">Crear Categoria</button>
+                                </div>
+                            </div>
+
+
+
                             <!-- Nombre -->
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Nombre" formControlName="name">
@@ -58,8 +80,8 @@
                             <!-- Type -->
                             <mat-form-field class="example-full-width">
                                 <mat-select placeholder="Tipo de producto" formControlName="type">
-                                    <mat-option *ngFor="let t of productTypes?.items" [value]="t.code">
-                                        {{t.value}}
+                                    <mat-option *ngFor="let item of (productTypes$ | async)?.items" [value]="item.code">
+                                        {{item.value}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>

@@ -1,10 +1,12 @@
 export class Product {
   _id: string;
-  code:string;
-  auxCode:string;
+  category: string;
   name: string;
+  code: string;
+  auxCode: string;
   description: string;
   createdAt: string;
   active: boolean;
-  price: number; 
+  type: string;
+  price: number;
 }

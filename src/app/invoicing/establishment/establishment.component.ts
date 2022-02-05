@@ -40,6 +40,7 @@ export class EstablishmentComponent implements OnInit, AfterViewInit {
 
   debounceTime: number = 500;
 
+  readonly: boolean = false;
 
   constructor(private http: HttpClient, private establishmentService: EstablishmentService) {
 

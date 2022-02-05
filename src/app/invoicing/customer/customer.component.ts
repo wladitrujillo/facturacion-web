@@ -1,6 +1,6 @@
 
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { MatPaginator } from '@angular/material';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Optional } from '@angular/core';
+import { MatDialogRef, MatPaginator } from '@angular/material';
 import { MatSort } from "@angular/material/sort";
 import { fromEvent, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
@@ -29,9 +29,12 @@ export class CustomerComponent implements OnInit, AfterViewInit {
   @ViewChild('search', { static: false }) search: ElementRef;
 
   debounceTime: number = 500;
+  isModalWindow: boolean = false;
+  readonly: boolean = false;
 
-  constructor(private customerService: CustomerService, private http: HttpClient) {
-  }
+  constructor(
+    private customerService: CustomerService,
+    private http: HttpClient) { }
 
 
   ngOnInit() {
@@ -78,7 +81,3 @@ export class CustomerComponent implements OnInit, AfterViewInit {
   }
 
 }
-function Debounce(arg0: number) {
-  throw new Error('Function not implemented.');
-}
-

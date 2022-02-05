@@ -89,7 +89,7 @@ export class CustomerUpdateComponent implements OnInit {
 
     }
 
-    close() {
+    onCloseModalWindow() {
         this.dialogRef.close(undefined);
     }
 

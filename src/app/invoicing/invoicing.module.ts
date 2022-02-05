@@ -28,6 +28,9 @@ import { AddCustomerComponent } from './addcustomer/add-customer.component';
 import { CustomerResolver } from '../core/service/customer.resolver';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { QueryInvoicingComponent } from './queryinvocing/queryinvoicing.component';
+import { ProductCategoryComponent } from './product-category/product-category.component';
+import { ProductCategoryListComponent } from './product-category/product-category-list.component';
+import { ProductCategoryResolver } from '../core/service/product-category.resolver';
 
 
 @NgModule({
@@ -53,11 +56,14 @@ import { QueryInvoicingComponent } from './queryinvocing/queryinvoicing.componen
     UserComponent,
     UserUpdateComponent,
     QueryInvoicingComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    ProductCategoryComponent,
+    ProductCategoryListComponent
   ],
   providers: [
     ProductService,
     ProductResolver,
+    ProductCategoryResolver,
     EstablishmentService,
     EstablishmentResolver,
     BranchService,

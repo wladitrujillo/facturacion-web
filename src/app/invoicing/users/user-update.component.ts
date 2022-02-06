@@ -7,9 +7,6 @@ import { Location } from '@angular/common';
 import { Role } from 'src/app/core/model/role';
 import { UserService } from 'src/app/core/service/user.service';
 import { AdminService } from 'src/app/core/service/admin.service';
-import { MatDialog, MatDialogRef } from '@angular/material';
-
-
 @Component({
     selector: 'app-user-update',
     templateUrl: './user-update.component.html'

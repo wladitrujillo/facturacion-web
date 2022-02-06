@@ -37,7 +37,7 @@ export class ProductUpdateComponent implements OnInit {
     readonly separatorKeysCodes: number[] = [ENTER, COMMA];
     productForm: FormGroup;
     SectioinArray: any = ['A', 'B', 'C', 'D', 'E'];
-
+    loading = false;
     productCategory$: Observable<ProductCategory[]>;
     refreshProductCategory$: BehaviorSubject<ProductCategory> = new BehaviorSubject<ProductCategory>(new ProductCategory());
 
@@ -98,12 +98,20 @@ export class ProductUpdateComponent implements OnInit {
 
         if (product) {
             this.productForm.value._id = product._id;
+            this.loading = true;
             this.productService.update(productValue)
                 .subscribe(
-                    product => { this.location.back() });
+                    product => {
+                        this.loading = false;
+                        this.location.back()
+                    });
         } else {
+            this.loading = true;
             this.productService.create(productValue)
-                .subscribe(product => { this.location.back() });
+                .subscribe(product => {
+                    this.loading = false;
+                    this.location.back()
+                });
         }
 
     }

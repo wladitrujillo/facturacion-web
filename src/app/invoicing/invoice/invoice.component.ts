@@ -99,11 +99,12 @@ export class InvoiceComponent implements OnInit {
     }
     invoice.customer = customer._id;
     invoice.detail = this.details;
+    invoice.payments = this.payments;
     this.invoiceService.create(branch._id, invoice)
       .subscribe(newInvoice => { this.initInvoice(); console.log("Invoice created===>>", invoice) });
   }
 
-  setTotal(): void {
+  setTotalInvoice(): void {
     this.invoice.totalWithoutTax = this.details.reduce((a, d) => a + d.totalWhitoutTax, 0);
     this.invoice.total = this.details.reduce((a, d) => a + d.total, 0);
   };
@@ -114,7 +115,7 @@ export class InvoiceComponent implements OnInit {
     let iva = detail.product.taxes.find(e => e.tax == 'IVA');
     let ivaValue = iva ? iva.percentage / 100 : 0;
     detail.total = detail.totalWhitoutTax * (1 + ivaValue);
-    this.setTotal();
+    this.setTotalInvoice();
   }
 
   increaseCount(detail: InvoiceDetail): void {
@@ -123,13 +124,13 @@ export class InvoiceComponent implements OnInit {
     let iva = detail.product.taxes.find(e => e.tax == 'IVA');
     let ivaValue = iva ? iva.percentage / 100 : 0;
     detail.total = detail.totalWhitoutTax * (1 + ivaValue);
-    this.setTotal();
+    this.setTotalInvoice();
   }
 
   removeItem(item) {
     let index = this.details.indexOf(item);
     this.details.splice(index, 1);
-    this.setTotal();
+    this.setTotalInvoice();
   }
 
   searchCustomer() {
@@ -204,7 +205,7 @@ export class InvoiceComponent implements OnInit {
             totalWhitoutTax: val.price,
             total: val.price * (1 + ivaValue)
           });
-          this.setTotal();
+          this.setTotalInvoice();
         }
       }
     );
@@ -212,16 +213,25 @@ export class InvoiceComponent implements OnInit {
   }
 
   addPayment() {
-    let totalInvoice = this.invoice.total || 0;
     let payment = new Payment();
-    let totalPayments = this.payments.length == 0 ? 0 : this.payments.reduce((a, e) => a + e.value, 0);
     payment.code = '01';
-    payment.value = totalInvoice - totalPayments;
+    payment.value = this.calculatePayment();
     this.payments.push(payment);
   }
 
   removePayment(removeIndex, payment: Payment) {
+    let value = payment.value || 0;
     this.payments = this.payments.filter((e, index) => index !== removeIndex);
+
+    if (this.payments.length > 0)
+      this.payments[this.payments.length - 1].value += value;
+
+  }
+
+  calculatePayment(): number {
+    let totalInvoice = this.invoice.total || 0;
+    let totalPayments = this.payments.length == 0 ? 0 : this.payments.reduce((a, e) => a + e.value, 0);
+    return totalInvoice - totalPayments;
   }
 
 }

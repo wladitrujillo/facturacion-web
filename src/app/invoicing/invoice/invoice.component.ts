@@ -16,6 +16,9 @@ import { InvoiceService } from 'src/app/core/service/invoice.service';
 import { ProductService } from 'src/app/core/service/product.service';
 import { AlertService } from 'src/app/core/service/alert.service';
 import { CustomerUpdateComponent } from '../customer/customer-update.component';
+import { Payment } from 'src/app/core/model/payment';
+import { Catalog } from 'src/app/core/model/catalog';
+import { AdminService } from 'src/app/core/service/admin.service';
 
 
 declare const $: any;
@@ -32,19 +35,14 @@ export class InvoiceComponent implements OnInit {
   @ViewChild('taxIdInput', { static: true }) taxIdInput;
 
   headerRow: string[];
-
   details: InvoiceDetail[];
-
-  wayPayments: WayPayment[];
-
+  payments: Payment[] = [];
   customer: Customer | any;
-
   invoice: Invoice;
-
   branch: Branch;
-
   user: User;
 
+  paymentMethod: Catalog;
 
   constructor(
     private customerService: CustomerService,
@@ -54,7 +52,8 @@ export class InvoiceComponent implements OnInit {
     private branchService: BranchService,
     private authenticationService: AuthenticationService,
     private dialog: MatDialog,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private adminService: AdminService) { }
 
 
   ngOnInit() {
@@ -62,6 +61,8 @@ export class InvoiceComponent implements OnInit {
     this.headerRow = ['CODIGO', 'PRODUCT', 'PRECIO', 'CANTIDAD', 'TOTAL'];
 
     this.user = this.authenticationService.currentUserValue;
+
+    this.adminService.getCatalogByName('payment_method').subscribe(response => this.paymentMethod = response)
 
     this.establishmentService.get('', 'asc', 0, 10)
       .subscribe(establishments =>
@@ -71,7 +72,7 @@ export class InvoiceComponent implements OnInit {
 
           }));
 
-    this.wayPayments = [{ code: "01", value: 102.2, term: 45, unit: "45" }];
+    this.payments = [];
 
     this.initInvoice();
 
@@ -210,5 +211,17 @@ export class InvoiceComponent implements OnInit {
 
   }
 
+  addPayment() {
+    let totalInvoice = this.invoice.total || 0;
+    let payment = new Payment();
+    let totalPayments = this.payments.length == 0 ? 0 : this.payments.reduce((a, e) => a + e.value, 0);
+    payment.code = '01';
+    payment.value = totalInvoice - totalPayments;
+    this.payments.push(payment);
+  }
+
+  removePayment(removeIndex, payment: Payment) {
+    this.payments = this.payments.filter((e, index) => index !== removeIndex);
+  }
 
 }

@@ -109,54 +109,48 @@
         <br>
 
         <div class="row">
-          <!--div class="col-md-4 mr-auto">
-            <legend>Forma De pago</legend>
+          <div class="col-12 col-md-7">
 
-            <button (click)="addProduct()" mat-icon-button matTooltip="Agregar item" [matTooltipPosition]="'right'"
-              color="primary">
-              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-            </button>
-
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th class="text-left">CÓDIGO</th>
-                    <th class="text-right">VALOR</th>
-                    <th class="text-right">PLAZO</th>
-                    <th class="text-left">UNIDAD</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let wp of wayPayments">
-                    <td class="text-left">
-                      {{wp.code}}
-                    </td>
-                    <td class="text-right">
-                      {{wp.value | currency}}
-                    </td>
-                    <td class="text-right">
-                      {{wp.term}}
-                    </td>
-                    <td class="td-left">
-                      {{wp.unit}}
-                    </td>
-                    <td class="td-actions">
-                      <button mat-button type="button" matTooltip="Remove item" [matTooltipPosition]="'left'"
-                        class="btn btn-link" (click)="removeWayPayment(wp)">
-                        <i class="material-icons">close</i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table no-padding">
+                    <thead>
+                      <tr>
+                        <th class="text-left">Forma De Pago</th>
+                        <th class="text-right">Valor</th>
+                        <th> <button (click)="addPayment()" mat-icon-button matTooltip="Agregar"
+                            [matTooltipPosition]="'right'" color="primary" class="pull-right">
+                            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                          </button>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let p of payments;let $index=index">
+                        <td class="text-left">
+                          <select name="" id="" [(ngModel)]="p.code">
+                            <option [value]="catalog.code" *ngFor="let catalog of paymentMethod?.items">
+                              {{catalog.value}}</option>
+                          </select>
+                        </td>
+                        <td class="text-right">
+                          <input type="number" [(ngModel)]="p.value">
+                        </td>
+                        <td class="td-actions pull-right">
+                          <button mat-button type="button" matTooltip="Remover" [matTooltipPosition]="'right'"
+                            class="btn btn-danger btn-link" (click)="removePayment($index,p)">
+                            <i class="material-icons">close</i>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-          </div-->
-          <div class="col-12 col-md-5">
 
           </div>
-          <div class="col-12 col-md-2"></div>
           <div class="col-12 col-md-5">
             <div class="card">
               <div class="card-body">

@@ -78,16 +78,6 @@ export class InvoiceComponent implements OnInit {
 
   }
 
-  initInvoice() {
-
-    this.customer = {};
-    this.invoice = new Invoice();
-    this.invoice.createdAt = new Date();
-    this.details = []
-
-
-  }
-
   createInvoice(branch: Branch, customer: Customer, invoice: Invoice) {
     if (!customer._id) {
       this.alertService.error("Debes seleccionar el cliente");
@@ -104,10 +94,7 @@ export class InvoiceComponent implements OnInit {
       .subscribe(newInvoice => { this.initInvoice(); console.log("Invoice created===>>", invoice) });
   }
 
-  setTotalInvoice(): void {
-    this.invoice.totalWithoutTax = this.details.reduce((a, d) => a + d.totalWhitoutTax, 0);
-    this.invoice.total = this.details.reduce((a, d) => a + d.total, 0);
-  };
+
 
   decreaseCount(detail: InvoiceDetail): void {
     if (detail.quantity > 0) detail.quantity--;
@@ -228,10 +215,26 @@ export class InvoiceComponent implements OnInit {
 
   }
 
-  calculatePayment(): number {
+  private setTotalInvoice(): void {
+    this.invoice.totalWithoutTax = this.details.reduce((a, d) => a + d.totalWhitoutTax, 0);
+    this.invoice.total = this.details.reduce((a, d) => a + d.total, 0);
+  };
+
+  private calculatePayment(): number {
     let totalInvoice = this.invoice.total || 0;
     let totalPayments = this.payments.length == 0 ? 0 : this.payments.reduce((a, e) => a + e.value, 0);
-    return totalInvoice - totalPayments;
+    let dif = totalInvoice - totalPayments;
+    return Math.round((dif + Number.EPSILON) * 100) / 100;
+  }
+
+  private initInvoice(): void {
+
+    this.customer = {};
+    this.invoice = new Invoice();
+    this.invoice.createdAt = new Date();
+    this.details = [];
+    this.payments = [];
+
   }
 
 }

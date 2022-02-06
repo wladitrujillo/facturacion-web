@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { InvoiceDataSource } from 'src/app/core/service/invoice.datasource';
 import { InvoiceService } from 'src/app/core/service/invoice.service';
 import { environment } from 'src/environments/environment';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -25,9 +26,12 @@ export class QueryInvoicingComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
+  formGroup: FormGroup;
+
   constructor(
     private http: HttpClient,
-    private invoiceService: InvoiceService
+    private invoiceService: InvoiceService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -35,6 +39,15 @@ export class QueryInvoicingComponent implements OnInit, AfterViewInit {
     this.dataSource = new InvoiceDataSource(this.http);
 
     this.dataSource.loadData('', 'asc', 0, 5);
+
+
+    this.formGroup = this.formBuilder.group({
+      startDate: [],
+      endData: [],
+      customer: [],
+      product: [],
+      establishment: []
+    });
 
   }
 
@@ -66,5 +79,10 @@ export class QueryInvoicingComponent implements OnInit, AfterViewInit {
 
   }
 
+
+  /* Get errors */
+  handleError = (controlName: string, errorName: string) => {
+    return this.formGroup.controls[controlName].hasError(errorName);
+  }
 
 }

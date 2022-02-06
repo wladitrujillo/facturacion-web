@@ -1,5 +1,35 @@
 <div class="main-content">
   <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Fecha Inicial" (click)="picker.open()">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker2" placeholder="Fecha Final" (click)="picker2.open()">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2 startView="year"></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Cliente">
+          <button mat-icon-button matSuffix>
+            <mat-icon>reorder</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Factura">
+        </mat-form-field>
+      </div>
+    </div>
     <div class="row">
 
 

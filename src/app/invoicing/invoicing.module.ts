@@ -34,6 +34,7 @@ import { ProductCategoryResolver } from '../core/service/product-category.resolv
 import { TaxValueComponent } from './tax-value/tax-value.component';
 import { TaxValueResolver } from '../core/service/tax.value.resolver';
 import { TaxValueListComponent } from './tax-value/tax-value-list.component';
+import { SharedUtilityModule } from '../shared-utility/shared-utility.module';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { TaxValueListComponent } from './tax-value/tax-value-list.component';
     RouterModule.forChild(InvoicingRoutes),
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    SharedUtilityModule
   ],
   declarations: [
     ProductListComponent,

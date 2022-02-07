@@ -1,4 +1,5 @@
 import { DataSource } from "@angular/cdk/table";
+import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, of } from "rxjs";
 import { catchError, finalize } from "rxjs/operators";
 import { Branch } from "src/app/core/model/branch";
@@ -9,18 +10,18 @@ export class BranchDataSource implements DataSource<Branch>{
     private branchSubject = new BehaviorSubject<Branch[]>([]);
 
     private loadingSubject = new BehaviorSubject<boolean>(false);
-   
+
 
     private totalRowSubject = new BehaviorSubject<number>(0);
     public totalRows$ = this.totalRowSubject.asObservable();
     public loading$ = this.loadingSubject.asObservable();
-    
-    constructor(private branchService: BranchService) {
+
+    constructor(private http: HttpClient) {
 
     }
 
-    loadEstablishments(
-        establishmentId:string,
+    load(
+        establishmentId: string,
         filter: string,
         sort: string,
         page: number,
@@ -28,11 +29,20 @@ export class BranchDataSource implements DataSource<Branch>{
 
         this.loadingSubject.next(true);
 
-        this.branchService.get(establishmentId,filter, sort, page, perPage).pipe(
-            catchError(() => of([])),
-            finalize(() => this.loadingSubject.next(false))
-        )
-            .subscribe(establishments => this.branchSubject.next(establishments));
+
+        this.http.get(`/api/establishment/${establishmentId}/branch?q=${filter}&sort=${sort}&page=${page}&per_page=${perPage}`, { observe: 'response' })
+            .pipe(
+                catchError(() => of([])),
+                finalize(() => this.loadingSubject.next(false))
+            )
+            .subscribe((response: any) => {
+
+                this.totalRowSubject.next(response.headers.get('x-total-count'))
+
+                this.branchSubject.next(response.body);
+
+
+            });
 
     }
 
@@ -45,8 +55,8 @@ export class BranchDataSource implements DataSource<Branch>{
         this.branchSubject.complete();
         this.loadingSubject.complete();
     }
-  
-    removeData(index:number){
+
+    removeData(index: number) {
         const data = this.branchSubject.value;
         data.splice(index, 1);
         this.branchSubject.next(data);

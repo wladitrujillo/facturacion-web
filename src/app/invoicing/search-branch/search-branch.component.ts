@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MatPaginator, MatSort } from '@angular/material';
-import { fromEvent, merge } from 'rxjs';
-import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
-import { Establishment } from 'src/app/core/model';
+import { Branch, Establishment } from 'src/app/core/model';
 import { BranchDataSource } from '../branch/branch.datasource';
 import { EstablishmentDataSource } from '../establishment/establishment.datasource';
 
@@ -18,15 +16,6 @@ export class SearchBranchComponent implements OnInit {
   displayedColumns = ["name", "code", "actions"];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-
-  @ViewChild('search', { static: false }) search: ElementRef;
-
-  debounceTime: number = 500;
-
-  readonly: boolean = false;
-  title: string = 'Buscar Establecimiento'
-
   step: number = 1;
 
   constructor(
@@ -35,45 +24,29 @@ export class SearchBranchComponent implements OnInit {
 
   ngOnInit() {
     this.establishmentDataSource = new EstablishmentDataSource(this.http);
-
+    this.branchDataSource = new BranchDataSource(this.http);
     this.establishmentDataSource.load('', 'name', 0, 5);
   }
   ngAfterViewInit() {
 
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-
-
-
-    fromEvent(this.search.nativeElement, 'keyup')
-      .pipe(debounceTime(this.debounceTime), distinctUntilChanged(), tap(() => {
-        this.paginator.pageIndex = 0;
-        this.loadEstablishmentData();
-      })
-      ).subscribe();
-
-
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        tap(() => this.loadEstablishmentData())
-      )
-      .subscribe();
 
   }
 
   loadEstablishmentData() {
-    let sortDirection = this.sort.direction == 'desc' ? '-' : '';
     this.establishmentDataSource.load(
-      this.search.nativeElement.value,
-      sortDirection + this.sort.active,
+      '',
+      'name',
       this.paginator.pageIndex,
       this.paginator.pageSize);
   }
-  close(valueSelected) {
-    this.dialogRef.close(valueSelected);
+  closeDialogRef(branchSelected: Branch) {
+    this.dialogRef.close(branchSelected);
   }
 
   selectEstablishment(establishment: Establishment): void {
+
     this.step = 2;
+    this.branchDataSource.load(establishment._id, '', 'name', 0, 5);
   }
 
 }

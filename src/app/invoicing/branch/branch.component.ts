@@ -49,9 +49,9 @@ export class BranchComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
-    this.dataSource = new BranchDataSource(this.branchService);
+    this.dataSource = new BranchDataSource(this.http);
 
-    this.dataSource.loadEstablishments(this.establishmentId, '', 'name', 0, 5);
+    this.dataSource.load(this.establishmentId, '', 'name', 0, 5);
 
   }
 
@@ -78,7 +78,7 @@ export class BranchComponent implements OnInit, AfterViewInit {
 
   loadData() {
     let sortDirection = this.sort.direction == 'desc' ? '-' : '';
-    this.dataSource.loadEstablishments(
+    this.dataSource.load(
       this.establishmentId,
       this.search.nativeElement.value,
       sortDirection + this.sort.active,

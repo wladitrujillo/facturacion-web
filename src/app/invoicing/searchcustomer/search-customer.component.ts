@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { merge, fromEvent } from 'rxjs';
 import { tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CustomerDataSource } from 'src/app/core/service/customer.datasource';
+import { Customer } from 'src/app/core/model/customer';
 
 @Component({
   selector: 'search-customer',
@@ -68,7 +69,7 @@ export class SearchCustomerComponent implements OnInit, AfterViewInit {
   }
 
 
-  close(valueSelected) {
-    this.dialogRef.close(valueSelected);
+  close(customer: Customer) {
+    this.dialogRef.close(customer);
   }
 }

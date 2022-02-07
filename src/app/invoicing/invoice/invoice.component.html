@@ -41,9 +41,9 @@
 
                   <div class="col-md-12">
 
-                    <strong>{{branch?.name}} {{branch?.code}} {{(branch?.next+'').padStart(8,'0')}}</strong>
-                    <button (click)="selectBranch()" mat-button matSuffix mat-liked-button aria-label="search"
-                      matTooltip="Seleccionar Caja" [matTooltipPosition]="'right'">
+                    <strong>{{branch?.name}} {{branch?.code}}</strong>
+                    <button *ngIf="user?.role=='SUPERADMIN'" (click)="selectBranch()" mat-button matSuffix
+                      mat-liked-button aria-label="search" matTooltip="Seleccionar Caja" [matTooltipPosition]="'right'">
                       <mat-icon>reorder</mat-icon>
                     </button>
                   </div>

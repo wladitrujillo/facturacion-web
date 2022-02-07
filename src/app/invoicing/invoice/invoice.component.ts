@@ -38,7 +38,7 @@ export class InvoiceComponent implements OnInit {
   headerRow: string[];
   details: InvoiceDetail[];
   payments: Payment[] = [];
-  customer: Customer | any;
+  customer: Customer;
   invoice: Invoice;
   branch: Branch;
   user: User;
@@ -172,13 +172,11 @@ export class InvoiceComponent implements OnInit {
 
   addProduct() {
 
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-
-    dialogConfig.data = {};
-
+    const dialogConfig: MatDialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      data: {}
+    };
     const dialogRef = this.dialog.open(SearchProductComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
@@ -217,18 +215,17 @@ export class InvoiceComponent implements OnInit {
   }
 
   selectBranch() {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-
-    dialogConfig.data = {};
+    const dialogConfig: MatDialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      data: {}
+    };
 
     const dialogRef = this.dialog.open(SearchBranchComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-      customer => {
-        if (customer) this.customer = customer;
+      branch => {
+        if (branch) this.branch = branch;
       }
     );
   }
@@ -246,13 +243,11 @@ export class InvoiceComponent implements OnInit {
   }
 
   private initInvoice(): void {
-
-    this.customer = {};
+    this.customer = new Customer();
     this.invoice = new Invoice();
     this.invoice.createdAt = new Date();
     this.details = [];
     this.payments = [];
-
   }
 
 }

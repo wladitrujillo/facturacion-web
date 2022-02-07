@@ -6,32 +6,50 @@
         <div class="row">
 
           <div class="col-md-6">
-            <legend>Cliente</legend>
 
-            <div class="input-group no-border">
-              <input [(ngModel)]="customer.taxId" (keydown.enter)="searchCustomer()" class="form-control"
-                placeholder="Buscar..." type="search" value="">
-              <button (click)="findCustomer()" mat-button matSuffix mat-stroked-button aria-label="search"
-                matTooltip="Buscar cliente">
-                <mat-icon>search</mat-icon>
-              </button>
-              <button (click)="addCustomer()" mat-button matSuffix mat-stroked-button aria-label="search"
-                matTooltip="Agregar cliente" [matTooltipPosition]="'right'">
-                <mat-icon>add</mat-icon>
-              </button>
-            </div>
-            <div>{{customer.firstName}} {{customer.lastName}}</div>
-            <div>
-              <small>{{customer.email}}</small>
-            </div>
-          </div>
-          <div class="col-md-6 mr-auto">
-            <div class="card">
+            <div class="card" style="min-height: 125px;">
               <div class="card-body">
 
+                <legend>Cliente</legend>
+                <div class="input-group no-border">
+                  <input [(ngModel)]="customer.taxId" (keydown.enter)="searchCustomer()" class="form-control"
+                    placeholder="Buscar..." type="search" value="">
+                  <button (click)="findCustomer()" mat-button matSuffix mat-stroked-button aria-label="search"
+                    matTooltip="Buscar cliente">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                  <button (click)="addCustomer()" mat-button matSuffix mat-stroked-button aria-label="search"
+                    matTooltip="Agregar cliente" [matTooltipPosition]="'right'">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+                <div>{{customer.firstName}} {{customer.lastName}} <small>{{customer.email}}</small></div>
 
-                <div>{{branch?.name}}</div>
-                <small>{{branch?.code}}</small>
+
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="col-md-6">
+
+            <div class="card" style="min-height: 125px;">
+              <div class="card-body">
+                <legend>Factura</legend>
+                <div class="row">
+
+                  <div class="col-md-12">
+
+                    <strong>{{branch?.name}} {{branch?.code}} {{(branch?.next+'').padStart(8,'0')}}</strong>
+                    <button (click)="selectBranch()" mat-button matSuffix mat-liked-button aria-label="search"
+                      matTooltip="Seleccionar Caja" [matTooltipPosition]="'right'">
+                      <mat-icon>reorder</mat-icon>
+                    </button>
+                  </div>
+
+                </div>
+
 
 
                 {{invoice.createdAt|date}}
@@ -42,17 +60,18 @@
             </div>
 
           </div>
-        </div>
 
+        </div>
+        <br>
         <div class="row">
 
-          <div class="col-sm-12 mr-auto">
-
-            <button (click)="addProduct()" mat-icon-button matTooltip="Agregar item" [matTooltipPosition]="'right'"
-              color="primary">
-              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          <div class="col-sm-12">
+            <button (click)="addProduct()" mat-raised-button class="btn btn-round btn-info btn-xs">
+              Agregar Producto <i class="material-icons">add</i>
             </button>
+          </div>
 
+          <div class="col-sm-12 mr-auto">
             <div class="table-responsive">
               <table class="table table-shopping">
                 <thead>
@@ -90,8 +109,8 @@
                       {{detail.total | currency}}
                     </td>
                     <td class="td-actions">
-                      <button mat-button type="button" matTooltip="Remove item" [matTooltipPosition]="'left'"
-                        class="btn btn-link" (click)="removeItem(detail)">
+                      <button mat-button type="button" matTooltip="Remover item" [matTooltipPosition]="'left'"
+                        class="btn btn-danger btn-link" (click)="removeItem(detail)">
                         <i class="material-icons">close</i>
                       </button>
                     </td>
@@ -102,8 +121,6 @@
             </div>
 
           </div>
-
-
         </div>
 
         <br>

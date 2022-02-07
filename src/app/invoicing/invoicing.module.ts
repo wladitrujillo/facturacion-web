@@ -35,6 +35,7 @@ import { TaxValueComponent } from './tax-value/tax-value.component';
 import { TaxValueResolver } from '../core/service/tax.value.resolver';
 import { TaxValueListComponent } from './tax-value/tax-value-list.component';
 import { SharedUtilityModule } from '../shared-utility/shared-utility.module';
+import { SearchBranchComponent } from './search-branch/search-branch.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { SharedUtilityModule } from '../shared-utility/shared-utility.module';
     ProductCategoryComponent,
     ProductCategoryListComponent,
     TaxValueComponent,
-    TaxValueListComponent
+    TaxValueListComponent,
+    SearchBranchComponent
   ],
   providers: [
     ProductService,
@@ -82,6 +84,7 @@ import { SharedUtilityModule } from '../shared-utility/shared-utility.module';
   entryComponents: [
     SearchProductComponent,
     SearchCustomerComponent,
+    SearchBranchComponent,
     AddCustomerComponent
   ]
 })

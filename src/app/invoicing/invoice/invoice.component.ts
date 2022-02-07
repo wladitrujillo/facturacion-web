@@ -19,6 +19,7 @@ import { CustomerUpdateComponent } from '../customer/customer-update.component';
 import { Payment } from 'src/app/core/model/payment';
 import { Catalog } from 'src/app/core/model/catalog';
 import { AdminService } from 'src/app/core/service/admin.service';
+import { SearchBranchComponent } from '../search-branch/search-branch.component';
 
 
 declare const $: any;
@@ -97,7 +98,7 @@ export class InvoiceComponent implements OnInit {
 
 
   decreaseCount(detail: InvoiceDetail): void {
-    if (detail.quantity > 0) detail.quantity--;
+    if (detail.quantity > 1) detail.quantity--;
     detail.totalWhitoutTax = detail.quantity * detail.product.price;
     let iva = detail.product.taxes.find(e => e.tax == 'IVA');
     let ivaValue = iva ? iva.percentage / 100 : 0;
@@ -213,6 +214,23 @@ export class InvoiceComponent implements OnInit {
     if (this.payments.length > 0)
       this.payments[this.payments.length - 1].value += value;
 
+  }
+
+  selectBranch() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {};
+
+    const dialogRef = this.dialog.open(SearchBranchComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      customer => {
+        if (customer) this.customer = customer;
+      }
+    );
   }
 
   private setTotalInvoice(): void {

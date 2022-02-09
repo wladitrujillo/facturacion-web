@@ -3,6 +3,7 @@ import { BehaviorSubject, of } from "rxjs";
 import { catchError, finalize } from "rxjs/operators";
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Invoice } from "../model/invoice";
+import { getMatIconFailedToSanitizeUrlError } from "@angular/material";
 
 export class InvoiceDataSource implements DataSource<Invoice>{
 
@@ -16,31 +17,33 @@ export class InvoiceDataSource implements DataSource<Invoice>{
 
     public totalRows$ = this.totalRowSubject.asObservable();
 
- 
+
     constructor(private http: HttpClient) {
 
     }
 
     loadData(
-        filter: string,
+        filter: any,
         sort: string,
         page: number,
         perPage: number) {
 
-        this.loadingSubject.next(true);      
+        this.loadingSubject.next(true);
 
-        this.http.get(`/api/invoice?q=${filter}&sort=${sort}&page=${page}&per_page=${perPage}`, { observe: 'response' })
+
+        this.http.put(`/api/invoice/query?sort=${sort}&page=${page}&per_page=${perPage}`, filter, { observe: 'response' })
             .pipe(
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false))
             )
             .subscribe((response: any) => {
+                console.log(response);
 
                 this.totalRowSubject.next(response.headers.get('x-total-count'))
 
                 this.InvoicesSubject.next(response.body);
 
-               
+
             });
 
         /*this.InvoiceService.get(filter, sort, page, perPage).pipe(
@@ -51,8 +54,8 @@ export class InvoiceDataSource implements DataSource<Invoice>{
 
     }
 
-    
-    removeData(index:number){
+
+    removeData(index: number) {
         const data = this.InvoicesSubject.value;
         data.splice(index, 1);
         this.InvoicesSubject.next(data);

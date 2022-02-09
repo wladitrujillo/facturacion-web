@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatPaginator, MatSort } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { merge } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -7,6 +7,10 @@ import { InvoiceDataSource } from 'src/app/core/service/invoice.datasource';
 import { InvoiceService } from 'src/app/core/service/invoice.service';
 import { environment } from 'src/environments/environment';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SearchCustomerComponent } from '../searchcustomer/search-customer.component';
+import { Customer } from 'src/app/core/model/customer';
+import { Branch } from 'src/app/core/model';
+import { SearchBranchComponent } from '../search-branch/search-branch.component';
 
 
 @Component({
@@ -16,21 +20,21 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class QueryInvoicingComponent implements OnInit, AfterViewInit {
 
-
-  dataSource: InvoiceDataSource;
-
-  displayedColumns = ["secuence", "createdAt", "totalWithoutTax", "total", "actions"];
-
-
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
+
+  dataSource: InvoiceDataSource;
+  displayedColumns = ["secuence", "createdAt", "totalWithoutTax", "total", "actions"];
   formGroup: FormGroup;
+  customer: Customer;
+  branch: Branch;
+  startDate: null;
+  endDate: null;
 
   constructor(
     private http: HttpClient,
-    private invoiceService: InvoiceService,
+    private dialog: MatDialog,
     private formBuilder: FormBuilder
   ) { }
 
@@ -38,8 +42,7 @@ export class QueryInvoicingComponent implements OnInit, AfterViewInit {
 
     this.dataSource = new InvoiceDataSource(this.http);
 
-    this.dataSource.loadData('', 'asc', 0, 5);
-
+    this.loadInvoicePage();
 
     this.formGroup = this.formBuilder.group({
       startDate: [],
@@ -64,11 +67,36 @@ export class QueryInvoicingComponent implements OnInit, AfterViewInit {
   }
 
   loadInvoicePage() {
+
+    let sort = 'createdAt';
+
+    if (this.sort)
+      sort = (this.sort.direction == 'desc' ? '-' : '') + this.sort.active;
+
+    let page = this.paginator ? this.paginator.pageIndex : 0;
+    let pageSize = this.paginator ? this.paginator.pageSize : 5;
+
+    let searchFilter = {};
+
+    if (this.startDate && this.endDate) {
+      searchFilter['createdAt'] = { '$gte': this.startDate, '$lte': this.endDate }
+    } else if (this.startDate) {
+      searchFilter['createdAt'] = { '$gte': this.startDate }
+    } else if (this.endDate) {
+      searchFilter['createdAt'] = { '$lte': this.endDate }
+    }
+
+    if (this.customer)
+      searchFilter['customer'] = this.customer._id;
+
+    if (this.branch)
+      searchFilter['branch'] = this.branch._id;
+
     this.dataSource.loadData(
-      '',
-      this.sort.direction,
-      this.paginator.pageIndex,
-      this.paginator.pageSize);
+      searchFilter,
+      sort,
+      page,
+      pageSize);
   }
 
   onPrintClick(invoiceId: string) {
@@ -79,6 +107,53 @@ export class QueryInvoicingComponent implements OnInit, AfterViewInit {
 
   }
 
+  searchCustomer() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {};
+
+    const dialogRef = this.dialog.open(SearchCustomerComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      customer => {
+        if (customer) {
+          this.customer = customer;
+        }
+      }
+    );
+  }
+
+  searchBranch() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {};
+
+    const dialogRef = this.dialog.open(SearchBranchComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      branch => {
+        if (branch) {
+          this.branch = branch;
+        }
+      }
+    );
+  }
+
+  removeBranch(): void {
+    this.branch = null;
+  }
+
+  removeCustomer(): void {
+    this.customer = null;
+  }
 
   /* Get errors */
   handleError = (controlName: string, errorName: string) => {

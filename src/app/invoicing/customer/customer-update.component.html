@@ -53,7 +53,8 @@
 
 
                             <mat-form-field class="example-full-width">
-                                <mat-select placeholder="Tipo de Identificación" formControlName="taxIdType">
+                                <mat-select placeholder="Tipo de Identificación" formControlName="taxIdType"
+                                    (selectionChange)="onTaxIdTypeChange()">
                                     <mat-option *ngFor="let type of identificationTypes?.items" [value]="type.code">
                                         {{type.value}}
                                     </mat-option>
@@ -69,6 +70,9 @@
                                 </mat-error>
                                 <mat-error *ngIf="handleError('taxId', 'minlength')">
                                     Cédula de identidad requiere mínimo 10 caracteres
+                                </mat-error>
+                                <mat-error *ngIf="handleError('taxId', 'invalidCedula')">
+                                    Cédula no válida
                                 </mat-error>
                             </mat-form-field>
 

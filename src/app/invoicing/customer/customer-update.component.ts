@@ -1,21 +1,20 @@
 
-import { Component, OnInit, Optional, ViewChild } from '@angular/core';
+import { Component, OnInit, Optional, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Location } from '@angular/common';
 import { Catalog } from 'src/app/core/model/catalog';
 import { CustomerService } from 'src/app/core/service/customer.service';
 import { AdminService } from 'src/app/core/service/admin.service';
 import { MatDialogRef } from '@angular/material';
-
-
+import { ValidateCedula } from 'src/app/shared-utility/validators/cedula.validator';
 @Component({
     selector: 'app-customer-update',
-    templateUrl: './customer-update.component.html'
-
+    templateUrl: './customer-update.component.html',
+    styleUrls: ['./customer-update.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
-
 export class CustomerUpdateComponent implements OnInit {
     visible = true;
     selectable = true;
@@ -30,7 +29,7 @@ export class CustomerUpdateComponent implements OnInit {
     customerTypes: Catalog;
     isModalWindow: boolean = false;
 
-
+    taxIdValidators = [Validators.required, Validators.minLength(10), ValidateCedula];
 
     constructor(
         private location: Location,
@@ -55,7 +54,7 @@ export class CustomerUpdateComponent implements OnInit {
             lastName: [customer.lastName || '', [Validators.required]],
             email: [customer.email || '', [Validators.required, Validators.email]],
             taxIdType: [customer.taxIdType || 'C', [Validators.required]],
-            taxId: [customer.taxId || '', [Validators.required, Validators.minLength(10)]],
+            taxId: [customer.taxId || '', this.taxIdValidators],
             type: [customer.type || 'C', [Validators.required]],
             phone: [customer.phone || ''],
             address: [customer.address || '']
@@ -94,6 +93,13 @@ export class CustomerUpdateComponent implements OnInit {
     }
 
 
+    onTaxIdTypeChange() {
+        if (this.customerForm.value.taxIdType == 'C' || this.customerForm.value.taxIdType == 'R')
+            this.customerForm.get('taxId').setValidators([Validators.required, Validators.minLength(10), ValidateCedula]);
+        else
+            this.customerForm.get('taxId').setValidators([Validators.required]);
+    }
+
     /* Get errors */
     handleError = (controlName: string, errorName: string) => {
         return this.customerForm.controls[controlName].hasError(errorName);
@@ -108,7 +114,4 @@ export class CustomerUpdateComponent implements OnInit {
             this.location.back()
         }
     }
-
-
-
 }

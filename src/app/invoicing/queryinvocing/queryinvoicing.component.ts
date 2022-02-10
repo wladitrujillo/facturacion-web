@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { merge } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { InvoiceDataSource } from 'src/app/core/service/invoice.datasource';
-import { InvoiceService } from 'src/app/core/service/invoice.service';
 import { environment } from 'src/environments/environment';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SearchCustomerComponent } from '../searchcustomer/search-customer.component';
@@ -25,7 +24,7 @@ export class QueryInvoicingComponent implements OnInit, AfterViewInit {
 
 
   dataSource: InvoiceDataSource;
-  displayedColumns = ["secuence", "createdAt", "totalWithoutTax", "total", "actions"];
+  displayedColumns = ["createdAt", "secuence", "totalWithoutTax", "total", "actions"];
   formGroup: FormGroup;
   customer: Customer;
   branch: Branch;
@@ -68,7 +67,7 @@ export class QueryInvoicingComponent implements OnInit, AfterViewInit {
 
   loadInvoicePage() {
 
-    let sort = 'createdAt';
+    let sort = '-createdAt';
 
     if (this.sort)
       sort = (this.sort.direction == 'desc' ? '-' : '') + this.sort.active;

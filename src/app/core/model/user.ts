@@ -1,5 +1,7 @@
 export class User {
     _id: string;
+    branch: string;
+    role: string;
     firstName: string;
     lastName: string;
     taxId: string;
@@ -14,7 +16,6 @@ export class User {
     state: string;
     postal: string;
     about: string;
-    role: string;
     password: string;
     hasToUpdatePassword: string;
 }

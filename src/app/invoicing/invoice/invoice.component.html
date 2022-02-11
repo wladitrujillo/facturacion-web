@@ -147,7 +147,7 @@
                       <tr *ngFor="let p of payments;let $index=index">
                         <td class="text-left">
                           <select name="" id="" [(ngModel)]="p.code">
-                            <option [value]="catalog.code" *ngFor="let catalog of paymentMethod?.items">
+                            <option [value]="catalog.code" *ngFor="let catalog of (paymentMethod$|async)?.items">
                               {{catalog.value}}</option>
                           </select>
                         </td>

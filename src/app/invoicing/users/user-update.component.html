@@ -17,6 +17,21 @@
                     <form [formGroup]="userForm" (ngSubmit)="onSubmit()" #resetUserForm="ngForm" novalidate>
 
                         <div class="controlers-wrapper">
+                            <mat-form-field class="example-full-width">
+                                <input disabled style="opacity: 0;" matInput type="text" formControlName="branch"
+                                    placeholder="Punto Emisión">
+                                <input disabled matInput type="text" value="{{branch?.name}}"
+                                    placeholder="Punto Emisión">
+                                <button type="button" mat-icon-button matSuffix (click)="removeBranch()">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                                <button type="button" mat-icon-button matSuffix (click)="searchBranch()">
+                                    <mat-icon>reorder</mat-icon>
+                                </button>
+                                <mat-error *ngIf="handleError('branch', 'required')">
+                                    Este campo es <strong>requerido</strong>
+                                </mat-error>
+                            </mat-form-field>
 
                             <mat-form-field class="example-full-width">
                                 <mat-label>Rol</mat-label>
@@ -75,7 +90,7 @@
 
                         <div class="full-wrapper button-wrapper">
                             <div class="button-wrapper">
-                                <button mat-flat-button color="warn">Guardar</button>
+                                <button type="submit" mat-flat-button color="warn">Guardar</button>
                             </div>
                         </div>
 

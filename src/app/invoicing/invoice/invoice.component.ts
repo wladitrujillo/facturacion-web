@@ -20,6 +20,7 @@ import { Payment } from 'src/app/core/model/payment';
 import { Catalog } from 'src/app/core/model/catalog';
 import { AdminService } from 'src/app/core/service/admin.service';
 import { SearchBranchComponent } from '../search-branch/search-branch.component';
+import { Observable } from 'rxjs';
 
 
 declare const $: any;
@@ -42,8 +43,7 @@ export class InvoiceComponent implements OnInit {
   invoice: Invoice;
   branch: Branch;
   user: User;
-
-  paymentMethod: Catalog;
+  paymentMethod$: Observable<Catalog>;
 
   constructor(
     private customerService: CustomerService,
@@ -63,17 +63,9 @@ export class InvoiceComponent implements OnInit {
 
     this.user = this.authenticationService.currentUserValue;
 
-    this.adminService.getCatalogByName('payment_method').subscribe(response => this.paymentMethod = response)
+    this.paymentMethod$ = this.adminService.getCatalogByName('payment_method');
 
-    this.establishmentService.get('', 'asc', 0, 10)
-      .subscribe(establishments =>
-        this.branchService.get(establishments[0]._id, '', 'asc', 0, 10)
-          .subscribe(branchs => {
-            this.branch = branchs[0]
-
-          }));
-
-    this.payments = [];
+    this.initBranch(this.user);
 
     this.initInvoice();
 
@@ -232,6 +224,16 @@ export class InvoiceComponent implements OnInit {
         if (branch) this.branch = branch;
       }
     );
+  }
+
+  private initBranch(user: User): void {
+    this.establishmentService.get('', 'asc', 0, 10)
+      .subscribe(establishments =>
+        this.branchService.get(establishments[0]._id, '', 'asc', 0, 10)
+          .subscribe(branchs => {
+            this.branch = branchs[0]
+
+          }));
   }
 
   private setTotalInvoice(): void {

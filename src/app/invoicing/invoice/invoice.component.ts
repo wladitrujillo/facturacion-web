@@ -92,7 +92,11 @@ export class InvoiceComponent implements OnInit {
     invoice.detail = this.details;
     invoice.payments = this.payments;
     this.invoiceService.create(branch._id, invoice)
-      .subscribe(newInvoice => { this.initInvoice(); console.log("Invoice created===>>", invoice) });
+      .subscribe(newInvoice => {
+        this.alertService.success('Factura creada exitosamente');
+        this.initInvoice();
+        console.log("Invoice created===>>", invoice)
+      });
   }
 
 

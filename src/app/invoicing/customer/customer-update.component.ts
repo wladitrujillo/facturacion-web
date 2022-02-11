@@ -21,6 +21,7 @@ export class CustomerUpdateComponent implements OnInit {
     removable = true;
     addOnBlur = true;
     minPrice = 0;
+    maxlength = 10;
     @ViewChild('chipList', { static: true }) chipList;
     @ViewChild('resetCustomerForm', { static: true }) myNgForm;
     readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -47,6 +48,10 @@ export class CustomerUpdateComponent implements OnInit {
         if (this.dialogRef) this.isModalWindow = true;
 
         let customer = this.route.snapshot.data["customer"] || {};
+
+        if (customer.taxIdType == 'R') this.maxlength = 13
+        else if (customer.taxIdType == 'C') this.maxlength = 10
+        else this.maxlength = 13
 
         this.customerForm = this.fb.group({
             _id: [customer._id],
@@ -94,10 +99,16 @@ export class CustomerUpdateComponent implements OnInit {
 
 
     onTaxIdTypeChange() {
-        if (this.customerForm.value.taxIdType == 'C' || this.customerForm.value.taxIdType == 'R')
+        if (this.customerForm.value.taxIdType == 'R') {
+            this.maxlength = 13;
+            this.customerForm.get('taxId').setValidators([Validators.required, Validators.minLength(13), ValidateCedula]);
+        } else if (this.customerForm.value.taxIdType == 'C') {
+            this.maxlength = 10;
             this.customerForm.get('taxId').setValidators([Validators.required, Validators.minLength(10), ValidateCedula]);
-        else
+        } else {
+            this.maxlength = 13;
             this.customerForm.get('taxId').setValidators([Validators.required]);
+        }
     }
 
     /* Get errors */

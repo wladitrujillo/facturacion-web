@@ -22,6 +22,8 @@ export function ValidateCedula(control: AbstractControl): { [key: string]: any }
 
     let mod10 = 10 - (suma % 10);
 
+    if (mod10 >= 10) mod10 = 0;
+
     if (digits[9] !== mod10) return { invalidCedula: true };
 
     return null;

@@ -39,6 +39,9 @@
                                 <mat-error *ngIf="handleError('email', 'required')">
                                     Requiere ingresar <strong>Email</strong>
                                 </mat-error>
+                                <mat-error *ngIf="handleError('email', 'email')">
+                                    Email no <strong>válido</strong>
+                                </mat-error>
                             </mat-form-field>
 
 
@@ -64,12 +67,14 @@
 
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Cédula de Identidad" formControlName="taxId"
-                                    [maxlength]="13">
+                                    [maxlength]="maxlength">
                                 <mat-error *ngIf="handleError('taxId', 'required')">
-                                    Requiere ingresar <strong>Cédula de Identidad</strong>
+                                    Esta campo es <strong>requerido</strong>
                                 </mat-error>
                                 <mat-error *ngIf="handleError('taxId', 'minlength')">
-                                    Cédula de identidad requiere mínimo 10 caracteres
+                                    Se requiere mínimo
+                                    {{customerForm.get('taxId').errors?.minlength?.requiredLength}}
+                                    caracteres
                                 </mat-error>
                                 <mat-error *ngIf="handleError('taxId', 'invalidCedula')">
                                     Cédula no válida

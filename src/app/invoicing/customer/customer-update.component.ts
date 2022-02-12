@@ -109,6 +109,7 @@ export class CustomerUpdateComponent implements OnInit {
             this.maxlength = 13;
             this.customerForm.get('taxId').setValidators([Validators.required]);
         }
+        this.customerForm.get('taxId').updateValueAndValidity();
     }
 
     /* Get errors */

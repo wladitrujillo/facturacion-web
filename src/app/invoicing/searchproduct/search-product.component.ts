@@ -35,7 +35,7 @@ export class SearchProductComponent implements OnInit, AfterViewInit {
 
     this.dataSource = new ProductDataSource(this.http);
 
-    this.dataSource.loadProducts('', 'code', 0, 3);
+    this.dataSource.loadProducts('', '', 'code', 0, 3);
   }
 
   ngAfterViewInit() {
@@ -60,6 +60,7 @@ export class SearchProductComponent implements OnInit, AfterViewInit {
   loadProductsPage() {
     let sortDirection = this.sort.direction == 'desc' ? '-' : '';
     this.dataSource.loadProducts(
+      '',
       this.search.nativeElement.value,
       sortDirection + this.sort.active,
       this.paginator.pageIndex,

@@ -46,7 +46,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
     this.dataSource = new ProductDataSource(this.http);
 
-    this.loadProductsPage();
+    this.loadProductsPage('');
 
   }
 

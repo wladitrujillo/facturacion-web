@@ -35,7 +35,10 @@ export class ProductCategoryService {
     return this.http.get<ProductCategory[]>(`${this.serviceUrl}?q=${filter}&sort=${sort}&page=${page}&per_page=${perPage}`)
       .catch(this.handleError<ProductCategory[]>('get'));
   }
-
+  getAllProducts(category: string, filter: string, sort: string, page: number, perPage: number): Observable<ProductCategory[]> {
+    return this.http.get<ProductCategory[]>(`${this.serviceUrl}/${category}/product?q=${filter}&sort=${sort}&page=${page}&per_page=${perPage}`)
+      .catch(this.handleError<ProductCategory[]>('get'));
+  }
   getById(_id: string): Observable<ProductCategory> {
     return this.http.get<ProductCategory>(`${this.serviceUrl}/${_id}`)
       .catch(this.handleError<ProductCategory>('getById'));

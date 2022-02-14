@@ -16,20 +16,24 @@ export class ProductDataSource implements DataSource<Product>{
 
     public totalRows$ = this.totalRowSubject.asObservable();
 
- 
+
     constructor(private http: HttpClient) {
 
     }
 
     loadProducts(
-        filter: string,
+        catetory: string,
+        text: string,
         sort: string,
         page: number,
         perPage: number) {
 
-        this.loadingSubject.next(true);      
+        this.loadingSubject.next(true);
 
-        this.http.get(`/api/product?q=${filter}&sort=${sort}&page=${page}&per_page=${perPage}`, { observe: 'response' })
+        let url = '/api/product'
+        if (catetory) url = '/api/product-category/' + catetory + '/product'
+
+        this.http.get(`${url}?q=${text}&sort=${sort}&page=${page}&per_page=${perPage}`, { observe: 'response' })
             .pipe(
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false))
@@ -40,19 +44,13 @@ export class ProductDataSource implements DataSource<Product>{
 
                 this.productsSubject.next(response.body);
 
-               
-            });
 
-        /*this.productService.get(filter, sort, page, perPage).pipe(
-            catchError(() => of([])),
-            finalize(() => this.loadingSubject.next(false))
-        )
-            .subscribe(products => this.productsSubject.next(products));*/
+            });
 
     }
 
-    
-    removeData(index:number){
+
+    removeData(index: number) {
         const data = this.productsSubject.value;
         data.splice(index, 1);
         this.productsSubject.next(data);

@@ -10,6 +10,9 @@ import { SearchCustomerComponent } from '../searchcustomer/search-customer.compo
 import { Customer } from 'src/app/core/model/customer';
 import { Branch } from 'src/app/core/model';
 import { SearchBranchComponent } from '../search-branch/search-branch.component';
+import { User } from 'src/app/core/model/user';
+import { AuthenticationService } from 'src/app/core/service/authentication.service';
+import { BranchService } from 'src/app/core/service/branch.service';
 
 
 @Component({
@@ -30,14 +33,19 @@ export class QueryInvoicingComponent implements OnInit, AfterViewInit {
   branch: Branch;
   startDate: null;
   endDate: null;
+  user: User;
 
   constructor(
     private http: HttpClient,
     private dialog: MatDialog,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService,
+    private branchService: BranchService
   ) { }
 
   ngOnInit() {
+
+    this.user = this.authenticationService.currentUserValue;
 
     this.dataSource = new InvoiceDataSource(this.http);
 

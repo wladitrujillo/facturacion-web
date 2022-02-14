@@ -2,12 +2,14 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { MatSort } from "@angular/material/sort";
-import { fromEvent, merge } from 'rxjs';
+import { fromEvent, merge, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Product } from 'src/app/core/model/product';
 import { ProductDataSource } from 'src/app/core/service/product.datasource';
 import { ProductService } from 'src/app/core/service/product.service';
+import { ProductCategory } from 'src/app/core/model/product-category';
+import { ProductCategoryService } from 'src/app/core/service/product-category.service';
 
 @Component({
   selector: 'app-product-list',
@@ -30,16 +32,21 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
   debounceTime: number = 500;
 
+  productCategory$: Observable<ProductCategory[]>;
 
-  constructor(private http: HttpClient, private productService: ProductService) {
-
-  }
+  constructor(
+    private http: HttpClient,
+    private productService: ProductService,
+    private productCategoryService: ProductCategoryService) { }
 
   ngOnInit() {
 
+
+    this.productCategory$ = this.productCategoryService.get('', '', 0, 100);
+
     this.dataSource = new ProductDataSource(this.http);
 
-    this.dataSource.loadProducts('', 'name', 0, 5);
+    this.loadProductsPage();
 
   }
 
@@ -50,26 +57,34 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     fromEvent(this.search.nativeElement, 'keyup')
       .pipe(debounceTime(this.debounceTime), distinctUntilChanged(), tap(() => {
         this.paginator.pageIndex = 0;
-        this.loadProductsPage();
+        this.loadProductsPage('');
       })
       ).subscribe();
 
 
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
-        tap(() => this.loadProductsPage())
+        tap(() => this.loadProductsPage(''))
       )
       .subscribe();
 
   }
 
-  loadProductsPage() {
-    let sortDirection = this.sort.direction == 'desc' ? '-' : '';
+  loadProductsPage(category: string) {
+
+    let sort = 'name';
+    if (this.sort)
+      sort = (this.sort.direction == 'desc' ? '-' : '') + this.sort.active;
+
+    let page = this.paginator ? this.paginator.pageIndex : 0;
+    let pageSize = this.paginator ? this.paginator.pageSize : 5;
+
     this.dataSource.loadProducts(
-      this.search.nativeElement.value,
-      sortDirection + this.sort.active,
-      this.paginator.pageIndex,
-      this.paginator.pageSize);
+      category,
+      this.search ? this.search.nativeElement.value : '',
+      sort,
+      page,
+      pageSize);
   }
 
 
@@ -78,4 +93,11 @@ export class ProductListComponent implements OnInit, AfterViewInit {
       .subscribe(() => this.dataSource.removeData((this.paginator.pageIndex * this.paginator.pageSize) + index));
 
   }
+
+  onCategoryChange(category: string) {
+    console.log(category);
+    this.loadProductsPage(category);
+
+  }
+
 }

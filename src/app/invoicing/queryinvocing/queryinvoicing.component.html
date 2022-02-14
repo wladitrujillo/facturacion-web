@@ -32,10 +32,10 @@
       <div class="col-md-3">
         <mat-form-field>
           <input disabled matInput value="{{branch?.name}}" type="text" placeholder="Punto Emisión">
-          <button mat-icon-button matSuffix (click)="removeBranch()">
+          <button mat-icon-button matSuffix (click)="removeBranch()" *ngIf="user?.role=='SUPERADMIN'">
             <mat-icon>close</mat-icon>
           </button>
-          <button mat-icon-button matSuffix (click)="searchBranch()">
+          <button mat-icon-button matSuffix (click)="searchBranch()" *ngIf="user?.role=='SUPERADMIN'">
             <mat-icon>reorder</mat-icon>
           </button>
         </mat-form-field>

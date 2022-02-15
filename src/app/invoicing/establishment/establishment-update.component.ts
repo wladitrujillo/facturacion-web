@@ -39,7 +39,7 @@ export class EstablishmentUpdateComponent implements OnInit {
 
         this.establishmentForm = this.fb.group({
             name: [establishment.name || '', [Validators.required]],
-            code: [establishment.code || '', Validators.required],
+            code: [establishment.code || '', [Validators.required, Validators.pattern('^[0-9]+$')]],
             phone: [establishment.phone || ''],
             address: [establishment.address || '']
         })

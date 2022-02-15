@@ -42,8 +42,8 @@ export class BranchUpdateComponent implements OnInit {
 
         this.branchForm = this.fb.group({
             name: [branch.name || '', [Validators.required]],
-            code: [branch.code || ''],
-            next: [branch.next || 0]
+            code: [branch.code || '', [Validators.required, Validators.pattern('^[0-9]+$')]],
+            next: [branch.next || 0, [Validators.required, Validators.min(0)]]
         })
 
     }

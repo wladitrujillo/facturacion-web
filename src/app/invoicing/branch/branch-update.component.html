@@ -26,16 +26,23 @@
                             </mat-form-field>
                             <!-- Code -->
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Número Punto de Venta" formControlName="code">
+                                <input maxlength="3" matInput placeholder="Número Punto de Venta"
+                                    formControlName="code">
                                 <mat-error *ngIf="handleError('code', 'required')">
                                     Este campo es <strong>requerido</strong>
+                                </mat-error>
+                                <mat-error *ngIf="handleError('code', 'pattern')">
+                                    Solo puede ingresar <strong>números</strong>
                                 </mat-error>
                             </mat-form-field>
                             <!-- Secuencial -->
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Secuencial" formControlName="next">
+                                <input type="number" matInput placeholder="Secuencial" formControlName="next">
                                 <mat-error *ngIf="handleError('next', 'required')">
                                     Este campo es <strong>requerido</strong>
+                                </mat-error>
+                                <mat-error *ngIf="handleError('next', 'min')">
+                                    Este campo debe ser mayor o igual a <strong>cero</strong>
                                 </mat-error>
                             </mat-form-field>
                         </div>

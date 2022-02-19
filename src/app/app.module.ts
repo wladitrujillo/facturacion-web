@@ -34,10 +34,10 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatStepperModule,
-  MatPaginatorIntl,
+  MatPaginatorIntl
 } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-
+import { MatTableExporterModule } from 'mat-table-exporter';
 import { AppComponent } from './app.component';
 
 import { SidebarModule } from './sidebar/sidebar.module';
@@ -83,7 +83,8 @@ import { getSpanishPaginatorIntl } from './es-paginator-intl';
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatTableExporterModule
   ]
 })
 export class MaterialModule { }

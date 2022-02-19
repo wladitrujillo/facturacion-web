@@ -52,8 +52,11 @@
         <mat-spinner></mat-spinner>
       </div>
 
+
+
+
       <mat-table class="invoice-table mat-elevation-z8" [dataSource]="dataSource" matSort matSortActive="createdAt"
-        matSortDirection="desc" matSortDisableClear>
+        matSortDirection="desc" matSortDisableClear matTableExporter #exporter="matTableExporter">
 
 
         <ng-container matColumnDef="secuence">
@@ -92,7 +95,10 @@
         <!-- actions -->
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>
-
+            <a matTooltip="Exportar Excel" mat-icon-button color="primary"
+              (click)="exporter.exportTable('xlsx', {fileName:'table'})">
+              <i class="fa fa-file-excel-o" style="color:green;" aria-hidden="true"></i>
+            </a>
           </th>
           <td mat-cell *matCellDef="let element; let i = index;" class="group-actions text-right">
             <button mat-raised-button class="btn btn-link" (click)=onPrintClick(element._id)>
@@ -106,7 +112,7 @@
 
       </mat-table>
       <mat-paginator class="invoice-paginator mat-elevation-z8" [length]="dataSource.totalRows$ | async"
-        [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
+        [pageSizeOptions]="[10, 20, 30, 40, 50, 100]" showFirstLastButtons>
       </mat-paginator>
 
     </div>

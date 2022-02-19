@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, PatternValidator, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Company } from 'src/app/core/model/company';
 import { User } from 'src/app/core/model/user';
@@ -34,8 +34,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
+      password: ['', Validators.compose([
+        Validators.required,
+        // 2. check whether the entered password has a number
+        RegisterComponent.patternValidator(/\d/, { hasNumber: true }),
+        // 3. check whether the entered password has upper case letter
+        RegisterComponent.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
+        // 4. check whether the entered password has a lower-case letter
+        RegisterComponent.patternValidator(/[a-z]/, { hasSmallCase: true }),
+        Validators.minLength(8)
+      ])],
+      confirmPassword: [null, Validators.required]
+    },
+      {
+        // check whether our password and confirm password match
+        validator: RegisterComponent.passwordMatchValidator
+      });
     console.log('ngOnInit del register')
   }
   ngOnDestroy() {
@@ -85,5 +99,36 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   }
 
+  /* Get errors */
+  handleError = (controlName: string, errorName: string) => {
+    return this.registerForm.controls[controlName].hasError(errorName);
+  }
+
+
+  static patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      if (!control.value) {
+        // if control is empty return no error
+        return null;
+      }
+
+      // test the value of the control against the regexp supplied
+      const valid = regex.test(control.value);
+
+      // if true, return no error (no error), else return error passed in the second parameter
+      return valid ? null : error;
+    };
+  }
+
+  static passwordMatchValidator(control: AbstractControl) {
+    const password: string = control.get('password').value; // get password from our password form control
+    const confirmPassword: string = control.get('confirmPassword').value; // get password from our confirmPassword form control
+    // compare is the password math
+    if (password !== confirmPassword) {
+      // if they don't match, set an error in our confirmPassword form control
+      control.get('confirmPassword').setErrors({ NoPasswordMatch: true });
+    }
+  }
 
 }
+

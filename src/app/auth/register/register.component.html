@@ -57,11 +57,32 @@
                     <mat-form-field class="has-default">
                       <mat-icon matSuffix>lock_outline</mat-icon>
                       <input type="password" matInput placeholder="Contraseña" formControlName="password">
-                      <mat-error *ngIf="fval.password.errors&&fval.password.errors.required">
+                      <mat-error *ngIf="handleError('password','required')">
                         Este campo es <strong>requiredo</strong>
                       </mat-error>
-                      <mat-error *ngIf="fval.password.errors&&fval.password.errors.minlength">
-                        La contraseña debe tener al menos 6 caracteres
+                      <mat-error *ngIf="handleError('password','hasNumber')">
+                        La contraseña debe tener números
+                      </mat-error>
+                      <mat-error *ngIf="handleError('password','hasCapitalCase')">
+                        La contraseña de tener mayusculas
+                      </mat-error>
+                      <mat-error *ngIf="handleError('password','hasSmallCase')">
+                        La contraseña debe tener minusculas
+                      </mat-error>
+                      <mat-error *ngIf="handleError('password','minlength')">
+                        La contraseña debe tener al menos 8 caracteres
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="has-default" style="margin-top: 5px;">
+                      <mat-icon matSuffix>lock_outline</mat-icon>
+                      <input type="password" matInput placeholder="Confirmar Contraseña"
+                        formControlName="confirmPassword">
+                      <mat-error *ngIf="handleError('confirmPassword','required')">
+                        Este campo es <strong>requiredo</strong>
+                      </mat-error>
+                      <mat-error *ngIf="handleError('confirmPassword','NoPasswordMatch')">
+                        La contraseña no <strong>coincide</strong>
                       </mat-error>
                     </mat-form-field>
 
